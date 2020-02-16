@@ -1,0 +1,13 @@
+{% set items = [ 
+    { id: 'products_button', title: labels.products.content, component: 'store::admin.products', icon: 'grid layout', active: true },
+    { id: 'sales_button', title: labels.sales.content, component: 'store::admin.sales', icon: 'chart line' },
+    { id: 'currency_button', title: labels.currency.content, component: 'store::admin.currency', icon: 'money bill alternate outline' },
+    { id: 'settings_button', title: labels.settings.content, component: 'store::admin.settings', icon: 'cogs' }
+] %}
+
+{{  component('components:tabs',{ 
+        items: items,
+        menu: { component: 'system:admin.extensions.menu.actions', extension: 'blog' },
+        content: { component: 'store::admin.products' } 
+    })
+}}

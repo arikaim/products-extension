@@ -1,0 +1,10 @@
+{% set class = class|default('ui label basic') %}
+{% set show_icon = show_icon|default(false) %}
+<div class="ui label {{ class }}">
+    {% if show_icon == true %}
+    <i class="icon {{ price.currency.icon }}"></i>
+    {% else %}
+    <span class="curreny-sign">{{ price.currency.sign }}</span>
+    {% endif %}
+    {{ price.price|numberFormat }}                          
+</div>

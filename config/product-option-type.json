@@ -1,0 +1,68 @@
+[   
+    {
+        "key": "description",
+        "title": "Description",
+        "description": "Product description",
+        "default": null,
+        "type": "textarea"          
+    },
+    {
+        "key": "requirements",
+        "title": "Requirement",
+        "description": "Product Requirement",
+        "default": null,
+        "type": "textarea"          
+    },
+    {
+        "key": "features",
+        "title": "Features",
+        "description": "Product Features",
+        "default": null,
+        "type": "textarea"          
+    },
+    {
+        "key": "regilar-price",
+        "title": "Regular License Price",
+        "description": "Price for Regular License",
+        "default": null,
+        "type": "price"          
+    },
+    {
+        "key": "extended-price",
+        "title": "Extended License Price",
+        "description": "Price for Extended License",
+        "default": null,
+        "type": "price"          
+    },
+    {
+        "key": "repository",
+        "title": "Repository",
+        "description": "Repository (username)/(name)",
+        "default": null,
+        "type": "text"          
+    },
+    {
+        "key": "repository-type",
+        "title": "Repository Type",
+        "description": "Repository Type",
+        "default": null,
+        "type": "dropdown",
+        "items": {
+            "github": "Github"
+        }          
+    },
+    {
+        "key": "private-repository",
+        "title": "Private Repository",
+        "description": "Private Repository",
+        "default": null,
+        "type": "checkbox"          
+    },
+    {
+        "key": "package-name",
+        "title": "Package name",
+        "description": "Package name",
+        "default": null,
+        "type": "text"          
+    }
+]

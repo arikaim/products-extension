@@ -1,0 +1,145 @@
+<?php
+/**
+ * Arikaim
+ *
+ * @link        http://www.arikaim.com
+ * @copyright   Copyright (c)  Konstantin Atanasov <info@arikaim.com>
+ * @license     http://www.arikaim.com/license
+ * 
+*/
+namespace Arikaim\Extensions\Products\Controllers;
+
+use Arikaim\Core\Db\Model;
+use Arikaim\Core\Controllers\ApiController;
+
+use Arikaim\Core\Controllers\Traits\Status;
+use Arikaim\Core\Controllers\Traits\SoftDelete;
+
+/**
+ * Products control panel api controller
+*/
+class ProductControlPanel extends ApiController
+{
+    use Status,
+        SoftDelete;
+
+    /**
+     * Init controller
+     *
+     * @return void
+     */
+    public function init()
+    {
+        $this->loadMessages('products::admin.products.messages');
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct($container) 
+    {
+        parent::__construct($container);
+        $this->setModelClass('Products');
+        $this->setExtensionName('products');
+    }
+
+    /**
+     * Creeate product options
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param Validator $data
+     * @return Psr\Http\Message\ResponseInterface
+    */
+    public function createOptionsController($request, $response, $data) 
+    { 
+        $this->requireControlPanelPermission();
+        
+        $this->onDataValid(function($data) { 
+            $product = Model::Products('products')->findById($data['uuid']);
+            $result = $product->createOptions();
+
+            $this->setResponse($result,function() use($product) {                  
+                $this
+                    ->message('options')
+                    ->field('uuid',$product->uuid);                  
+            },'errors.options'); 
+        });
+        $data
+            ->addRule('text:required','uuid')          
+            ->validate();
+    }
+
+    /**
+     * Add product
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param Validator $data
+     * @return Psr\Http\Message\ResponseInterface
+    */
+    public function addController($request, $response, $data) 
+    {       
+        $this->requireControlPanelPermission();
+        
+        $this->onDataValid(function($data) { 
+            $model = Model::Products('products');
+            $data = [
+                'type_id'     => $data['product_type'],
+                'title'       => $data['title']
+            ];
+
+            if ($model->hasProduct($data['title']) == true) {
+                $this->error('errors.exist');
+                return;
+            }
+            $product = $model->create($data);
+            $this->setResponse(is_object($product),function() use($product) {                  
+                $this
+                    ->message('add')
+                    ->field('uuid',$product->uuid);                  
+            },'errors.add');                                    
+        });
+        $data
+            ->addRule('text:min=2|required','title')
+            ->addRule('number|required','product_type')            
+            ->validate();
+    }
+
+    /**
+     * Update product
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param Validator $data
+     * @return Psr\Http\Message\ResponseInterface
+    */
+    public function updateController($request, $response, $data) 
+    {       
+        $this->requireControlPanelPermission();
+        
+        $this->onDataValid(function($data) { 
+            $product = Model::Products('products')->findById($data['uuid']); 
+            $data = [
+                'type_id'     => $data['product_type'],
+                'title'       => $data['title']
+            ];
+
+            if (is_object($product) == false) {
+                $this->error('errors.update');
+                return;
+            }
+
+            $result = (bool)$product->update($data);
+            $this->setResponse($result,function() use($product) {                  
+                $this
+                    ->message('update')
+                    ->field('uuid',$product->uuid);                  
+            },'errors.update');                                    
+        });
+        $data
+            ->addRule('text:min=2|required','title')
+            ->addRule('number|required','product_type')            
+            ->validate();
+    }
+}

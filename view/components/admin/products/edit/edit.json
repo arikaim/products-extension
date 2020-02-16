@@ -1,0 +1,12 @@
+{
+    "title": {
+        "content": "Edit",
+        "icon": "edit"
+    },
+    "labels": {
+        "product": "Product",
+        "details": "Details",
+        "options": "Options",
+        "price": "Price"
+    }
+}

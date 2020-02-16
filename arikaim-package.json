@@ -1,0 +1,19 @@
+{
+    "title": "Products",
+    "name": "products",
+    "package-type": "extension",
+    "type": "user",
+    "description": "Create and manage store",
+    "short-description": "Products",
+    "version": "1.0.1",
+    "private-repository": true,
+    "repository": "https://github.com/arikaim-repository/products-extension.git",
+    "position": "3",
+    "admin-menu": {       
+        "title": "Products",
+        "page-title": "Products",
+        "icon": "shoping bag",
+        "page-icon": "shoping bag",              
+        "component": "products::admin"        
+    }
+}
