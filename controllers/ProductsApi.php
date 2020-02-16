@@ -11,7 +11,7 @@ namespace Arikaim\Extensions\Products\Controllers;
 
 use Arikaim\Core\Db\Model;
 use Arikaim\Core\Controllers\ApiController;
-use Arikaim\Extensions\Store\Controllers\Traits\Products;
+use Arikaim\Extensions\Products\Controllers\Traits\Products;
 
 /**
  * Products api controller
