@@ -1,6 +1,6 @@
-{% set currency = createModel('Currency','store').getDefault() %}
+{% set currency = createModel('Currency','products').getDefault() %}
 {% if uuid is not empty %}
-    {% set product = createModel('Products','store').findById(uuid) %}
+    {% set product = createModel('Products','products').findById(uuid) %}
 {% endif %}
 <form class="ui form" id="product_form">  
     <input type="hidden" name="uuid" id="uuid" value="{{ uuid }}">        
@@ -32,7 +32,7 @@
     {% endif %}
     <div class="field">
         <label>{{ fields.type.label }}</label>
-        {{ component('store::admin.products.type.dropdown',{ selected: product.type_id, class: 'basic button fluid' }) }}
+        {{ component('products::admin.products.type.dropdown',{ selected: product.type_id, class: 'basic button fluid' }) }}
     </div>    
     {{ component('components:form.footer') }}
 </form>

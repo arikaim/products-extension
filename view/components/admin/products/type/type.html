@@ -3,9 +3,9 @@
 {% set panel_class = '' %}
 <div class="mt-8 ml-2">
     {% set items = [ 
-        { title: labels.view, component: 'store::admin.products.type.view', icon: 'list', active: true },
-        { title: labels.add, component: 'store::admin.products.type.add', icon: 'plus' },
-        { title: labels.edit, component: 'store::admin.products.type.edit', icon: 'edit' }
+        { title: labels.view, component: 'products::admin.products.type.view', icon: 'list', active: true },
+        { title: labels.add, component: 'products::admin.products.type.add', icon: 'plus' },
+        { title: labels.edit, component: 'products::admin.products.type.edit', icon: 'edit' }
     ] %}
 
     {{  component('components:tabs.vertical',{ 
@@ -14,7 +14,7 @@
             item_class: 'product-type-tab-item',
             content: { 
                 id: 'product_type_content',
-                component: 'store::admin.products.type.view',
+                component: 'products::admin.products.type.view',
                 params: params 
             } 
         })

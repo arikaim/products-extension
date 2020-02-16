@@ -5,7 +5,7 @@ $(document).ready(function() {
     },function(result) {
         arikaim.page.loadContent({
             id: 'product_edit_content',
-            component: 'store::admin.products.edit.options',
+            component: 'products::admin.products.edit.options',
             params: { uuid: result.uuid }
         }); 
     });

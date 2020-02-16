@@ -1,5 +1,5 @@
 {% component 'components:view.rows' %}
-{% set model = createModel('ProductType','store').orderBy('title') %}
+{% set model = createModel('ProductType','products').orderBy('title') %}
 {% set items = paginate(model,'product-type') %}
 
 {% for item in items.getItems() %}  

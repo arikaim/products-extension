@@ -1,6 +1,6 @@
 {% component 'components:tabs.vertical.content' %}
-{% set product = createModel('Products','store').findById(uuid) %}
-{% set optinsList = createModel('ProductOptionsList','store').getItemsQuery(product.type.slug) %}
+{% set product = createModel('Products','products').findById(uuid) %}
+{% set optinsList = createModel('ProductOptionsList','products').getItemsQuery(product.type.slug) %}
 {% if product.options.count() != optinsList.count() %}
 <div class="ui icon mini message">
     <i class="icon warning mini"></i>
@@ -16,7 +16,7 @@
 
 {{  component('system:admin.orm.options.edit',{ 
         model: 'ProductOptions',
-        extension: 'store',
+        extension: 'products',
         id: product.id,
         class: 'mt-2 basic',
         hide: false 

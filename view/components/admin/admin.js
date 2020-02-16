@@ -5,15 +5,15 @@
  *  http://www.arikaim.com
  */
 
-function StoreControlPanel() {
+function ProductsControlPanel() {
 
     this.init = function() {
         arikaim.ui.tab();
     };
 }
 
-var store = new StoreControlPanel();
+var productsControlPanel = new ProductsControlPanel();
 
 arikaim.page.onReady(function() {
-    store.init();
+    productsControlPanel.init();
 });

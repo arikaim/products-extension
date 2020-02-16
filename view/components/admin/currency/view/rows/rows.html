@@ -1,5 +1,5 @@
 {% component 'components:view.rows' %}
-    {% set currency = createModel('Currency','store').orderBy('title') %}
+    {% set currency = createModel('Currency','products').orderBy('title') %}
     {% set items = paginate(currency,'currency') %}
    
     {% for item in items.getItems() %}

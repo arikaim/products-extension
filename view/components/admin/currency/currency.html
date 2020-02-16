@@ -1,7 +1,7 @@
 {% set items = [ 
-    { title: labels.view, component: 'store::admin.currency.view', icon: 'list', active: true },
-    { title: labels.add, component: 'store::admin.currency.add', icon: 'plus' },
-    { title: labels.edit, component: 'store::admin.currency.edit', icon: 'edit' }
+    { title: labels.view, component: 'products::admin.currency.view', icon: 'list', active: true },
+    { title: labels.add, component: 'products::admin.currency.add', icon: 'plus' },
+    { title: labels.edit, component: 'products::admin.currency.edit', icon: 'edit' }
 ] %}
 
 {{  component('components:tabs.vertical',{ 
@@ -9,7 +9,7 @@
         menu: { id: 'currency_menu' }, 
         item_class: 'currency-tab-item',
         content: { 
-            component: 'store::admin.currency.view', 
+            component: 'products::admin.currency.view', 
             params: params,
             id: "currency_content" 
         } 

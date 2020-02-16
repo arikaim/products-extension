@@ -13,7 +13,7 @@ $(document).ready(function() {
     },function(result) {
         arikaim.page.loadContent({
             id: 'product_edit_content',
-            component: 'store::admin.products.edit.price',
+            component: 'products::admin.products.edit.price',
             params: { uuid: result.uuid }
         }); 
     });

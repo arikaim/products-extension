@@ -1,8 +1,8 @@
 {% if items is empty %}
-{% set products = createModel('Products','store') %}
+{% set products = createModel('Products','products') %}
 {% endif %}
 <div class="ui stackable cards" id="products_list">  
     {% for product in items %}
-        {{ component('store>product.view.card',{ product: product }) }}
+        {{ component('products>product.view.card',{ product: product }) }}
     {% endfor %}
 </div>

@@ -3,7 +3,7 @@
     "name": "products",
     "package-type": "extension",
     "type": "user",
-    "description": "Create and manage store",
+    "description": "Manage products",
     "short-description": "Products",
     "version": "1.0.1",
     "private-repository": true,
@@ -12,8 +12,9 @@
     "admin-menu": {       
         "title": "Products",
         "page-title": "Products",
-        "icon": "shoping bag",
-        "page-icon": "shoping bag",              
+        "icon": "shopping bag",
+        "page-icon": "shopping bag",              
         "component": "products::admin"        
     }
 }
+

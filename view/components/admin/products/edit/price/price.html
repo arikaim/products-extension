@@ -1,6 +1,6 @@
 {% component 'components:tabs.vertical.content' %}
-{% set product = createModel('Products','store').findById(uuid) %}
-{% set priceList = createModel('ProductOptionsList','store').getItemsQuery(product.type.slug,'price') %}
+{% set product = createModel('Products','products').findById(uuid) %}
+{% set priceList = createModel('ProductOptionsList','products').getItemsQuery(product.type.slug,'price') %}
 {% if product.price.count() != priceList.count() %}
 <div class="ui icon mini message">
     <i class="icon warning mini"></i>

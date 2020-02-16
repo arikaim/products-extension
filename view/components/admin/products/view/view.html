@@ -24,8 +24,8 @@
                 <th class="two wide">{{ columns.price }}</th>                                      
             </tr>
         </thead>
-        <tbody id="product_rows" component="store::admin.products.view.rows" namespace="products">
-            {{ component('store::admin.products.view.rows') }} 
+        <tbody id="product_rows" component="products::admin.products.view.rows" namespace="products">
+            {{ component('products::admin.products.view.rows') }} 
         </tbody>
     </table> 
     <div id="paginator">      

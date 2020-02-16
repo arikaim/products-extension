@@ -1,7 +1,7 @@
 {% set show_label = (show_label is null) ? true : show_label %}
 {% set name = name|default('product_type') %}
 {% set id = id|default(name) %}
-{% set model = createModel('ProductType','store') %}
+{% set model = createModel('ProductType','products') %}
 {% set class = class|default('basic button') %}
 {% set data_column = data_column|default('id') %}
 {% if selected is not empty %}

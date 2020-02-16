@@ -13,7 +13,7 @@ function ProductsView() {
 
         search.init({
             id: 'product_rows',
-            component: 'store::admin.products.view.rows',
+            component: 'products::admin.products.view.rows',
             event: 'product.search.load'
         },'products')  
         
@@ -24,7 +24,7 @@ function ProductsView() {
     };
 
     this.initRows = function() {
-        var component = arikaim.component.get('store::admin');
+        var component = arikaim.component.get('products::admin');
         var removeMessage = component.getProperty('messages.remove.content');
 
         $('.status-dropdown').dropdown({
@@ -54,7 +54,7 @@ function ProductsView() {
             arikaim.ui.setActiveTab('#edit_product','.product-tab-item');
             arikaim.page.loadContent({
                 id: 'products_content',
-                component: 'store::admin.products.edit',
+                component: 'products::admin.products.edit',
                 params: { uuid: uuid }
             });          
         });
