@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Arikaim\Extensions\Products\Models\ProductOptionType;
 use Arikaim\Extensions\Products\Models\ProductOptionsList;
-use Arikaim\Extensions\Products\Models\Currency;
+use Arikaim\Extensions\Currency\Models\Currency;
 
 use Arikaim\Core\Db\Traits\Uuid;
 use Arikaim\Core\Db\Traits\Find;

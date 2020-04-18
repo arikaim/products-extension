@@ -33,11 +33,6 @@ class Products extends Extension
         // price 
         $this->addApiRoute('PUT','/api/products/admin/product/price/update','PriceListControlPanel','update','session');
         $this->addApiRoute('PUT','/api/products/admin/product/price/create','PriceListControlPanel','createPriceList','session');       
-        // currency
-        $this->addApiRoute('POST','/api/products/admin/currency/add','CurrencyControlPanel','add','session');   
-        $this->addApiRoute('PUT','/api/products/admin/currency/update','CurrencyControlPanel','update','session');   
-        $this->addApiRoute('PUT','/api/products/admin/currency/status','CurrencyControlPanel','setStatus','session');   
-        $this->addApiRoute('DELETE','/api/products/admin/currency/delete/{uuid}','CurrencyControlPanel','softDelete','session');  
         
         // Api
         // products 
@@ -50,7 +45,6 @@ class Products extends Extension
         // Relation map 
         $this->addRelationMap('product','Products');
         // Create db tables        
-        $this->createDbTable('CurrencySchema');
         $this->createDbTable('ProductTypeSchema');
         $this->createDbTable('ProductsSchema');
         // Product options

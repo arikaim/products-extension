@@ -3,11 +3,7 @@
         "products": {
             "content": "Products",
             "title": "Manage products"
-        },
-        "currency": {
-            "content": "Currency",
-            "title": "Currency"
-        },     
+        },          
         "settings": {
             "content": "Settings",
             "title": "Settings"

@@ -1,4 +1,4 @@
-{% set currency = createModel('Currency','products').getDefault() %}
+{% set currency = createModel('Currency','currency').getDefault() %}
 {% if uuid is not empty %}
     {% set product = createModel('Products','products').findById(uuid) %}
 {% endif %}

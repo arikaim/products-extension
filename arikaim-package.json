@@ -5,10 +5,15 @@
     "type": "user",
     "description": "Manage products",
     "short-description": "Products",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "private-repository": true,
     "repository": "https://github.com/arikaim-repository/products-extension.git",
     "position": "3",
+    "require": {
+        "extensions": [
+            "currency"
+        ]
+    },
     "admin-menu": {       
         "title": "Products",
         "page-title": "Products",
