@@ -10,17 +10,19 @@
 namespace Arikaim\Extensions\Products\Controllers;
 
 use Arikaim\Core\Db\Model;
-use Arikaim\Core\Controllers\ApiController;
+use Arikaim\Core\Controllers\ControlPanelApiController;
 
 use Arikaim\Core\Controllers\Traits\Status;
 use Arikaim\Core\Controllers\Traits\SoftDelete;
+use Arikaim\Core\Controllers\Traits\MetaTags;
 
 /**
  * Products control panel api controller
 */
-class ProductControlPanel extends ApiController
+class ProductControlPanel extends ControlPanelApiController
 {
     use Status,
+        MetaTags,
         SoftDelete;
 
     /**
@@ -53,8 +55,6 @@ class ProductControlPanel extends ApiController
     */
     public function createOptionsController($request, $response, $data) 
     { 
-        $this->requireControlPanelPermission();
-        
         $this->onDataValid(function($data) { 
             $product = Model::Products('products')->findById($data['uuid']);
             $result = $product->createOptions();
@@ -79,9 +79,7 @@ class ProductControlPanel extends ApiController
      * @return Psr\Http\Message\ResponseInterface
     */
     public function addController($request, $response, $data) 
-    {       
-        $this->requireControlPanelPermission();
-        
+    {         
         $this->onDataValid(function($data) { 
             $model = Model::Products('products');
             $data = [
@@ -115,9 +113,7 @@ class ProductControlPanel extends ApiController
      * @return Psr\Http\Message\ResponseInterface
     */
     public function updateController($request, $response, $data) 
-    {       
-        $this->requireControlPanelPermission();
-        
+    {         
         $this->onDataValid(function($data) { 
             $product = Model::Products('products')->findById($data['uuid']); 
             $data = [

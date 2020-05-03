@@ -8,6 +8,9 @@
     <div class="item link edit-product-tab-item" component="products::admin.products.edit.price" uuid="{{ uuid }}">
         {{ labels.price }}     
     </div>  
+    <div class="item link edit-product-tab-item" component="products::admin.products.edit.meta" uuid="{{ uuid }}">
+        {{ labels.meta }}     
+    </div>  
 </div>
 <div class="ui active tab basic segment" id="product_edit_content">    
     {{ component('products::admin.products.edit.details',{ uuid: uuid }) }}

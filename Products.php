@@ -30,6 +30,7 @@ class Products extends Extension
         $this->addApiRoute('PUT','/api/products/admin/product/status','ProductControlPanel','setStatus','session');
         $this->addApiRoute('DELETE','/api/products/admin/product/delete/{uuid}','ProductControlPanel','softDelete','session');
         $this->addApiRoute('PUT','/api/products/admin/product/create/options','ProductControlPanel','createOptions','session');       
+        $this->addApiRoute('PUT','/api/products/admin/product/update/meta','ProductControlPanel','updateMetaTags','session');
         // price 
         $this->addApiRoute('PUT','/api/products/admin/product/price/update','PriceListControlPanel','update','session');
         $this->addApiRoute('PUT','/api/products/admin/product/price/create','PriceListControlPanel','createPriceList','session');       
@@ -47,6 +48,7 @@ class Products extends Extension
         // Create db tables        
         $this->createDbTable('ProductTypeSchema');
         $this->createDbTable('ProductsSchema');
+        $this->createDbTable('ProductTranslationsSchema');
         // Product options
         $this->createDbTable('ProductOptionTypeSchema');
         $this->createDbTable('ProductOptionsListSchema');

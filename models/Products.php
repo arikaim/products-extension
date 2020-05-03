@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 use Arikaim\Extensions\Products\Models\ProductType;
 use Arikaim\Extensions\Products\Models\ProductOptions;
 use Arikaim\Extensions\Products\Models\ProductPriceList;
+use Arikaim\Extensions\Products\Models\ProductTranslations;
 use Arikaim\Core\Models\Users;
 
 use Arikaim\Core\Db\Traits\Uuid;
@@ -27,6 +28,7 @@ use Arikaim\Core\Db\Traits\DateUpdated;
 use Arikaim\Core\Db\Traits\Options\OptionsRelation;
 use Arikaim\Core\Db\Traits\Price\PriceRelation;
 use Arikaim\Extensions\Category\Models\Traits\CategoryRelations;
+use Arikaim\Core\Db\Traits\Translations;
 
 /**
  * Products model class
@@ -43,6 +45,7 @@ class Products extends Model
         OptionsRelation,
         PriceRelation,
         CategoryRelations,
+        Translations,
         Position;
 
     /**
@@ -112,12 +115,35 @@ class Products extends Model
     ];
    
     /**
+     * Db column names which are translated to other languages
+     *
+     * @var array
+     */
+    protected $translatedAttributes = [
+        'title'       
+    ];
+
+    /**
      * Disable timestamps
      *
      * @var boolean
      */
     public $timestamps = false;
     
+    /**
+     * Translation column ref
+     *
+     * @var string
+     */
+    protected $translationReference = 'product_id';
+
+    /**
+     * Translatin model class
+     *
+     * @var string
+     */
+    protected $translationModelClass = ProductTranslations::class;
+
     /**
      * Options class name
      *

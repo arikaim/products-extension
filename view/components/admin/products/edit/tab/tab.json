@@ -2,6 +2,7 @@
     "labels": {       
         "details": "Details",
         "options": "Options",
-        "price": "Price"
+        "price": "Price",
+        "meta": "Meta Tags"
     }
 }
