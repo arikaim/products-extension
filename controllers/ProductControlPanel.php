@@ -32,7 +32,7 @@ class ProductControlPanel extends ControlPanelApiController
      */
     public function init()
     {
-        $this->loadMessages('products::admin.products.messages');
+        $this->loadMessages('products::admin.messages');
     }
 
     /**

@@ -29,7 +29,7 @@ class ProductOptionType extends Model
      *
      * @var string
      */
-    protected $table = "product_option_type";   
+    protected $table = 'product_option_type';   
 
     /**
      * Disable timestamps

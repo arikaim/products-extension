@@ -5,6 +5,9 @@
     },
     "columns": {
         "action": "Action",
-        "title": "Title"      
+        "title": "Title",
+        "slug": "Slug",
+        "description": "Description",
+        "prodcuts": "Products"      
     }
 }

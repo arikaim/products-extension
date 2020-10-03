@@ -64,5 +64,33 @@
         "description": "Package name",
         "default": null,
         "type": "text"          
+    },
+    {
+        "key": "monthly-price",
+        "title": "Monthly Price",
+        "description": "Price for monthly subscription",
+        "default": null,
+        "type": "price"          
+    },
+    {
+        "key": "annual-price",
+        "title": "Annual Price",
+        "description": "Price for annual subscription",
+        "default": null,
+        "type": "price"          
+    },
+    {
+        "key": "user-group",
+        "title": "User Group",
+        "description": "User gruop",
+        "default": null,
+        "type": "user-group"          
+    },
+    {
+        "key": "user-permission",
+        "title": "User Permission",
+        "description": "User permission",
+        "default": null,
+        "type": "permission"          
     }
 ]

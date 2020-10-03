@@ -1,19 +1,42 @@
 {% component 'components:view.rows' %}
 
-{% set model = createModel('Products','products').orderBy('title') %}
+{% set model = createModel('Products','products') %}
+{% set show_deleted = searchValue('show_deleted','products') %}
+{% if show_deleted == 'true' %}
+    {% set model = model.softDeletedQuery() %}
+{% else %}
+    {% set model = model.getNotDeletedQuery() %}
+{% endif %}
+{% set type_id = searchValue('type_id','products') %}
+{% if type_id is not empty %}
+    {% set model = model.where('type_id','=',type_id) %}
+{% endif %}
 {{ createSearch('title','products','like:%{value}%','and') }}
 {% set model = applySearch(model,'products') %}
-{% set items = paginate(model,'products') %}
+{% set model = model.orderBy('title') %}
 
-{% for item in items.getItems() %}  
+{% set items = paginate(model,'products') %}
+{% if items.getItems.count() == 0 %}
+<tr>
+    <td>{{ labels.empty }}</td>
+</tr>
+{% endif %}
+
+{% for item in items.getItems()  %}  
     <tr id="{{ item.uuid }}">              
-        <td>               
-            <button class="ui icon mini basic button edit-button" uuid="{{ item.uuid }}">
-                <i class="icon edit"></i>
-            </button>            
-            <button class="ui icon mini basic button delete-button" uuid="{{ item.uuid }}" data-title="{{ item.title }}">
-                <i class="icon trash orange"></i>
-            </button>                        
+        <td>              
+            {% if item.isDeleted() == false %} 
+                <button class="ui icon mini basic button edit-button" uuid="{{ item.uuid }}">
+                    <i class="icon edit"></i>
+                </button>            
+                <button class="ui icon mini basic button delete-button" uuid="{{ item.uuid }}" data-title="{{ item.title }}">
+                    <i class="icon trash orange"></i>
+                </button>                       
+            {% else %}
+                <button class="ui icon mini basic button restore-button" uuid="{{ item.uuid }}" title="{{ labels.resotre }}">
+                    <i class="trash restore olive icon"></i>
+                </button>    
+            {% endif %} 
         </td>
         <td>{{ item.date_created|dateFormat }}</td>  
         <td>

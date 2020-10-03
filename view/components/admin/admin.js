@@ -4,16 +4,29 @@
  *  @license    http://www.arikaim.com/license
  *  http://www.arikaim.com
  */
+'use strict';
 
 function ProductsControlPanel() {
+    var self = this;
+    this.messages = {};
+
+    this.loadMessages = function() {
+        arikaim.component.loadProperties('products::admin.messages',function(params) {            
+            self.messages = params.messages;
+        });
+    };
 
     this.init = function() {
-        arikaim.ui.tab();
+        arikaim.ui.tab();      
     };
 }
 
-var productsControlPanel = new ProductsControlPanel();
+if (isEmpty(productsControlPanel) == true) {
+    var productsControlPanel = new ProductsControlPanel();
+    productsControlPanel.loadMessages();
+}
 
-arikaim.page.onReady(function() {
+
+$(document).ready(function() {
     productsControlPanel.init();
 });

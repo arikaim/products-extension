@@ -1,0 +1,43 @@
+{
+    "price": {
+        "update": "Product price was saved successfully."
+    },
+    "add": "Product was created successfully.",
+    "update": "Product was saved successfully.",
+    "delete": "Product was deleted successfully.",
+    "restore": "Product was restored successfully.",
+    "type": {
+        "add": "Product type was created successfully.",
+        "update": "Product type was saved successfully.",
+        "delete": "Product type was deleted successfully."
+    },
+    "errors": {
+        "type": {
+            "exist": "Product type with this title exists",
+            "used": "Product type are used",
+            "readonly": "Product type is not editable.",
+            "delete": "Can't delete product type.",
+            "update": "Can't save product type."
+        },
+        "price": {
+            "update": "Can't save product price"
+        },
+        "update": "Can't save product",
+        "add": "Can't create product",
+        "exist": "Product with this title exist",
+        "restore": "Can't restore product",
+        "delete": "Can't delete product"
+    },
+    "messages": {
+        "remove": {
+            "title": "Confirm Remove",
+            "content": "Confirm remove product '<b><% title %></b>'"
+        },
+        "type": {
+            "remove": {
+                "title": "Confirm Remove",
+                "content": "Confirm remove product type '<b><% title %></b>'"
+            }
+        }
+    }
+}

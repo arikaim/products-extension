@@ -1,3 +1,5 @@
+'use strict';
+
 $(document).ready(function() {
     arikaim.ui.button('.add-options',function(element) {
         var uuid = $(element).attr('uuid');

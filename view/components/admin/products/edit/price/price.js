@@ -1,3 +1,5 @@
+'use strict';
+
 $(document).ready(function() {    
     $('.option-field').popup();
 

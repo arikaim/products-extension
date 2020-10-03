@@ -1,14 +1,18 @@
 <div class="ui stackable tabular menu product-edit-tabs">      
     <div class="item link active edit-product-tab-item" component="products::admin.products.edit.details" uuid="{{ uuid }}">
+        <i class="icon stream blue"></i>
         {{ labels.details }}     
     </div>  
     <div class="item link edit-product-tab-item" component="products::admin.products.edit.options" uuid="{{ uuid }}">
+        <i class="icon sliders horizontal blue"></i>
         {{ labels.options }}     
     </div>  
     <div class="item link edit-product-tab-item" component="products::admin.products.edit.price" uuid="{{ uuid }}">
+        <i class="currency icon blue"></i>
         {{ labels.price }}     
     </div>  
     <div class="item link edit-product-tab-item" component="products::admin.products.edit.meta" uuid="{{ uuid }}">
+        <i class="code icon blue"></i>
         {{ labels.meta }}     
     </div>  
 </div>

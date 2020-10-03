@@ -53,7 +53,7 @@ class Products extends Model
      *
      * @var string
      */
-    protected $table = "products";
+    protected $table = 'products';
 
     /**
      * Visible columns
@@ -198,6 +198,6 @@ class Products extends Model
     {
         $model = $this->findByColumn($title,'title');
 
-        return is_object($model);
+        return \is_object($model);
     }    
 }

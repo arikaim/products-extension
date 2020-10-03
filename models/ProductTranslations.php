@@ -31,7 +31,7 @@ class ProductTranslations extends Model
      *
      * @var string
      */
-    protected $table = "product_translations";
+    protected $table = 'product_translations';
 
     /**
      * Fillable attributes

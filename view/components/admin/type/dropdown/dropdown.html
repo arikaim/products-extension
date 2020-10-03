@@ -8,9 +8,14 @@
     {% set selected = model.findById(selected) %}
 {% endif %}
 {% set label = (selected is empty) ? labels.choose : selected.title %}
-
+{% if hide_readonly == true %}
+    {% set model = model.editable() %}
+{% endif %}
 <div class="ui dropdown product-type {{ class }}" {{ title|attr('title') }} {{ attributes|attr }}>
     <input type="hidden" value="{{ selected[data_column] }}" name="{{ name }}" {{ id|attr('id') }}>  
+    {% if icon is not empty %}
+    <i class="icon {{ icon }}"></i>
+    {% endif %}
     {% if show_label == true %}
         <div class="text default">
            {{ label }}
@@ -18,6 +23,11 @@
     {% endif %}
     <i class="icon dropdown"></i>
     <div class="menu">
+        {% if show_all == true %}
+        <div class="item" data-value="">                    
+            {{ labels.all }}            
+        </div>  
+        {% endif %}
         {% for item in model.get() %}
         <div class="item" data-value="{{ item[data_column] }}">                    
             {{ item.title }}            

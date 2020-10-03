@@ -1,0 +1,20 @@
+{% component 'components:tabs.vertical.content' %}
+<div class="mt-4">
+    {% if uuid is empty %} 
+    <div class="ui segment">
+        {{  component('products::admin.type.dropdown',{ 
+                class: 'basic button fluid',
+                selected: uuid, 
+                data_column: 'uuid',
+                hide_readonly: true
+            }) 
+        }}
+    </div>
+    {% endif %}
+    <div class="mt-1" id="form_content">
+        {% if uuid is not empty %} 
+            {{ component('products::admin.type.form',{ uuid: uuid }) }}
+        {% endif %}
+    </div>     
+</div>       
+{% endcomponent %}

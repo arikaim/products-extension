@@ -22,7 +22,7 @@ class ProductTypeSchema extends Schema
      *
      * @var string
      */
-    protected $tableName = "product_type";
+    protected $tableName = 'product_type';
 
     /**
      * Create table
@@ -38,6 +38,7 @@ class ProductTypeSchema extends Schema
         $table->slug();
         $table->string('title')->nullable(false);
         $table->status();
+        $table->integer('readonly')->nullable(true);
         $table->string('description')->nullable(true);           
     }
 
@@ -49,6 +50,9 @@ class ProductTypeSchema extends Schema
      */
     public function update($table) 
     {              
+        if ($this->hasColumn('readonly') == false) {
+            $table->integer('readonly')->nullable(true);
+        } 
     }
 
     /**
@@ -67,9 +71,10 @@ class ProductTypeSchema extends Schema
         ); 
 
         $seed->create(['slug' => 'subscription'],[
-            'uuid'   => Uuid::create(),
-            'title'  => 'Subscription',               
-            'status' => 1
+            'uuid'      => Uuid::create(),
+            'readonly'  => 1,
+            'title'     => 'Subscription',               
+            'status'    => 1
             ]
         ); 
     }

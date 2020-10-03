@@ -32,7 +32,7 @@ class ProductOptions extends Model
      *
      * @var string
      */
-    protected $table = "product_options";
+    protected $table = 'product_options';
 
     /**
      * Visible columns

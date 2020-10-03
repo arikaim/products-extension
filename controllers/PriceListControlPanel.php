@@ -10,12 +10,12 @@
 namespace Arikaim\Extensions\Products\Controllers;
 
 use Arikaim\Core\Db\Model;
-use Arikaim\Core\Controllers\ApiController;
+use Arikaim\Core\Controllers\ControlPanelApiController;
 
 /**
  * Product price list control panel api controller
 */
-class PriceListControlPanel extends ApiController
+class PriceListControlPanel extends ControlPanelApiController
 {
     /**
      * Init controller
@@ -24,7 +24,7 @@ class PriceListControlPanel extends ApiController
      */
     public function init()
     {
-        $this->loadMessages('products::admin.products.messages');
+        $this->loadMessages('products::admin.messages');
     }
 
     /**
@@ -44,9 +44,7 @@ class PriceListControlPanel extends ApiController
      * @return Psr\Http\Message\ResponseInterface
     */
     public function updateController($request, $response, $data) 
-    {       
-        $this->requireControlPanelPermission();
-        
+    {         
         $this->onDataValid(function($data) { 
             $price = $data->get('price',null);
 
@@ -77,8 +75,6 @@ class PriceListControlPanel extends ApiController
     */
     public function createPriceListController($request, $response, $data) 
     {
-        $this->requireControlPanelPermission();
-        
         $this->onDataValid(function($data) { 
             $product = Model::Products('products')->findById($data['uuid']);
             $result = $product->createPriceList();

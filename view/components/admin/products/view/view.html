@@ -1,9 +1,35 @@
 {% component 'components:tabs.vertical.content' %}
 {% set class = 'sixteen wide column' %}
 {% set panel_class = '' %}
+{% set show_deleted = searchValue('show_deleted','products') %}
+{% set type_id = searchValue('type_id','products') %}
 <div class="ui stackable grid">
-    <div class="sixteen wide column mt-10">           
-        {{ component("components:search",{ namespace: 'products' }) }}
+    <div class="ten wide centered column mt-10"> 
+        <div class="ui two column centered stackable grid">
+            <div class="row">
+                <div class="ui four computer two tablet column left aligned">          
+                    {{ component("components:search.form",{ namespace: 'products' }) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="two wide column left aligned">
+                    {{  component('products::admin.type.dropdown',{ 
+                            class: 'inline',
+                            icon: 'filter',
+                            selected: type_id, 
+                            show_all: true,
+                            data_column: 'id'                       
+                        }) 
+                    }}
+                </div>
+                <div class="four wide column left aligned">
+                    <div class="ui toggle checkbox show-deleted">
+                        <input type="checkbox" name="show_deleted" {{ (show_deleted == 'true') ? 'checked': '' }}>
+                        <label>{{ labels.deleted }}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <div class="ui stackable text menu">

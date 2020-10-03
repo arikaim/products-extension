@@ -21,7 +21,7 @@ class ProductOptionsSchema extends Schema
      *
      * @var string
      */
-    protected $tableName = "product_options";
+    protected $tableName = 'product_options';
 
     /**
      * Create table
@@ -32,7 +32,6 @@ class ProductOptionsSchema extends Schema
     public function create($table) 
     {
         $table->tableOptions('product_option_type','products',function($table) {
-
         });
     }
 

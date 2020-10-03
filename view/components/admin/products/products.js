@@ -7,7 +7,6 @@
 'use strict';
 
 function ProductsControlPanel() {
-    var self = this;
     
     this.createPriceList = function(uuid, onSuccess, onError) {
         var data = {
@@ -30,7 +29,11 @@ function ProductsControlPanel() {
     };
 
     this.delete = function(uuid, onSuccess, onError) {
-        return arikaim.delete('/api/products/admin/product/delete' + uuid,onSuccess,onError);          
+        return arikaim.delete('/api/products/admin/product/delete/' + uuid,onSuccess,onError);          
+    };
+
+    this.restoreProduct = function(uuid, onSuccess, onError) {
+        return arikaim.put('/api/products/admin/product/restore/' + uuid,onSuccess,onError);          
     };
 
     this.update = function(formId, onSuccess, onError) {
@@ -57,6 +60,6 @@ function ProductsControlPanel() {
 
 var products = new ProductsControlPanel();
 
-arikaim.page.onReady(function() {
+$(document).ready(function() {
     products.init();
 });

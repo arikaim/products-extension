@@ -21,7 +21,7 @@ class ProductTranslationsSchema extends Schema
      *
      * @var string
      */
-    protected $tableName = "product_translations";
+    protected $tableName = 'product_translations';
 
     /**
      * Create table

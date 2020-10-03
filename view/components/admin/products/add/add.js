@@ -1,3 +1,5 @@
+'use strict';
+
 $(document).ready(function() {
     arikaim.ui.form.onSubmit('#product_form',function() {
         return products.add('#product_form');

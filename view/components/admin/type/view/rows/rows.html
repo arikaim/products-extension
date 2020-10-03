@@ -1,0 +1,33 @@
+{% component 'components:view.rows' %}
+{% set model = createModel('ProductType','products').orderBy('title') %}
+{% set items = paginate(model,'product-type') %}
+
+{% for item in items.getItems() %}  
+    <tr id="{{ item.uuid }}">              
+        <td>  
+            {% if item.readonly != 1 %}
+                <div class="ui buttons">        
+                    <button class="ui icon mini basic button edit-button" uuid="{{ item.uuid }}" title="{{ labels.edit }}">
+                        <i class="icon edit"></i>
+                    </button>     
+                    {% if item.hasProducts() == false %}       
+                    <button class="ui icon mini basic button delete-button" uuid="{{ item.uuid }}" data-title="{{ item.title }}">
+                        <i class="icon trash orange"></i>
+                    </button>  
+                    {% endif %}
+                </div>                  
+            {% else %}
+                <div class="ui horizontal blue fluid basic label">{{ labels.readonly }}</div>
+            {% endif %}   
+        </td>         
+        <td>{{ item.title }}</td> 
+        <td>
+            <div class="ui horizontal basic label">{{ item.slug }}</div>
+        </td> 
+        <td>{{ item.description|sliceLabel(30) }}</td>      
+        <td>
+            {{ item.products().count() }}
+        </td>           
+    </tr>
+{% endfor %}
+{% endcomponent %}

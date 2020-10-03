@@ -3,6 +3,9 @@
         "content": "View",
         "icon": "list"      
     },
+    "labels": {
+        "deleted": "Show deleted"
+    },
     "columns": {
         "action": "Action",
         "name": "Name",

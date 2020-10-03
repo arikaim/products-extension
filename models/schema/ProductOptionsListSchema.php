@@ -23,7 +23,7 @@ class ProductOptionsListSchema extends Schema
      *
      * @var string
      */
-    protected $tableName = "product_options_list";
+    protected $tableName = 'product_options_list';
 
     /**
      * Create table
@@ -34,7 +34,6 @@ class ProductOptionsListSchema extends Schema
     public function create($table) 
     {            
         $table->tableOptionsList(function($table) {
-
         });
     }
 
@@ -56,11 +55,17 @@ class ProductOptionsListSchema extends Schema
      */
     public function seeds($seed)
     {       
-        $items = Extension::loadJsonConfigFile('product-options-list.json','store');
-        
+        // Software product type
+        $items = Extension::loadJsonConfigFile('software-type.json','products');        
         $seed->createFromArray(['key','type_name'],$items,function($item) {
-            $item['uuid'] = Uuid::create();
-        
+            $item['uuid'] = Uuid::create();        
+            return $item;
+        });
+
+        // Subscription product type
+        $items = Extension::loadJsonConfigFile('subscription-type.json','products');        
+        $seed->createFromArray(['key','type_name'],$items,function($item) {
+            $item['uuid'] = Uuid::create();        
             return $item;
         });
     }

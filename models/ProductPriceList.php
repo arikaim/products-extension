@@ -35,7 +35,7 @@ class ProductPriceList extends Model
      *
      * @var string
      */
-    protected $table = "product_price_list";
+    protected $table = 'product_price_list';
 
     /**
      * Visible columns

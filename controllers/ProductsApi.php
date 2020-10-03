@@ -62,7 +62,7 @@ class ProductsApi extends ApiController
             $size = $data->get('size',15);
 
             $query = Model::Products('products');
-            $model = $query->where('title','like',"%$search%")->take($size)->get();
+            $model = $query->where('title','like','%' . $search . '%')->take($size)->get();
 
             $this->setResponse(is_object($model),function() use($model) {     
                 $items = [];

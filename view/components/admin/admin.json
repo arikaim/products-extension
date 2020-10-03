@@ -1,22 +1,16 @@
 {
     "labels": {
         "products": {
-            "content": "Products",
+            "content": "View",
             "title": "Manage products"
-        },          
+        },    
+        "type": {
+            "content": "Product Type",
+            "title": "Product Type"
+        },        
         "settings": {
             "content": "Settings",
             "title": "Settings"
-        },             
-        "sales": {
-            "content": "Sales",
-            "title": "Product Sales reports"
-        }     
-    },
-    "messages": {
-        "remove": {
-            "title": "Confirm Remove",
-            "content": "Confirm remove product '<b><% title %></b>'"
-        }
+        }                      
     }
 }

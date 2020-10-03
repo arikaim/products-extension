@@ -21,7 +21,7 @@ class ProductPriceListSchema extends Schema
      *
      * @var string
      */
-    protected $tableName = "product_price_list";
+    protected $tableName = 'product_price_list';
 
     /**
      * Create table

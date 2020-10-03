@@ -32,7 +32,7 @@
     {% endif %}
     <div class="field">
         <label>{{ fields.type.label }}</label>
-        {{ component('products::admin.products.type.dropdown',{ selected: product.type_id, class: 'basic button fluid' }) }}
+        {{ component('products::admin.type.dropdown',{ selected: product.type_id, class: 'basic button fluid' }) }}
     </div>    
     {{ component('components:form.footer') }}
 </form>
