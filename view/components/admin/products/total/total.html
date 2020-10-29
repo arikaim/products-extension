@@ -1,0 +1,11 @@
+{% set model = createModel('Products','products') %}
+{% set model = model.typeQuery(type_id) %}
+{% set total = model.count() %}
+<div class="ui statistic {{ class }}">
+    <div class="value">
+        {{ total }}
+    </div>
+    <div class="label">
+        {{ labels.products }}
+    </div>
+</div>

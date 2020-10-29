@@ -200,4 +200,16 @@ class Products extends Model
 
         return \is_object($model);
     }    
+
+    /**
+     * Get type query
+     *
+     * @param Builder $query
+     * @param int|null $typeId
+     * @return Builder
+     */
+    public function scopeTypeQuery($query, $typeId = null)
+    {
+        return (empty($typeId) == false) ? $query->where('type_id','=',$typeId) : $query;
+    }
 }

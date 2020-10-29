@@ -38,7 +38,7 @@ class ProductControlPanel extends ControlPanelApiController
     /**
      * Constructor
      */
-    public function __construct($container) 
+    public function __construct($container = null) 
     {
         parent::__construct($container);
         $this->setModelClass('Products');

@@ -33,6 +33,9 @@
     </div>
 </div>
 <div class="ui stackable text menu">
+    <div class="item" id="products_total">
+        {{ component('products::admin.products.total',{ type_id: type_id, class: 'olive mini horizontal' }) }}
+    </div>
     <div class="item right floated">       
         {{ component('components:paginator.dropdown',{ namespace: 'products' }) }}
     </div>
