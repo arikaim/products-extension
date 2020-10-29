@@ -30,7 +30,7 @@ trait Products
         $products = Model::Products('products')->getActive();
        
         $queryParams = $this->resolveRequestParams($request,['category_slug','page']);
-        $page = (empty($queryParams['page']) == true) ? 1 : $queryParams['page'];
+        $page = $queryParams['page'] ?? 1;
         $categorySlug = $this->getParam('category_slug',$queryParams['category_slug']);
         
         $products = Model::Category('category',function($model) use($categorySlug,$products) {                
