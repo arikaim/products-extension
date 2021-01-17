@@ -15,6 +15,7 @@ use Arikaim\Extensions\Products\Models\ProductType;
 use Arikaim\Extensions\Products\Models\ProductOptions;
 use Arikaim\Extensions\Products\Models\ProductPriceList;
 use Arikaim\Extensions\Products\Models\ProductTranslations;
+use Arikaim\Extensions\Products\Models\ProductId;
 use Arikaim\Core\Models\Users;
 
 use Arikaim\Core\Db\Traits\Uuid;
@@ -166,6 +167,16 @@ class Products extends Model
     public function getOptionsType()
     {
         return $this->type->slug;
+    }
+
+    /**
+     * Product id relations
+     *
+     * @return mixed
+     */
+    public function external()
+    {
+        return $this->hasMany(ProductId::class,'product_id');
     }
 
     /**

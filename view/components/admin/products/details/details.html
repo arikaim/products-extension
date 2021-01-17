@@ -1,0 +1,25 @@
+{% if uuid is not empty %}
+    {% set product = createModel('Products','products').findById(uuid) %}
+{% endif %}
+<div>
+    <span class="text-bold mr-2">{{ labels.product }}</span>
+    <div class="ui segment">      
+        {{ component('products::product.dropdown',{ selected: uuid }) }}
+    </div>
+    <div id="edit_product_tab">
+        <table class="ui very basic definition table">
+            <thead>
+                <tr>
+                    <th class="two wide right aligned"></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="right aligned">{{ labels.uuid }}</td>
+                    <td>{{ product.uuid }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

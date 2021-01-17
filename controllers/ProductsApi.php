@@ -64,7 +64,7 @@ class ProductsApi extends ApiController
             $query = Model::Products('products');
             $model = $query->where('title','like','%' . $search . '%')->take($size)->get();
 
-            $this->setResponse(is_object($model),function() use($model) {     
+            $this->setResponse(\is_object($model),function() use($model) {     
                 $items = [];
                 foreach ($model as $item) {
                     $items[]= [
@@ -80,5 +80,44 @@ class ProductsApi extends ApiController
         $data->validate();
 
         return $this->getResponse(true);
+    }
+
+    /**
+     * Get product details
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param Validator $data
+     * @return Psr\Http\Message\ResponseInterface
+    */
+    public function getProductDetailsController($request, $response, $data) 
+    {          
+        $this->onDataValid(function($data) { 
+            $product = Model::Products('products')->findById($data['uuid']);
+            if (empty($product) == true) {
+                $this->error('Product not exist.');
+                return false;
+            }
+
+            if ($product->status != $product->ACTIVE()) {
+                $this->error('Product not exist or not published.');
+                return false;
+            }
+
+            $this->setResultFields($product->toArray());
+
+            $categories = [];
+            foreach ($product->categories as $item) {
+                $categories[] = [
+                    'title' => $item->getTitle(),
+                    'slug'  => $item->getSlug()
+                ];
+            }
+        
+            $this->setResultFields($categories,'categories');
+        });
+        $data
+            ->addRule('text:required','uuid')
+            ->validate();      
     }
 }

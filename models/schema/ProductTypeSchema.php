@@ -69,13 +69,5 @@ class ProductTypeSchema extends Schema
                 'status' => 1
             ]
         ); 
-
-        $seed->create(['slug' => 'subscription'],[
-            'uuid'      => Uuid::create(),
-            'readonly'  => 1,
-            'title'     => 'Subscription',               
-            'status'    => 1
-            ]
-        ); 
     }
 }

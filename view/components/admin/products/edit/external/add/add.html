@@ -1,0 +1,20 @@
+<form class="ui form" id="add_id_from">
+    <div class="inline field">
+        <label>{{ labels.id }}</label>
+        <input rule="empty" type="text" id="external_id" name="external_id" value="">
+    </div>
+    <div class="inline field">
+        <label class="pl-2">{{ labels.driver }}</label>
+        {{  component('system:admin.drivers.dropdown',{ 
+                selected: selected,
+                category: 'orders',
+                calss: 'fluid' 
+            }) 
+        }}           
+    </div>
+    <div class="inline field">
+        <a class="ui mini green icon button add-external-id" uuid="{{ uuid }}">
+            <i class="icon plus"></i>
+        </a>
+    </div>
+</form>

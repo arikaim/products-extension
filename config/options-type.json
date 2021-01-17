@@ -66,20 +66,6 @@
         "type": "text"          
     },
     {
-        "key": "monthly-price",
-        "title": "Monthly Price",
-        "description": "Price for monthly subscription",
-        "default": null,
-        "type": "price"          
-    },
-    {
-        "key": "annual-price",
-        "title": "Annual Price",
-        "description": "Price for annual subscription",
-        "default": null,
-        "type": "price"          
-    },
-    {
         "key": "user-group",
         "title": "User Group",
         "description": "User gruop",
@@ -92,5 +78,12 @@
         "description": "User permission",
         "default": null,
         "type": "permission"          
+    },
+    {
+        "key": "version",
+        "title": "Version",
+        "description": "Package version",
+        "default": null,
+        "type": "text"          
     }
 ]

@@ -11,10 +11,18 @@
         <i class="currency icon blue"></i>
         {{ labels.price }}     
     </div>  
+    <div class="item link edit-product-tab-item" component="products::admin.products.edit.relations" uuid="{{ uuid }}">
+        <i class="project diagram icon blue"></i>
+        {{ labels.relations }}     
+    </div>  
+    <div class="item link edit-product-tab-item" component="products::admin.products.edit.external" uuid="{{ uuid }}">
+        <i class="info icon blue"></i>
+        {{ labels.external }}     
+    </div>   
     <div class="item link edit-product-tab-item" component="products::admin.products.edit.meta" uuid="{{ uuid }}">
         <i class="code icon blue"></i>
         {{ labels.meta }}     
-    </div>  
+    </div>      
 </div>
 <div class="ui active tab basic segment" id="product_edit_content">    
     {{ component('products::admin.products.edit.details',{ uuid: uuid }) }}

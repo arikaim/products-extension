@@ -12,16 +12,16 @@ namespace Arikaim\Extensions\Products\Models\Schema;
 use Arikaim\Core\Db\Schema;
 
 /**
- * Price list db table
+ * External product id mapping db table
  */
-class ProductPriceListSchema extends Schema  
+class ProductIdSchema extends Schema  
 {    
     /**
      * Table name
      *
      * @var string
      */
-    protected $tableName = 'product_price_list';
+    protected $tableName = 'product_id';
 
     /**
      * Create table
@@ -31,8 +31,14 @@ class ProductPriceListSchema extends Schema
      */
     public function create($table) 
     {
-        $table->tablePriceList('products','currency',function($table) {
-        });
+        // fields
+        $table->prototype('id');
+        $table->prototype('uuid');
+        $table->relation('product_id','products');
+
+        $table->string('external_id')->nullable(false);      
+        $table->string('api_driver')->nullable(false);  
+        $table->unique(['external_id','api_driver']);         
     }
 
     /**
@@ -42,6 +48,16 @@ class ProductPriceListSchema extends Schema
      * @return void
      */
     public function update($table) 
-    {               
+    {                      
+    }
+
+    /**
+     * Insert or update rows in table
+     *
+     * @param Seed $seed
+     * @return void
+     */
+    public function seeds($seed)
+    {         
     }
 }

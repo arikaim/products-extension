@@ -1,0 +1,15 @@
+{% if uuid is not empty %}
+    {% set product = createModel('Products','products').findById(uuid) %}
+    {% set items = product.external().get() %}
+{% endif %}
+{% for item in items %}
+<tr>
+    <td>
+        <button class="ui mini basic compact icon button delete-external-id" uuid="{{ item.uuid }}">
+            <i class="icon trash orange"></i>
+        </button>
+    </td>
+    <td>{{ item.external_id }}</td>
+    <td>{{ item.api_driver }}</td>
+</tr>
+{% endfor %}

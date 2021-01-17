@@ -12,16 +12,16 @@ namespace Arikaim\Extensions\Products\Models\Schema;
 use Arikaim\Core\Db\Schema;
 
 /**
- * Price list db table
+ * Product relations table
  */
-class ProductPriceListSchema extends Schema  
+class ProductRelationsSchema extends Schema  
 {    
     /**
      * Table name
      *
      * @var string
      */
-    protected $tableName = 'product_price_list';
+    protected $tableName = 'product_relations';
 
     /**
      * Create table
@@ -31,8 +31,8 @@ class ProductPriceListSchema extends Schema
      */
     public function create($table) 
     {
-        $table->tablePriceList('products','currency',function($table) {
-        });
+        $table->tablePolymorphicRelations('product_id','products',function($table) {
+        });       
     }
 
     /**

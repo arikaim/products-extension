@@ -61,12 +61,5 @@ class ProductOptionsListSchema extends Schema
             $item['uuid'] = Uuid::create();        
             return $item;
         });
-
-        // Subscription product type
-        $items = Extension::loadJsonConfigFile('subscription-type.json','products');        
-        $seed->createFromArray(['key','type_name'],$items,function($item) {
-            $item['uuid'] = Uuid::create();        
-            return $item;
-        });
     }
 }

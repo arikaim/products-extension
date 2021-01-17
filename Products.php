@@ -36,16 +36,19 @@ class Products extends Extension
         $this->addApiRoute('POST','/api/products/admin/product/type/add','ProductTypeControlPanel','add','session');  
         $this->addApiRoute('PUT','/api/products/admin/product/type/update','ProductTypeControlPanel','update','session');
         $this->addApiRoute('DELETE','/api/products/admin/product/type/delete/{uuid}','ProductTypeControlPanel','delete','session');
-
         // price 
         $this->addApiRoute('PUT','/api/products/admin/product/price/update','PriceListControlPanel','update','session');
         $this->addApiRoute('PUT','/api/products/admin/product/price/create','PriceListControlPanel','createPriceList','session');       
-        
+        // external Id
+        $this->addApiRoute('POST','/api/products/admin/external/id','ProductControlPanel','addExternalId','session');    
+        $this->addApiRoute('DELETE','/api/products/admin/external/id/{uuid}','ProductControlPanel','deleteExternalId','session');  
+
         // Api
         // products 
         $this->addApiRoute('GET','/api/products/product/list/dropdown/[{query}]','ProductsApi','getDropdownList');   
         $this->addApiRoute('GET','/api/products/product/list[/{params:.*}]','ProductsApi','getList');   
-        
+        $this->addApiRoute('GET','/api/products/product/details/{uuid}','ProductsApi','getProductDetails');   
+
         // Events
         $this->registerEvent('product.add','Add product');  
         $this->registerEvent('product.update','Update product');  
@@ -54,12 +57,14 @@ class Products extends Extension
         // Create db tables        
         $this->createDbTable('ProductTypeSchema');
         $this->createDbTable('ProductsSchema');
+        $this->createDbTable('ProductIdSchema');   
         $this->createDbTable('ProductTranslationsSchema');
+        $this->createDbTable('ProductRelationsSchema');
         // Product options
         $this->createDbTable('ProductOptionTypeSchema');
         $this->createDbTable('ProductOptionsListSchema');
         $this->createDbTable('ProductOptionsSchema');     
-        $this->createDbTable('ProductPriceListSchema');                
+        $this->createDbTable('ProductPriceListSchema');   
     }   
 
     /**

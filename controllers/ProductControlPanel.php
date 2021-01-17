@@ -138,4 +138,65 @@ class ProductControlPanel extends ControlPanelApiController
             ->addRule('number|required','product_type')            
             ->validate();
     }
+
+    /**
+     * Add external id
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param Validator $data
+     * @return Psr\Http\Message\ResponseInterface
+    */
+    public function addExternalIdController($request, $response, $data) 
+    {         
+        $this->onDataValid(function($data) { 
+            $product = Model::Products('products')->findById($data['uuid']); 
+            if (is_object($product) == false) {
+                $this->error('errors.id');
+                return;
+            }
+
+            $model = Model::ProductId('products');
+            $result = $model->addId($product->id,$data['external_id'],$data['api_driver']);
+
+            $this->setResponse($result,function() use($product) {                  
+                $this
+                    ->message('id.add')
+                    ->field('uuid',$product->uuid);                  
+            },'errors.id.exists');                                    
+        });
+        $data
+            ->addRule('text:min=2|required','external_id')                
+            ->validate();
+    }
+
+    /**
+     * Delete external id
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param Validator $data
+     * @return Psr\Http\Message\ResponseInterface
+    */
+    public function deleteExternalIdController($request, $response, $data) 
+    {         
+        $this->onDataValid(function($data) { 
+            $model = Model::ProductId('products')->findById($data['uuid']); 
+            if (is_object($model) == false) {
+                $this->error('errors.id.delete');
+                return;
+            }
+
+            $result = $model->delete();
+
+            $this->setResponse($result,function() use($model) {                  
+                $this
+                    ->message('id.delete')
+                    ->field('uuid',$model->uuid);                  
+            },'errors.id.delete');                                    
+        });
+        $data
+            ->addRule('text:min=2|required','uuid')                
+            ->validate();
+    }
 }

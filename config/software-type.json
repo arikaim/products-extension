@@ -36,5 +36,9 @@
         "type_name": "software",
         "key": "extended-price",
         "branch": "price"
+    },
+    {
+        "type_name": "software",
+        "key": "version"      
     }
 ]

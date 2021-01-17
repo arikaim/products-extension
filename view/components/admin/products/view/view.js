@@ -78,6 +78,16 @@ function ProductsView() {
             }
         });    
 
+        arikaim.ui.button('.product-details',function(element) {
+            var uuid = $(element).attr('uuid');
+            
+            arikaim.page.loadContent({
+                id: 'products_content',
+                component: 'products::admin.products.details',
+                params: { uuid: uuid }
+            });   
+        });
+       
         arikaim.ui.button('.delete-button',function(element) {
             var uuid = $(element).attr('uuid');
             var title = $(element).attr('data-title');

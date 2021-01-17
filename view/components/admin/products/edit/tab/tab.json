@@ -3,6 +3,8 @@
         "details": "Details",
         "options": "Options",
         "price": "Price",
+        "external": "External Id",
+        "relations": "Relations",
         "meta": "Meta Tags"
     }
 }

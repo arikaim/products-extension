@@ -16,7 +16,7 @@
 {% set model = model.orderBy('title') %}
 
 {% set items = paginate(model,'products') %}
-{% if items.getItems.count() == 0 %}
+{% if items.getItems().count() == 0 %}
 <tr>
     <td>{{ labels.empty }}</td>
 </tr>
@@ -37,6 +37,9 @@
                     <i class="trash restore olive icon"></i>
                 </button>    
             {% endif %} 
+            <button class="ui icon mini basic button product-details" uuid="{{ item.uuid }}">
+                <i class="icon info blue"></i>
+            </button>  
         </td>
         <td>{{ item.date_created|dateFormat }}</td>  
         <td>
