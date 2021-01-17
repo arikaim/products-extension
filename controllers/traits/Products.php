@@ -33,8 +33,6 @@ trait Products
         $page = $queryParams['page'] ?? 1;
         $categorySlug = $this->getParam('category_slug',$queryParams['category_slug']);
         
-        echo $categorySlug;
-        
         $products = Model::Category('category',function($model) use($categorySlug,$products) {                
             return $model->relationsQuery($products,$categorySlug);           
         });
