@@ -34,10 +34,8 @@ function ProductTypeControlPanel() {
     }
 }
 
-if (isEmpty(productType) == true) {
-    var productType = new ProductTypeControlPanel();
-}
+var productType = new ProductTypeControlPanel();
 
-arikaim.page.onReady(function() {
+$(document).ready(function() {
     productType.init();
 });

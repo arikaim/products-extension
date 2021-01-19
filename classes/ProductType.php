@@ -1,0 +1,74 @@
+<?php
+/**
+ * Arikaim
+ *
+ * @link        http://www.arikaim.com
+ * @copyright   Copyright (c)  Konstantin Atanasov <info@arikaim.com>
+ * @license     http://www.arikaim.com/license
+ * 
+*/
+namespace Arikaim\Extensions\Products\Classes;
+
+use Arikaim\Core\Db\Model;
+use Arikaim\Core\Extension\Extension;
+use Arikaim\Core\Db\Traits\Options\OptionType;
+use Arikaim\Core\Utils\Uuid;
+
+/**
+ * Product type options  
+*/
+class ProductType
+{
+    /**
+     * Import product type
+     *
+     * @param string $configFile
+     * @param string $extensionName
+     * @return boolean
+     */
+    public static function import(string $configFile, string $extensionName): bool
+    {
+        // Software product type
+        $items = Extension::loadJsonConfigFile($configFile,$extensionName);   
+        if (\is_array($items) == false) {
+            return false;
+        }
+
+        Model::seed('ProductOptionsList','products',function($seed) use($items) {     
+            $seed->updateOrCreateFromArray(['key','type_name'],$items,function($item) {
+                $item['uuid'] = Uuid::create();        
+                return $item;
+            });
+        });
+
+        return true;
+    } 
+
+    /**
+     * Import options type
+     *
+     * @param string $configFile
+     * @param string $extensionName
+     * @return boolean
+     */
+    public static function importOptionsType(string $configFile, string $extensionName): bool
+    {
+        $items = Extension::loadJsonConfigFile($configFile,$extensionName);
+        if (\is_array($items) == false) {
+            return false;
+        }
+
+        Model::seed('ProductOptionType','products',function($seed) use($items) {
+            $seed->updateOrCreateFromArray(['key'],$items,function($item) {
+                $item['uuid'] = Uuid::create();
+                $item['type'] = OptionType::getOptionTypeId($item['type']);
+                $items = $item['items'] ?? null;
+                $item['items'] = (empty($items) == false) ? \json_encode($items) : null;
+
+                return $item;
+            });
+        });
+
+        return true;
+    }
+}

@@ -10,8 +10,6 @@
 namespace Arikaim\Extensions\Products\Models\Schema;
 
 use Arikaim\Core\Db\Schema;
-use Arikaim\Core\Utils\Uuid;
-use Arikaim\Core\Extension\Extension;
 
 /**
  * Product options list db table
@@ -54,12 +52,6 @@ class ProductOptionsListSchema extends Schema
      * @return void
      */
     public function seeds($seed)
-    {       
-        // Software product type
-        $items = Extension::loadJsonConfigFile('software-type.json','products');        
-        $seed->createFromArray(['key','type_name'],$items,function($item) {
-            $item['uuid'] = Uuid::create();        
-            return $item;
-        });
+    {              
     }
 }

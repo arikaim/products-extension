@@ -1,0 +1,15 @@
+[
+    {
+        "type_name": "standard",
+        "key": "description"
+    },
+    {
+        "type_name": "standard",
+        "key": "features"
+    },
+    {
+        "type_name": "standard",
+        "key": "price",
+        "branch": "price"
+    }
+]

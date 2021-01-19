@@ -10,10 +10,6 @@
 namespace Arikaim\Extensions\Products\Models\Schema;
 
 use Arikaim\Core\Db\Schema;
-use Arikaim\Core\Utils\Uuid;
-use Arikaim\Core\Extension\Extension;
-
-use Arikaim\Core\Db\Traits\Options\OptionType;
 
 /**
  * Product option type db table schema
@@ -56,16 +52,6 @@ class ProductOptionTypeSchema extends Schema
      * @return void
      */
     public function seeds($seed)
-    {       
-        $items = Extension::loadJsonConfigFile('options-type.json','products');
-       
-        $seed->createFromArray(['key'],$items,function($item) {
-            $item['uuid'] = Uuid::create();
-            $item['type'] = OptionType::getOptionTypeId($item['type']);
-            $items = (isset($item['items']) == true) ? $item['items'] : null;
-            $item['items'] = (empty($items) == false) ? \json_encode($items) : null;
-
-            return $item;
-        });
+    {        
     }
 }

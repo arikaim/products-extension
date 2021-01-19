@@ -12,6 +12,8 @@ namespace Arikaim\Extensions\Products\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Arikaim\Extensions\Products\Models\Products;
+use Arikaim\Extensions\Products\Models\ProductOptionsList;
+use Arikaim\Extensions\Products\Models\ProductOptionType;
 
 use Arikaim\Core\Db\Traits\Uuid;
 use Arikaim\Core\Db\Traits\Status;
@@ -81,7 +83,7 @@ class ProductType extends Model
      *
      * @return boolean
      */
-    public function hasProducts()
+    public function hasProducts(): bool
     {
         $count = $this->products()->count();
 
@@ -91,10 +93,36 @@ class ProductType extends Model
     /**
      * Editable product type scope
      *
+     * @param bool $readonly
      * @return Builder
      */
-    public function scopeEditable($query, $readonly = false)
+    public function scopeEditable($query, bool $readonly = false)
     {
         return ($readonly == false) ? $query->whereNull('readonly')->orWhere('readonly','!=',1) : $query->where('readonly','=',1);
     }    
+
+    /**
+     * Gte options list
+     *
+     * @return Collection
+     */
+    public function getOptionsType()
+    {
+        $optionsList = new ProductOptionsList();
+
+        return $optionsList->where('type_name','=',$this->slug)->get();
+    }
+
+    /**
+     * Get option type
+     *
+     * @param string $key
+     * @return Model|null
+     */
+    public function getOptionType(string $key)
+    {
+        $optionType = new ProductOptionType();
+
+        return $optionType->where('key','=',$key)->first();
+    }
 }

@@ -68,7 +68,7 @@ class ProductsApi extends ApiController
                 $items = [];
                 foreach ($model as $item) {
                     $items[]= [
-                        'name' => $item['title'],
+                        'name'  => $item['title'],
                         'value' => $item['uuid']
                     ];
                 }

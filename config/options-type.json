@@ -7,13 +7,6 @@
         "type": "textarea"          
     },
     {
-        "key": "requirements",
-        "title": "Requirement",
-        "description": "Product Requirement",
-        "default": null,
-        "type": "textarea"          
-    },
-    {
         "key": "features",
         "title": "Features",
         "description": "Product Features",
@@ -21,69 +14,10 @@
         "type": "textarea"          
     },
     {
-        "key": "regilar-price",
-        "title": "Regular License Price",
-        "description": "Price for Regular License",
+        "key": "price",
+        "title": "Price",
+        "description": "Product price",
         "default": null,
         "type": "price"          
-    },
-    {
-        "key": "extended-price",
-        "title": "Extended License Price",
-        "description": "Price for Extended License",
-        "default": null,
-        "type": "price"          
-    },
-    {
-        "key": "repository",
-        "title": "Repository",
-        "description": "Repository (username)/(name)",
-        "default": null,
-        "type": "text"          
-    },
-    {
-        "key": "repository-type",
-        "title": "Repository Type",
-        "description": "Repository Type",
-        "default": null,
-        "type": "dropdown",
-        "items": {
-            "github": "Github"
-        }          
-    },
-    {
-        "key": "private-repository",
-        "title": "Private Repository",
-        "description": "Private Repository",
-        "default": null,
-        "type": "checkbox"          
-    },
-    {
-        "key": "package-name",
-        "title": "Package name",
-        "description": "Package name",
-        "default": null,
-        "type": "text"          
-    },
-    {
-        "key": "user-group",
-        "title": "User Group",
-        "description": "User gruop",
-        "default": null,
-        "type": "user-group"          
-    },
-    {
-        "key": "user-permission",
-        "title": "User Permission",
-        "description": "User permission",
-        "default": null,
-        "type": "permission"          
-    },
-    {
-        "key": "version",
-        "title": "Version",
-        "description": "Package version",
-        "default": null,
-        "type": "text"          
     }
 ]

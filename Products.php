@@ -10,6 +10,7 @@
 namespace Arikaim\Extensions\Products;
 
 use Arikaim\Core\Extension\Extension;
+use Arikaim\Extensions\Products\Classes\ProductType;
 
 /**
  * Extension class
@@ -66,6 +67,17 @@ class Products extends Extension
         $this->createDbTable('ProductOptionsSchema');     
         $this->createDbTable('ProductPriceListSchema');   
     }   
+
+    /**
+     * Post install actions
+     *
+     * @return void
+     */
+    public function postInstall()
+    {
+        ProductType::importOptionsType('options-type.json','products');
+        ProductType::import('standard-product.json','products');
+    }
 
     /**
      * UnInstall extension

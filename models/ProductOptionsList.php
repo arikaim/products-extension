@@ -36,5 +36,18 @@ class ProductOptionsList extends Model
      *
      * @var boolean
      */
-    public $timestamps = false;    
+    public $timestamps = false;  
+    
+    /**
+     * Visible columns
+     *
+     * @var array
+    */
+    protected $visible = [
+        'uuid',
+        'position',
+        'type_name',
+        'key',
+        'branch'
+    ];
 }

@@ -1,43 +1,36 @@
-{% component 'components:tabs.vertical.content' %}
-{% set class = 'sixteen wide column' %}
-{% set panel_class = '' %}
 {% set show_deleted = searchValue('show_deleted','products') %}
 {% set type_id = searchValue('type_id','products') %}
-<div class="ui stackable grid">
-    <div class="ten wide centered column mt-10"> 
-        <div class="ui two column centered stackable grid">
-            <div class="row">
-                <div class="ui four computer two tablet column left aligned">          
-                    {{ component("components:search.form",{ namespace: 'products' }) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="two wide column left aligned">
-                    {{  component('products::admin.type.dropdown',{ 
-                            class: 'inline',
-                            icon: 'filter',
-                            selected: type_id, 
-                            show_all: true,
-                            data_column: 'id'                       
-                        }) 
-                    }}
-                </div>
-                <div class="four wide column left aligned">
-                    <div class="ui toggle checkbox show-deleted">
-                        <input type="checkbox" name="show_deleted" {{ (show_deleted == 'true') ? 'checked': '' }}>
-                        <label>{{ labels.deleted }}</label>
-                    </div>
-                </div>
+<div class="ui segment">
+    <div class="ui stackable grid">
+        <div class="two wide column">
+            {{  component('products::admin.type.dropdown',{ 
+                    class: 'fluid basic button',
+                    icon: 'filter',
+                    selected: type_id, 
+                    show_all: true,
+                    data_column: 'id'                       
+                }) 
+            }}
+        </div>
+        <div class="two wide column">
+            <div class="ui toggle checkbox show-deleted p-2">
+                <input type="checkbox" name="show_deleted" {{ (show_deleted == 'true') ? 'checked': '' }}>
+                <label>{{ labels.deleted }}</label>
             </div>
         </div>
-    </div>
-</div>
-<div class="ui stackable text menu">
-    <div class="item" id="products_total">
-        {{ component('products::admin.products.total',{ type_id: type_id, class: 'olive mini horizontal' }) }}
-    </div>
-    <div class="item right floated">       
-        {{ component('components:paginator.dropdown',{ namespace: 'products' }) }}
+        <div class="six wide centered column">                 
+            {{ component("components:search.form",{ namespace: 'products' }) }}                    
+        </div>
+        <div class="four wide column">
+        </div>
+        <div class="one wide column" id="products_total">
+            <div class="p-2">
+                {{ component('products::admin.products.total',{ type_id: type_id, class: 'olive mini horizontal' }) }}
+            </div>           
+        </div>
+        <div class="one wide column">
+            {{ component('components:paginator.dropdown',{ namespace: 'products' }) }}
+        </div>
     </div>
 </div>
 <div class="ui mt-2">
@@ -61,4 +54,3 @@
         {{ component("components:paginator",{ namespace: 'products' }) }}
     </div>
 </div>
-{% endcomponent %}
