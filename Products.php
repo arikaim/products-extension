@@ -44,8 +44,7 @@ class Products extends Extension
         $this->addApiRoute('POST','/api/products/admin/external/id','ProductControlPanel','addExternalId','session');    
         $this->addApiRoute('DELETE','/api/products/admin/external/id/{uuid}','ProductControlPanel','deleteExternalId','session');  
 
-        // Api
-        // products 
+        // api      
         $this->addApiRoute('GET','/api/products/product/list/dropdown/[{query}]','ProductsApi','getDropdownList');   
         $this->addApiRoute('GET','/api/products/product/list[/{params:.*}]','ProductsApi','getList');   
         $this->addApiRoute('GET','/api/products/product/details/{uuid}','ProductsApi','getProductDetails');   

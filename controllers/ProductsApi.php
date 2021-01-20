@@ -98,7 +98,6 @@ class ProductsApi extends ApiController
                 $this->error('Product not exist.');
                 return false;
             }
-
             if ($product->status != $product->ACTIVE()) {
                 $this->error('Product not exist or not published.');
                 return false;
