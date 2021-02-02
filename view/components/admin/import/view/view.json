@@ -1,0 +1,13 @@
+{
+    "title": {
+        "content": "View",
+        "icon": "list"              
+    },
+    "columns": {
+        "id": "Id",    
+        "action": "Action",    
+        "title": "Title",    
+        "price": "Price",
+        "description": "Description"       
+    }
+}

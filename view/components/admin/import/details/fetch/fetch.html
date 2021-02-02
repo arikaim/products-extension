@@ -1,0 +1,84 @@
+{% set model = createModel('SalesOrders','orders') %}
+{% set driver = service('driver').create(driver_name) %}
+{% set order = driver.createApiFunction('Sale',{ code: code }) %}
+{% set order = order.call().toArray() %}
+{% set envato = create('Classes\\Envato\\SalesOrder','orders') %}
+{% set order = envato.create(order) %}
+{{ order.setId(code) }}
+<div class="mt-8">
+    <h4>{{ labels.details }}</h4>
+    <table class="ui table very basic definition mt-4">
+        <tbody>
+            <tr>
+                <td class="one wide right aligned">{{ labels.code }}</td>
+                <td>{{ code }}</td>
+            </tr>
+            <tr>
+                <td class="one wide right aligned">{{ labels.date }}</td>
+                <td>{{ order.getDate()|dateTimeFormat }}</td>
+            </tr>            
+            <tr>
+                <td class="one wide right aligned">{{ labels.client }}</td>
+                <td>
+                    <span class="p-1">{{ order.getClientId() }}</span>
+                    <span class="p-1">{{ order.getClient() }}</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="one wide right aligned">{{ labels.items }}</td>
+                <td class="ten wide">
+                    <table class="ui very basic definition mini table">
+                        <thead>
+                            <tr>
+                                <th class="one wide">{{ labels.id }}</th>
+                                <th>{{ labels.title }}</th>
+                                <th class="one wide">{{ labels.price }}</th>
+                                <th class="one wide">{{ labels.qty }}</th>
+                                <th class="one wide">{{ labels.total }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in order.getItems() %}
+                            <tr>
+                                <td>
+                                    {{ item.getId() }}
+                                </td>
+                                <td>
+                                    {{ item.getTitle() }}
+                                </td>
+                                <td>
+                                    {{ order.getCurrency() }}
+                                    {{ item.getPrice() }}
+                                </td>
+                                <td>
+                                    {{ item.getQty() }}
+                                </td>
+                                <td>
+                                    {{ order.getCurrency() }}
+                                    {{ item.getTotal() }}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td class="one wide right aligned">{{ labels.total }}</td>
+                <td>
+                    {{ order.getCurrency() }}
+                    {{ order.getAmount() }}
+                </td>
+            </tr>
+        </tbody>
+    </table>    
+    <div id="external_order_details">
+        {% if model.hasExternal(code,driver_name) == false %}
+            <button class="ui green button import-order" driver-name="{{ driver_name }}" external-id="{{ order.getId() }}">
+                {{ labels.import }}
+            </button>
+        {% else %}
+            {{ component('orders::admin.orders.details',{ external_id: code, api_driver: driver_name }) }}
+        {% endif %}
+    </div>
+</div>

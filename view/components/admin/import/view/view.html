@@ -1,0 +1,28 @@
+{% set driver = getOption('products.import.current.driver','envato') %}
+<div class="ui segment">
+    <div class="ui grid">
+        <div class="ten wide column">
+            {{ component('system:admin.drivers.dropdown',{ selected: driver, category: 'api', calss: '' }) }}  
+        </div>
+        <div class="one wide column right floated">       
+            {{ component('components:paginator.dropdown',{ namespace: 'import-products' }) }}
+        </div>
+    </div>   
+</div>
+<table class="ui compact stackable selectable borderless basic table">
+    <thead class="table-head">
+        <tr>              
+            <th class="one wide collapsing left aligned">{{ columns.action }}</th>
+            <th class="one wide">{{ columns.id }}</th>   
+            <th class="two wide">{{ columns.title }}</th>   
+            <th class="two wide">{{ columns.price }}</th>        
+            <th class="wide">{{ columns.description }}</th>                                                                              
+        </tr>
+    </thead>
+    <tbody id="orders_rows" component="products::admin.import.view.rows" namespace="import-products" driver="{{ driver }}">
+        {{ component('products::admin.import.view.rows',{ driver_name: driver }) }}   
+    </tbody>
+</table>
+<div class="mt-2">
+    {{ component('components:paginator',{ namespace: 'import-products' }) }}
+</div>

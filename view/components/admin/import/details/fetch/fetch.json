@@ -1,0 +1,15 @@
+{
+    "labels": {
+        "details": "External Order Details",
+        "code": "Order Code",
+        "date": "Date",
+        "total": "Total",
+        "items": "Items",
+        "title": "Title",
+        "id": "Id",
+        "qty": "Qty",
+        "price": "Item Price",
+        "client": "Client",
+        "import": "Import Order"
+    }
+}

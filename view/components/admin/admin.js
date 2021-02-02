@@ -8,24 +8,25 @@
 
 function ProductsControlPanel() {
     var self = this;
-    this.messages = {};
+    this.messages = null;
 
     this.loadMessages = function() {
+        if (isObject(this.messages) == true) {
+            return;
+        }
+
         arikaim.component.loadProperties('products::admin.messages',function(params) {            
             self.messages = params.messages;
         });
     };
 
     this.init = function() {
-        arikaim.ui.tab();      
+        arikaim.ui.tab();    
+        this.loadMessages();  
     };
 }
 
-if (isEmpty(productsControlPanel) == true) {
-    var productsControlPanel = new ProductsControlPanel();
-    productsControlPanel.loadMessages();
-}
-
+var productsControlPanel = new ProductsControlPanel();
 
 $(document).ready(function() {
     productsControlPanel.init();

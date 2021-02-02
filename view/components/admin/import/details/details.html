@@ -1,0 +1,24 @@
+{% set driver = getOption('orders.external.current.driver','envato') %}
+<div class="ui segment">
+    <div class="ui grid">
+        <div class="three wide column">
+            <span class="font-bold">{{ labels.driver }}</span>
+            {{ component('system:admin.drivers.dropdown',{ selected: driver, category: 'api', calss: '' }) }}               
+        </div>
+        <div class="five wide column">
+            <div class="ui form">
+                <div class="field">                
+                    <div class="ui right action input ">
+                        <input type="text" name="code" id="code" placeholder="{{ labels.code }}">
+                        <button class="ui basic button order-details-button" driver-name="{{ driver }}">                   
+                            {{ labels.fetch }}
+                        </button>
+                    </div>                  
+                </div>              
+            </div>
+        </div>
+    </div>   
+</div>
+<div id="sales_order_details">
+
+</div>

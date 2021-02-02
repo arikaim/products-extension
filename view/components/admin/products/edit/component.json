@@ -1,7 +1,8 @@
 {
     "include": {
         "js": [
-            "system:admin.orm.relations"
+            "system:admin.orm.relations",
+            "products::admin.products.edit.external"
         ]
     },
     "access": {

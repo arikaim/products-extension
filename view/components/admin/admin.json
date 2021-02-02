@@ -7,7 +7,11 @@
         "type": {
             "content": "Product Type",
             "title": "Product Type"
-        },        
+        },  
+        "import": {
+            "content": "Import",
+            "title": "Import Product"
+        },       
         "settings": {
             "content": "Settings",
             "title": "Settings"

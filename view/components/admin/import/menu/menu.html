@@ -1,0 +1,12 @@
+{% set items = [ 
+    { title: labels.view, component: 'products::admin.import.view', icon: 'list', id: 'view_orders', active: true },      
+    { title: labels.details, component: 'products::admin.import.details', icon: 'info', id: 'order_details' },
+] %}
+
+{{  component('components:tabs.vertical',{ 
+        items: items, 
+        menu: { id: 'external_orders_menu' }, 
+        item_class: 'external-tab-item',
+        content: { id: 'external_content', component: 'products::admin.import.view' } 
+    })
+}}
