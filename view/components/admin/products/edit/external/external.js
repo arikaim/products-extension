@@ -60,7 +60,7 @@ function ExternalProductId() {
 
 var externalProductId = new ExternalProductId();
 
-$(document).ready(function() {  
+arikaim.component.onLoaded(function() {
     externalProductId.init();
     externalProductId.initRows();
 });

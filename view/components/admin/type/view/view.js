@@ -45,7 +45,7 @@ function ProductTypeView() {
 
 var productTypeView = new ProductTypeView();
 
-$(document).ready(function() {  
+arikaim.component.onLoaded(function() {
     productTypeView.init();
     productTypeView.initRows();  
 }); 

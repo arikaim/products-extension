@@ -1,6 +1,6 @@
 'use strict';
 
-$(document).ready(function() {  
+arikaim.component.onLoaded(function() {
     $('.product-dropdown').dropdown({
         apiSettings: {     
             on: 'now',      

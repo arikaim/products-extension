@@ -60,6 +60,6 @@ function ProductsControlPanel() {
 
 var products = new ProductsControlPanel();
 
-$(document).ready(function() {
+arikaim.component.onLoaded(function() {
     products.init();
 });

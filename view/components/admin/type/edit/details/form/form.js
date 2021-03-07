@@ -1,5 +1,5 @@
 'use strict';
 
-$(document).ready(function() {
+arikaim.component.onLoaded(function() {
     arikaim.ui.form.addRules("#product_type_form");
 });

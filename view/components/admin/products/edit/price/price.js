@@ -1,6 +1,6 @@
 'use strict';
 
-$(document).ready(function() {    
+arikaim.component.onLoaded(function() {
     $('.option-field').popup();
 
     arikaim.ui.form.onSubmit('#price_form',function() {

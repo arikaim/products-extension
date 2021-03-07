@@ -1,6 +1,6 @@
 'use strict';
 
-$(document).ready(function() {  
+arikaim.component.onLoaded(function() { 
     $('.product-dropdown').on('change',function(value) {
         var selected = $(this).dropdown('get value');
         

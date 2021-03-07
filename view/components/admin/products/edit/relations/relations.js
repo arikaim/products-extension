@@ -1,6 +1,6 @@
 'use strict';
 
-$(document).ready(function() {
+arikaim.component.onLoaded(function() {
     $('#packages_dropdown').dropdown({});
 
     arikaim.ui.button('.add-relation',function(element) {

@@ -1,6 +1,6 @@
 'use strict';
 
-$(document).ready(function() {
+arikaim.component.onLoaded(function() {
     arikaim.ui.form.onSubmit('#product_form',function() {
         return products.update('#product_form');
     },function(result) {

@@ -8,27 +8,14 @@
 
 function ImportProductsView() {
     var self = this;
-    this.messages = null;
 
     this.init = function() {
         //paginator.init('orders_rows');   
         
         $('.drivers-dropdown').dropdown({
             onChange: function(selected) {
-
             }
         });
-        //this.loadMessages();
-    };
-
-    this.loadMessages = function() {
-        if (isObject(this.messages) == true) {
-            return;
-        }
-
-        arikaim.component.loadProperties('products::admin.import.view',function(params) { 
-            self.messages = params.messages;
-        }); 
     };
 
     this.initRows = function() {    
@@ -41,15 +28,14 @@ function ImportProductsView() {
         });
 
         arikaim.ui.button('.details-button',function(element) {
-            var uuid = $(element).attr('uuid');
-           
+            var uuid = $(element).attr('uuid');           
         });
     }
 }
 
 var importProductsView = new ImportProductsView();
 
-$(document).ready(function() {
+arikaim.component.onLoaded(function() {
     importProductsView.init();   
     importProductsView.initRows();
 });

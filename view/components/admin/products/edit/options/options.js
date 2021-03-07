@@ -1,6 +1,6 @@
 'use strict';
 
-$(document).ready(function() {
+arikaim.component.onLoaded(function() {
     arikaim.ui.button('.add-options',function(element) {
         var uuid = $(element).attr('uuid');
         return products.createOptions(uuid);

@@ -1,6 +1,6 @@
 'use strict';
 
-$(document).ready(function() {
+arikaim.component.onLoaded(function() {
     arikaim.ui.button('.order-details-button',function(element) {
         var code = $('#code').val();
         var driverName = $(element).attr('driver-name');

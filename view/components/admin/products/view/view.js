@@ -128,7 +128,7 @@ function ProductsView() {
 
 var productsView = new ProductsView();
 
-$(document).ready(function() {  
+arikaim.component.onLoaded(function() {
     productsView.init();
     productsView.initRows();  
 }); 

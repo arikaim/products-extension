@@ -36,6 +36,6 @@ function ProductTypeControlPanel() {
 
 var productType = new ProductTypeControlPanel();
 
-$(document).ready(function() {
+arikaim.component.onLoaded(function() {
     productType.init();
 });
