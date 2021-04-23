@@ -10,8 +10,7 @@ function ImportProductsView() {
     var self = this;
 
     this.init = function() {
-        //paginator.init('orders_rows');   
-        
+    
         $('.drivers-dropdown').dropdown({
             onChange: function(selected) {
             }
@@ -19,14 +18,6 @@ function ImportProductsView() {
     };
 
     this.initRows = function() {    
-    
-        $('.status-dropdown').dropdown({
-            onChange: function(value) {
-                var uuid = $(this).attr('uuid');
-                adsControlPanel.setStatus(uuid,value);               
-            }
-        });
-
         arikaim.ui.button('.details-button',function(element) {
             var uuid = $(element).attr('uuid');           
         });

@@ -13,7 +13,7 @@ function ProductsControlPanel() {
             uuid: uuid
         };
 
-        return arikaim.put('/api/products/admin/product/price/create',data,onSuccess,onError);          
+        return arikaim.put('/api/admin/products/product/price/create',data,onSuccess,onError);          
     };
 
     this.createOptions = function(uuid, onSuccess, onError) {
@@ -21,27 +21,27 @@ function ProductsControlPanel() {
             uuid: uuid
         };
 
-        return arikaim.put('/api/products/admin/product/create/options',data,onSuccess,onError);          
+        return arikaim.put('/api/admin/products/create/options',data,onSuccess,onError);          
     };
 
     this.add = function(formId, onSuccess, onError) {
-        return arikaim.post('/api/products/admin/product/add',formId,onSuccess,onError);          
+        return arikaim.post('/api/admin/products/add',formId,onSuccess,onError);          
     };
 
     this.delete = function(uuid, onSuccess, onError) {
-        return arikaim.delete('/api/products/admin/product/delete/' + uuid,onSuccess,onError);          
+        return arikaim.delete('/api/admin/products/delete/' + uuid,onSuccess,onError);          
     };
 
     this.restoreProduct = function(uuid, onSuccess, onError) {
-        return arikaim.put('/api/products/admin/product/restore/' + uuid,onSuccess,onError);          
+        return arikaim.put('/api/admin/products/restore/' + uuid,onSuccess,onError);          
     };
 
     this.update = function(formId, onSuccess, onError) {
-        return arikaim.put('/api/products/admin/product/update',formId, onSuccess, onError);          
+        return arikaim.put('/api/products/admin/update',formId, onSuccess, onError);          
     };
 
     this.updatePrice = function(formId, onSuccess, onError) {
-        return arikaim.put('/api/products/admin/product/price/update',formId, onSuccess, onError);          
+        return arikaim.put('/api/admin/products/price/update',formId, onSuccess, onError);          
     };
 
     this.setStatus = function(uuid, status, onSuccess, onError) {
@@ -50,16 +50,12 @@ function ProductsControlPanel() {
             status: status
         };
 
-        return arikaim.put('/api/products/admin/product/status',data,onSuccess,onError);          
-    };
-
-    this.init = function() {       
-        arikaim.ui.tab('.product-tab-item','products_content');
-    };
+        return arikaim.put('/api/admin/products/status',data,onSuccess,onError);          
+    };   
 }
 
 var products = new ProductsControlPanel();
 
 arikaim.component.onLoaded(function() {
-    products.init();
+    arikaim.ui.tab('.product-tab-item','products_content');
 });

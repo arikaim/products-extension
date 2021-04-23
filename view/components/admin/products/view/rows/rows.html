@@ -1,5 +1,3 @@
-{% component 'components:view.rows' %}
-
 {% set model = createModel('Products','products') %}
 {% set show_deleted = searchValue('show_deleted','products') %}
 {% if show_deleted == 'true' %}
@@ -61,4 +59,3 @@
         </td>                        
     </tr>
 {% endfor %}
-{% endcomponent %}

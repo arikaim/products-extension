@@ -9,19 +9,15 @@
 function ProductTypeControlPanel() {
     
     this.add = function(formId, onSuccess, onError) {
-        return arikaim.post('/api/products/admin/product/type/add',formId, onSuccess, onError);          
+        return arikaim.post('/api/admin/products/type/add',formId, onSuccess, onError);          
     };
 
     this.update = function(formId, onSuccess, onError) {
-        return arikaim.put('/api/products/admin/product/type/update',formId, onSuccess, onError);          
+        return arikaim.put('/api/admin/products/type/update',formId, onSuccess, onError);          
     };
     
     this.delete = function(uuid, onSuccess, onError) {
-        return arikaim.delete('/api/products/admin/product/type/delete/' + uuid, onSuccess, onError);          
-    };
-
-    this.init = function() {       
-        arikaim.ui.tab('.product-type-tab-item','product_type_content');
+        return arikaim.delete('/api/admin/products/type/delete/' + uuid, onSuccess, onError);          
     };
 
     this.initEditForm = function() {
@@ -37,5 +33,5 @@ function ProductTypeControlPanel() {
 var productType = new ProductTypeControlPanel();
 
 arikaim.component.onLoaded(function() {
-    productType.init();
+    arikaim.ui.tab('.product-type-item','product_type_content');
 });
