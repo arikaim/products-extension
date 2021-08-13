@@ -37,7 +37,7 @@ function ProductsControlPanel() {
     };
 
     this.update = function(formId, onSuccess, onError) {
-        return arikaim.put('/api/products/admin/update',formId, onSuccess, onError);          
+        return arikaim.put('/api/admin/products/update',formId, onSuccess, onError);          
     };
 
     this.updatePrice = function(formId, onSuccess, onError) {
