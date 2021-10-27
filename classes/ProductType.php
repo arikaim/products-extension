@@ -20,6 +20,31 @@ use Arikaim\Core\Utils\Uuid;
 class ProductType
 {
     /**
+     * Product type
+     *
+     * @param string $configFile
+     * @param string $extensionName
+     * @return boolean
+     */
+    public static function importTypes(string $configFile, string $extensionName): bool
+    {
+        // Products types
+        $items = Extension::loadJsonConfigFile($configFile,$extensionName);   
+        if (\is_array($items) == false) {
+            return false;
+        }
+
+        Model::seed('ProductType','products',function($seed) use($items) {     
+            $seed->updateOrCreateFromArray(['slug'],$items,function($item) {
+                $item['uuid'] = Uuid::create();        
+                return $item;
+            });
+        });
+
+        return true;
+    }
+
+    /**
      * Import product type
      *
      * @param string $configFile
@@ -28,7 +53,7 @@ class ProductType
      */
     public static function import(string $configFile, string $extensionName): bool
     {
-        // Software product type
+        // Product type options
         $items = Extension::loadJsonConfigFile($configFile,$extensionName);   
         if (\is_array($items) == false) {
             return false;

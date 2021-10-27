@@ -74,8 +74,12 @@ class Products extends Extension
      */
     public function postInstall()
     {
+        ProductType::importTypes('product-types.json','products');
         ProductType::importOptionsType('options-type.json','products');
-        ProductType::import('standard-product.json','products');
+
+        ProductType::import('consumer-product.json','products');
+        ProductType::import('software-product.json','products');
+        ProductType::import('service-product.json','products');
     }
 
     /**

@@ -1,0 +1,17 @@
+[   
+    {        
+        "title": "Software",
+        "description": "Software Product",
+        "slug": "software"               
+    },
+    {        
+        "title": "Service",
+        "description": "Service Product",
+        "slug": "service"               
+    },
+    {        
+        "title": "Consumer Product",
+        "description": "Consumer Product Type",
+        "slug": "consumer"               
+    }
+]

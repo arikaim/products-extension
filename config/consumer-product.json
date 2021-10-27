@@ -1,14 +1,14 @@
 [
     {
-        "type_name": "standard",
+        "type_name": "consumer",
         "key": "description"
     },
     {
-        "type_name": "standard",
+        "type_name": "consumer",
         "key": "features"
     },
     {
-        "type_name": "standard",
+        "type_name": "consumer",
         "key": "price",
         "branch": "price"
     }

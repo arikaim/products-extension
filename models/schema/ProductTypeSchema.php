@@ -63,11 +63,5 @@ class ProductTypeSchema extends Schema
      */
     public function seeds($seed)
     {  
-        $seed->create(['slug' => 'software'],[
-                'uuid'   => Uuid::create(),
-                'title'  => 'Software',               
-                'status' => 1
-            ]
-        ); 
     }
 }

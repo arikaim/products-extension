@@ -1,7 +1,8 @@
 {% set options = createModel('ProductOptionsList','products') %}
-{% set user_type = createModel('ProductType','products').findByColumn(uuid,['uuid','slug']) %}
+{% set product_type = createModel('ProductType','products').findByColumn(uuid,['uuid','slug']) %}
 {% set option_type = createModel('ProductOptionType','products') %}
-{% set items = options.getItemsQuery(user_type.slug) %}       
+{% set items = options.getItemsQuery(product_type.slug) %}  
+
 <div class="mt-2">
     {% if items.count() == 0 %}
     <div class="ui message">

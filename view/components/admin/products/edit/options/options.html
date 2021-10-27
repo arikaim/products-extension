@@ -1,7 +1,7 @@
 {% component 'components:tabs.vertical.content' %}
 {% set product = createModel('Products','products').findById(uuid) %}
-{% set optinsList = createModel('ProductOptionsList','products').getItemsQuery(product.type.slug) %}
-{% if product.options.count() != optinsList.count() %}
+{% set options = createModel('ProductOptionsList','products').getItemsQuery(product.type.slug) %}
+{% if product.options.count() != options.count() %}
 <div class="ui icon mini message">
     <i class="icon warning mini"></i>
     <div class="content">
@@ -20,6 +20,7 @@
         id: product.id,
         class: 'mt-2 basic',
         hide: false 
-}) }}
+    }) 
+}}
 
 {% endcomponent %}

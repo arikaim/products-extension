@@ -1,0 +1,19 @@
+[
+    {
+        "type_name": "software",
+        "key": "description"
+    },
+    {
+        "type_name": "software",
+        "key": "features"
+    },
+    {
+        "type_name": "software",
+        "key": "price",
+        "branch": "price"
+    },
+    {
+        "type_name": "software",
+        "key": "repository"       
+    }
+]

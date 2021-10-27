@@ -19,5 +19,19 @@
         "description": "Product price",
         "default": null,
         "type": "price"          
+    },
+    {
+        "key": "duration",
+        "title": "Duration",
+        "description": "Duration Time",
+        "default": null,
+        "type": "time-interval"          
+    },
+    {
+        "key": "repository",
+        "title": "Git Repository",
+        "description": "Git Repository",
+        "default": null,
+        "type": "text"          
     }
 ]

@@ -1,0 +1,19 @@
+[
+    {
+        "type_name": "service",
+        "key": "description"
+    },
+    {
+        "type_name": "service",
+        "key": "features"
+    },
+    {
+        "type_name": "service",
+        "key": "price",
+        "branch": "price"
+    },
+    {
+        "type_name": "service",
+        "key": "duration"      
+    }
+]
