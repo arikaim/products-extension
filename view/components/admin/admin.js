@@ -7,8 +7,6 @@
 'use strict';
 
 function ProductsControlPanel() {
-    var self = this;
-  
     this.init = function() {
         arikaim.ui.tab();    
     };

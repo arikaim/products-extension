@@ -14,13 +14,6 @@
         "type": "textarea"          
     },
     {
-        "key": "price",
-        "title": "Price",
-        "description": "Product price",
-        "default": null,
-        "type": "price"          
-    },
-    {
         "key": "duration",
         "title": "Duration",
         "description": "Duration Time",

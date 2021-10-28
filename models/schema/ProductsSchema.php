@@ -39,7 +39,7 @@ class ProductsSchema extends Schema
         $table->userId();
         $table->status();
         $table->position();      
-        $table->relation('type_id','product_type');
+        $table->relation('type_id','product_type'); 
         $table->dateCreated();
         $table->dateUpdated();
         $table->dateDeleted();
@@ -54,6 +54,6 @@ class ProductsSchema extends Schema
      * @return void
      */
     public function update($table) 
-    {               
+    {                   
     }
 }

@@ -13,7 +13,7 @@ function ProductsControlPanel() {
             uuid: uuid
         };
 
-        return arikaim.put('/api/admin/products/product/price/create',data,onSuccess,onError);          
+        return arikaim.put('/api/admin/products/price/create',data,onSuccess,onError);          
     };
 
     this.createOptions = function(uuid, onSuccess, onError) {
