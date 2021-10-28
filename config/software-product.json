@@ -9,6 +9,10 @@
     },
     {
         "type_name": "software",
+        "key": "requirements"
+    },
+    {
+        "type_name": "software",
         "key": "price",
         "branch": "price"
     },

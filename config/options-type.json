@@ -33,5 +33,12 @@
         "description": "Git Repository",
         "default": null,
         "type": "text"          
+    },
+    {
+        "key": "requirements",
+        "title": "Requirements",
+        "description": "Installation Requirements",
+        "default": null,
+        "type": "textarea"          
     }
 ]
