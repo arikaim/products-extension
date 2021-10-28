@@ -80,9 +80,10 @@ function ProductsView() {
 
         arikaim.ui.button('.product-details',function(element) {
             var uuid = $(element).attr('uuid');
-            
+            $('#product_details').fadeIn(500);
+
             arikaim.page.loadContent({
-                id: 'products_content',
+                id: 'product_details',
                 component: 'products::admin.products.details',
                 params: { uuid: uuid }
             });   

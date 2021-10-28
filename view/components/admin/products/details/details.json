@@ -1,5 +1,10 @@
 {
+    "title": "Product Details",
     "labels": {
-        "uuid": "Uuid"
+        "uuid": "Uuid",
+        "title": "Title",
+        "slug": "Slug",
+        "date": "Date Added",
+        "type": "Type"
     }
 }

@@ -33,24 +33,28 @@
         </div>
     </div>
 </div>
-<div class="ui mt-2">
-    <table class="ui compact stackable selectable borderless basic table">
-        <thead class="table-head">
-            <tr>              
-                <th class="one wide collapsing left aligned">{{ columns.action }}</th>
-                <th class="one wide">{{ columns.created }}</th>
-                <th class="collapsing one wide">{{ columns.status }}</th>
-                <th class="one wide">{{ columns.type }}</th>  
-                <th class="five wide">{{ columns.title }}</th>    
-                <th class="five wide">{{ columns.category }}</th>                             
-                <th class="two wide">{{ columns.price }}</th>                                      
-            </tr>
-        </thead>
-        <tbody id="product_rows" component="products::admin.products.view.rows" namespace="products">
-            {{ component('products::admin.products.view.rows') }} 
-        </tbody>
-    </table> 
-    <div id="paginator">      
-        {{ component("components:paginator",{ namespace: 'products' }) }}
+<div class="flex flex-row items-start">
+    <div class="w-3/4 flex-grow">
+        <table class="ui compact stackable selectable borderless basic table">
+            <thead class="table-head">
+                <tr>              
+                    <th class="two wide collapsing left aligned">{{ columns.action }}</th>
+                    <th class="two wide">{{ columns.created }}</th>
+                    <th class="collapsing one wide">{{ columns.status }}</th>
+                    <th class="one wide">{{ columns.type }}</th>  
+                    <th class="five wide">{{ columns.title }}</th>    
+                    <th class="four wide">{{ columns.category }}</th>                             
+                    <th class="two wide">{{ columns.price }}</th>                                      
+                </tr>
+            </thead>
+            <tbody id="product_rows" component="products::admin.products.view.rows" namespace="products">
+                {{ component('products::admin.products.view.rows') }} 
+            </tbody>
+        </table> 
+        <div id="paginator">      
+            {{ component("components:paginator",{ namespace: 'products' }) }}
+        </div>
+    </div>
+    <div class="w-1/4 hidden" id="product_details">
     </div>
 </div>

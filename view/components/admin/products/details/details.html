@@ -1,25 +1,36 @@
 {% if uuid is not empty %}
     {% set product = createModel('Products','products').findById(uuid) %}
 {% endif %}
-<div>
-    <span class="text-bold mr-2">{{ labels.product }}</span>
-    <div class="ui segment">      
-        {{ component('products::product.dropdown',{ selected: uuid }) }}
-    </div>
-    <div id="edit_product_tab">
-        <table class="ui very basic definition table">
-            <thead>
-                <tr>
-                    <th class="two wide right aligned"></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="right aligned">{{ labels.uuid }}</td>
-                    <td>{{ product.uuid }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="ml-2">    
+    {{ component('semantic~segment-title',{ title: title, class: 'p-3 rounded', close_button: true }) }}    
+    <table class="ui very basic definition table">
+        <thead>
+            <tr>
+                <th class="three wide right aligned"></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="right aligned">{{ labels.title }}</td>
+                <td>{{ product.title }}</td>
+            </tr>
+            <tr>
+                <td class="right aligned">{{ labels.slug }}</td>
+                <td>{{ product.slug }}</td>
+            </tr>
+            <tr>
+                <td class="right aligned">{{ labels.type }}</td>
+                <td>{{ product.type.title }}</td>
+            </tr>
+            <tr>
+                <td class="right aligned">{{ labels.date }}</td>
+                <td>{{ product.date_created|dateTimeFormat }}</td>
+            </tr>
+            <tr>
+                <td class="right aligned">{{ labels.uuid }}</td>
+                <td>{{ product.uuid }}</td>
+            </tr>
+        </tbody>
+    </table>          
 </div>
