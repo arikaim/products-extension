@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 use Arikaim\Extensions\Products\Models\ProductOptionType;
 use Arikaim\Extensions\Products\Models\ProductOptionsList;
 use Arikaim\Extensions\Currency\Models\Currency;
+use Arikaim\Extensions\Products\Models\Products;
 
 use Arikaim\Core\Db\Traits\Uuid;
 use Arikaim\Core\Db\Traits\Find;
@@ -87,4 +88,25 @@ class ProductPriceList extends Model
      * @var string
      */
     protected $currencyClass = Currency::class;
+
+    /**
+     * Get free products
+     *
+     * @param Builder $query
+     * @return Builder $query
+     */
+    public function scopeFreeProducts($query)
+    {
+        return $query->where('price','=',0)->orWhereNull('price')->distinct();
+    } 
+
+    /**
+     * Product relation
+     *
+     * @return mixed
+     */
+    public function product()
+    {
+        return $this->belongsTo(Products::class,'product_id');
+    }
 }

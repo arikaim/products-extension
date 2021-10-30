@@ -10,7 +10,6 @@
 namespace Arikaim\Extensions\Products\Models\Schema;
 
 use Arikaim\Core\Db\Schema;
-use Arikaim\Core\Utils\Uuid;
 
 /**
  * Product type db table

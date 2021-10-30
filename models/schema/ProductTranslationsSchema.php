@@ -33,6 +33,7 @@ class ProductTranslationsSchema extends Schema
     {
         $table->tableTranslations('product_id','products',function($table) {          
             $table->string('title')->nullable(true);
+            $table->text('description')->nullable(true)->default(true);
             $table->metaTags();                
         });          
     }

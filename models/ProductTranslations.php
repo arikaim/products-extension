@@ -39,7 +39,8 @@ class ProductTranslations extends Model
      * @var array
      */
     protected $fillable = [
-        'title',        
+        'title',  
+        'description',      
         'meta_title',
         'meta_description',
         'meta_keywords',        

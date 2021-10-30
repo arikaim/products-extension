@@ -68,8 +68,8 @@ class Products extends Model
         'date_created',      
         'slug',
         'title',  
-        'price',
-        'key',
+        'description',
+        'price',     
         'options_list',
         'price_list',
         'is_free'            
@@ -110,7 +110,8 @@ class Products extends Model
         'date_created',
         'date_deleted',
         'slug',
-        'title',       
+        'title',   
+        'description',    
         'type_id',
         'user_id'
     ];
@@ -205,7 +206,7 @@ class Products extends Model
      * @param string $title
      * @return boolean
      */
-    public function hasProduct($title)
+    public function hasProduct(string $title)
     {
         $model = $this->findByColumn($title,'title');
 
@@ -219,7 +220,7 @@ class Products extends Model
      * @param int|null $typeId
      * @return Builder
      */
-    public function scopeTypeQuery($query, $typeId = null)
+    public function scopeTypeQuery($query, ?int $typeId = null)
     {
         return (empty($typeId) == false) ? $query->where('type_id','=',$typeId) : $query;
     }

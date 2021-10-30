@@ -1,8 +1,10 @@
 {
     "labels": {       
         "details": "Details",
+        "description": "Description",
         "options": "Options",
         "price": "Price",
+        "images": "Images",
         "external": "External Id",
         "relations": "Relations",
         "meta": "Meta Tags"

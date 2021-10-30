@@ -19,5 +19,9 @@
     {
         "type_name": "software",
         "key": "repository"       
+    },
+    {
+        "type_name": "software",
+        "key": "version"       
     }
 ]

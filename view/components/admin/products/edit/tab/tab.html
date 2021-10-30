@@ -3,6 +3,10 @@
         <i class="icon stream blue"></i>
         {{ labels.details }}     
     </div>  
+    <div class="item link edit-product-tab-item" component="products::admin.products.edit.description" uuid="{{ uuid }}">
+        <i class="icon text file outline blue"></i>
+        {{ labels.description }}     
+    </div>  
     <div class="item link edit-product-tab-item" component="products::admin.products.edit.options" uuid="{{ uuid }}">
         <i class="icon sliders horizontal blue"></i>
         {{ labels.options }}     
@@ -10,6 +14,10 @@
     <div class="item link edit-product-tab-item" component="products::admin.products.edit.price" uuid="{{ uuid }}">
         <i class="currency icon blue"></i>
         {{ labels.price }}     
+    </div> 
+    <div class="item link edit-product-tab-item" component="products::admin.products.edit.images" uuid="{{ uuid }}">
+        <i class="image icon blue"></i>
+        {{ labels.images }}     
     </div>  
     <div class="item link edit-product-tab-item" component="products::admin.products.edit.relations" uuid="{{ uuid }}">
         <i class="project diagram icon blue"></i>
