@@ -4,6 +4,7 @@
     },
     "add": "Product was created successfully.",
     "update": "Product was saved successfully.",
+    "description": "Product description was saved successfully.",
     "delete": "Product was deleted successfully.",
     "restore": "Product was restored successfully.",
     "type": {
@@ -12,6 +13,7 @@
         "delete": "Product type was deleted successfully."
     },
     "errors": {
+        "description": "Can't save product description.",
         "type": {
             "exist": "Product type with this title exists",
             "used": "Product type are used",

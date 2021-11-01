@@ -1,12 +1,5 @@
 [   
     {
-        "key": "description",
-        "title": "Description",
-        "description": "Product description",
-        "default": null,
-        "type": "textarea"          
-    },
-    {
         "key": "features",
         "title": "Features",
         "description": "Product Features",

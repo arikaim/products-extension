@@ -1,10 +1,6 @@
 [
     {
         "type_name": "software",
-        "key": "description"
-    },
-    {
-        "type_name": "software",
         "key": "features"
     },
     {

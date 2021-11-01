@@ -1,10 +1,6 @@
 [
     {
         "type_name": "consumer",
-        "key": "description"
-    },
-    {
-        "type_name": "consumer",
         "key": "features"
     },
     {

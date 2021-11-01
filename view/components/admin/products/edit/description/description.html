@@ -5,7 +5,11 @@
         <input type="hidden" name="uuid" id="uuid" value="{{ uuid }}">  
         <div class="field">
             <label>{{ fields.description.label }}</label>
-            <textarea name="description" id="description" placeholder="{{ fields.description.placeholder }}"></textarea>
+            <textarea 
+                rows="20" cols="12" 
+                name="description" 
+                id="description" 
+                placeholder="{{ fields.description.placeholder }}"></textarea>
         </div>    
         {{ component('components:form.footer') }}
     </form>

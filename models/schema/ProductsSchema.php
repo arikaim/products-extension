@@ -36,7 +36,7 @@ class ProductsSchema extends Schema
         $table->prototype('uuid');
         $table->slug();
         $table->string('title')->nullable(false);
-        $table->text('description')->nullable(true)->default(true);
+        $table->text('description')->nullable(true);
         $table->userId();
         $table->status();
         $table->position();      
@@ -57,7 +57,7 @@ class ProductsSchema extends Schema
     public function update($table) 
     {                   
         if ($table->hasColumn('description') == false) {
-            $table->text('description')->nullable(true)->default(true);
+            $table->text('description')->nullable(true);
         }
     }
 }

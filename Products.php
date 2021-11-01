@@ -28,6 +28,7 @@ class Products extends Extension
         // product
         $this->addApiRoute('POST','/api/admin/products/add','ProductControlPanel','add','session');  
         $this->addApiRoute('PUT','/api/admin/products/update','ProductControlPanel','update','session');
+        $this->addApiRoute('PUT','/api/admin/products/update/description','ProductControlPanel','updateDescription','session');
         $this->addApiRoute('PUT','/api/admin/products/status','ProductControlPanel','setStatus','session');
         $this->addApiRoute('DELETE','/api/admin/products/delete/{uuid}','ProductControlPanel','softDelete','session');
         $this->addApiRoute('PUT','/api/admin/products/restore/{uuid}','ProductControlPanel','restore','session');

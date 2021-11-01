@@ -116,18 +116,17 @@ class ProductControlPanel extends ControlPanelApiController
     {         
         $this->onDataValid(function($data) { 
             $product = Model::Products('products')->findById($data['uuid']); 
-            $data = [
-                'type_id'     => $data['product_type'],
-                'title'       => $data['title']
-            ];
-
-            if (is_object($product) == false) {
+            if (\is_object($product) == false) {
                 $this->error('errors.update');
                 return;
             }
+           
+            $result = $product->update([
+                'type_id'     => $data['product_type'],
+                'title'       => $data['title']
+            ]);
 
-            $result = (bool)$product->update($data);
-            $this->setResponse($result,function() use($product) {                  
+            $this->setResponse(($result !== false),function() use($product) {                  
                 $this
                     ->message('update')
                     ->field('uuid',$product->uuid);                  
@@ -136,6 +135,37 @@ class ProductControlPanel extends ControlPanelApiController
         $data
             ->addRule('text:min=2|required','title')
             ->addRule('number|required','product_type')            
+            ->validate();
+    }
+
+    /**
+     * Update product description
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param Validator $data
+     * @return Psr\Http\Message\ResponseInterface
+    */
+    public function updateDescriptionController($request, $response, $data) 
+    {         
+        $this->onDataValid(function($data) { 
+            $product = Model::Products('products')->findById($data['uuid']); 
+            if (\is_object($product) == false) {
+                $this->error('errors.update');
+                return;
+            }
+
+            $result = $product->update([
+                'description' => $data['description']           
+            ]);
+
+            $this->setResponse(($result !== false),function() use($product) {                  
+                $this
+                    ->message('description')
+                    ->field('uuid',$product->uuid);                  
+            },'errors.description');                                    
+        });
+        $data                     
             ->validate();
     }
 

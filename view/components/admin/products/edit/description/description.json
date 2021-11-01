@@ -1,7 +1,7 @@
 {    
     "fields": {
         "description": {
-            "label": "Content",
+            "label": "",
             "placeholder": "Enter product description."
         }
     }

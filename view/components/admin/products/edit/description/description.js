@@ -4,7 +4,7 @@ arikaim.component.onLoaded(function() {
     arikaim.ui.form.addRules("#product_description_form");
 
     arikaim.ui.form.onSubmit('#product_description_form',function() {
-        return products.update('#product_description_form');
+        return products.updateDescription('#product_description_form');
     },function(result) {
         arikaim.ui.form.showMessage(result.message);            
     },function(error) {
