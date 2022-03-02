@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="six wide centered column">                 
-            {{ component("components:search.form",{ namespace: 'products' }) }}                    
+            {{ component("semantic~search.form",{ namespace: 'products' }) }}                    
         </div>
         <div class="four wide column">
         </div>
@@ -29,7 +29,7 @@
             </div>           
         </div>
         <div class="one wide column">
-            {{ component('components:paginator.dropdown',{ namespace: 'products' }) }}
+            {{ component('semantic~paginator.dropdown',{ namespace: 'products' }) }}
         </div>
     </div>
 </div>
@@ -52,7 +52,7 @@
             </tbody>
         </table> 
         <div id="paginator">      
-            {{ component("components:paginator",{ namespace: 'products' }) }}
+            {{ component("semantic~paginator",{ namespace: 'products' }) }}
         </div>
     </div>
     <div class="w-1/4 hidden" id="product_details">

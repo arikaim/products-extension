@@ -1,4 +1,4 @@
-{% component 'components:tabs.vertical.content' %}
+{% component 'semantic~tabs.vertical.content' %}
 {% set product = createModel('Products','products').findById(uuid) %}
 {% set priceList = createModel('ProductOptionsList','products').getItemsQuery(product.type.slug,'price') %}
 {% if product.price.count() != priceList.count() %}
@@ -18,7 +18,7 @@
         <input type="hidden" value="{{ uuid }}" name="uuid">
         {% for price in product.price %}              
             {% set field_name = 'price[' ~ price.key ~ ']' %}
-            {{  component('components:form.fields.price',{ 
+            {{  component('semantic~form.fields.price',{ 
                     label: price.type.title,
                     value: price.price,
                     icon: price.currency.icon,
@@ -28,7 +28,7 @@
             }}        
             {{ component('system:admin.orm.options.form.fields.type',{ option: price }) }} 
         {% endfor %}
-        {{ component('components:form.footer') }}
+        {{ component('semantic~form.footer') }}
     </form>
 {% endif %}
 {% endcomponent %}

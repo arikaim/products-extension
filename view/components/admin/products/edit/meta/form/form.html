@@ -2,4 +2,4 @@
 {% set translation = product.translation(language) %}
 {% set language = language|default(current_language) %}
 
-{{ component('components:form.meta',{ uuid: uuid, language: language, translation: translation }) }}
+{{ component('semantic~form.meta',{ uuid: uuid, language: language, translation: translation }) }}

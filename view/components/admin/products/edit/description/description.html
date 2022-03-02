@@ -1,4 +1,4 @@
-{% component 'components:tabs.vertical.content' %}
+{% component 'semantic~tabs.vertical.content' %}
 {% set column = 'ten' %}
 <div class="mt-4">
     <form class="ui form" id="product_description_form">  
@@ -11,7 +11,7 @@
                 id="description" 
                 placeholder="{{ fields.description.placeholder }}"></textarea>
         </div>    
-        {{ component('components:form.footer') }}
+        {{ component('semantic~form.footer') }}
     </form>
 </div>   
 {% endcomponent %}

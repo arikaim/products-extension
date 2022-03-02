@@ -41,7 +41,7 @@
         </td>
         <td>{{ item.date_created|dateFormat }}</td>  
         <td>
-            {{ component('components:status.dropdown',{ status: item.status, uuid: item.uuid, skip: [2,3,4,5] }) }}
+            {{ component('semantic~status.dropdown',{ status: item.status, uuid: item.uuid, skip: [2,3,4,5] }) }}
         </td>
         <td>
            {{ item.type.title }}       

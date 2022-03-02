@@ -5,6 +5,7 @@
         "options": "Options",
         "price": "Price",
         "images": "Images",
+        "repository": "Git Repository",
         "external": "External Id",
         "relations": "Relations",
         "meta": "Meta Tags"

@@ -8,7 +8,7 @@
         <label>{{ fields.title.label }}</label>
         <input type="text" name="title" id="title" {{ fields.title.placeholder|attr('placeholder') }} value="{{ product.title }}"> 
     </div>       
-    {{  component('components:form.fields.slug',{ 
+    {{  component('semantic~form.fields.slug',{ 
             slug_source: 'title',
             label: fields.slug.label,
             show_url: false,
@@ -34,5 +34,5 @@
         <label>{{ fields.type.label }}</label>
         {{ component('products::admin.type.dropdown',{ selected: product.type_id, class: 'basic button fluid' }) }}
     </div>    
-    {{ component('components:form.footer') }}
+    {{ component('semantic~form.footer') }}
 </form>
