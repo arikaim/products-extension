@@ -56,7 +56,7 @@ class ProductsSchema extends Schema
      */
     public function update($table) 
     {                   
-        if ($table->hasColumn('description') == false) {
+        if ($this->hasColumn('description') == false) {
             $table->text('description')->nullable(true);
         }
     }

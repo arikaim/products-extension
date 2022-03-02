@@ -15,24 +15,26 @@
             field_class: 'basic large label' 
         }) 
     }}   
-    {% if product is not empty %}
-    <div class="field">
-        <label>{{ fields.category.label }}</label>
-        {% set category = createModel('Category','category').getList(null,'product') %}
-        {{  component('system:admin.orm.relations.fields.dropdown',{ 
-                model: 'CategoryRelations',
-                extension: 'category',
-                type: 'product',
-                relation_id: product.id,
-                items: category,
-                class: 'fluid'
-            }) 
-        }}   
+    <div class="two fields">
+        {% if product is not empty %}
+        <div class="field">
+            <label>{{ fields.category.label }}</label>
+            {% set category = createModel('Category','category').getList(null,'product') %}
+            {{  component('system:admin.orm.relations.fields.dropdown',{ 
+                    model: 'CategoryRelations',
+                    extension: 'category',
+                    type: 'product',
+                    relation_id: product.id,
+                    items: category,
+                    class: 'fluid'
+                }) 
+            }}   
+        </div>
+        {% endif %}
+        <div class="field">
+            <label>{{ fields.type.label }}</label>
+            {{ component('products::admin.type.dropdown',{ selected: product.type_id, class: 'basic button fluid' }) }}
+        </div>    
     </div>
-    {% endif %}
-    <div class="field">
-        <label>{{ fields.type.label }}</label>
-        {{ component('products::admin.type.dropdown',{ selected: product.type_id, class: 'basic button fluid' }) }}
-    </div>    
     {{ component('semantic~form.footer') }}
 </form>
