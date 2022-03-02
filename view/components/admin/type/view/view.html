@@ -1,17 +1,19 @@
-<table class="ui compact stackable selectable borderless basic table">
-    <thead class="table-head">
-        <tr>              
-            <th class="one wide collapsing left aligned">{{ columns.action }}</th>               
-            <th>{{ columns.title }}</th>  
-            <th class="one wide column">{{ columns.slug }}</th>                        
-            <th class="ten wide column">{{ columns.description }}</th>                   
-            <th class="one wide column">{{ columns.prodcuts }}</th>                                                   
-        </tr>
-    </thead>
-    <tbody id="product_type_rows" component="products::admin.type.view.rows" namespace="product-type">
-        {{ component('products::admin.type.view.rows') }} 
-    </tbody>
-</table> 
-<div id="paginator">      
-    {{ component("semantic~paginator",{ namespace: 'product-type' }) }}
+<div class="ui segment">
+    <table class="ui compact stackable selectable borderless basic table">
+        <thead class="table-head">
+            <tr>              
+                <th class="one wide collapsing left aligned">{{ columns.action }}</th>               
+                <th>{{ columns.title }}</th>  
+                <th class="one wide column">{{ columns.slug }}</th>                        
+                <th class="ten wide column">{{ columns.description }}</th>                   
+                <th class="one wide column">{{ columns.prodcuts }}</th>                                                   
+            </tr>
+        </thead>
+        <tbody id="product_type_rows" component="products::admin.type.view.rows" namespace="product-type">
+            {{ component('products::admin.type.view.rows') }} 
+        </tbody>
+    </table> 
+    <div id="paginator">      
+        {{ component("semantic~paginator",{ namespace: 'product-type' }) }}
+    </div>
 </div>

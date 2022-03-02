@@ -1,6 +1,12 @@
 {% set model = createModel('ProductType','products').orderBy('title') %}
 {% set items = paginate(model,'product-type') %}
 
+{% if items.getItems()|length == 0 %}
+<tr>
+    <td colspan="5">..</td>
+</tr>
+{% endif %}
+
 {% for item in items.getItems() %}  
     <tr id="{{ item.uuid }}">              
         <td>  

@@ -8,7 +8,13 @@
         {{ driver.getError(products) }}
     </div>
 {% else %}
-    {% set items = paginate(products,'import-products') %}  
+    {% set items = paginate(products,'import-products') %} 
+    {% if items.getItems()|length == 0 %}
+        <tr>
+            <td colspan="5">..</td>
+        </tr>
+    {% endif %}
+
     {% for item in items.getItems() %}         
         <tr id="row_{{ item.getId() }}">
             <td>           

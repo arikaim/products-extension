@@ -1,11 +1,9 @@
-{% set items = [ 
-    { title: labels.view, component: 'products::admin.products.view', icon: 'list', active: true },
-    { title: labels.add, component: 'products::admin.products.add', icon: 'plus' },
-    { id: 'edit_product', title: labels.edit, component: 'products::admin.products.edit', icon: 'edit' }   
-] %}
-
 {{  component('semantic~tabs.vertical',{ 
-        items: items, 
+        items: [ 
+            { title: labels.view, component: 'products::admin.products.view', icon: 'list', active: true },
+            { title: labels.add, component: 'products::admin.products.add', icon: 'plus' },
+            { id: 'edit_product', title: labels.edit, component: 'products::admin.products.edit', icon: 'edit' }   
+        ], 
         menu: { id: 'products_menu' }, 
         item_class: 'product-tab-item',
         content: { 
