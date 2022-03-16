@@ -1,19 +1,30 @@
 {% set id = id|default('products_dropdown') %}
 {% set name = name|default('product') %}
 {% set size = size|default(15) %}
+{% set data_field = data_field|default('uuid') %}
 {% set model = createModel('Products','products') %}
 {% set items = model.orderBy('position').take(size).get() %}
 {% if selected is not empty %}
     {% set selected = model.findById(selected) %}
 {% endif %}
 {% set selected_text = (selected is empty) ? labels.select : selected.title %}
-<div class="ui search selection dropdown product-dropdown" id="{{ id }}">
-    <input name="{{ name }}" type="hidden" value="{{ selected.uuid }}">
+<div 
+    class="ui search selection dropdown product-dropdown {{ class }}" 
+    id="{{ id }}" 
+    data-field="{{ data_field }}">
+    <input name="{{ name }}" type="hidden" value="{{ selected[data_field] }}">
     <i class="dropdown icon"></i>
-    <div class="text">{{ selected_text }}</div>
+    <div class="default text">
+        {{ selected_text }}
+    </div>
     <div class="menu">
+        <div class="item" data-value="">
+            {{ labels.select }}
+        </div>
         {% for item in items %}
-        <div class="item" data-value="{{ item.uuid }}">{{ item.title }}</div>
+        <div class="item" data-value="{{ selected[data_field] }}">
+            {{ item.title }}
+        </div>
         {% endfor %}
     </div>
 </div>

@@ -39,4 +39,17 @@ trait Products
 
         return Paginator::create($products,$page);
     }
+
+    /**
+     * Get product price
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param Validator $data
+     * @return Psr\Http\Message\ResponseInterface
+    */
+    public function getPriceController($request, $response, $data)
+    {
+
+    }
 }

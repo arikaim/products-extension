@@ -24,8 +24,7 @@ class Products extends Extension
      */
     public function install()
     {
-        // Control Panel Routes
-        // product
+        // Control Panel Routes      
         $this->addApiRoute('POST','/api/admin/products/add','ProductControlPanel','add','session');  
         $this->addApiRoute('PUT','/api/admin/products/update','ProductControlPanel','update','session');
         $this->addApiRoute('PUT','/api/admin/products/update/description','ProductControlPanel','updateDescription','session');
@@ -34,21 +33,21 @@ class Products extends Extension
         $this->addApiRoute('PUT','/api/admin/products/restore/{uuid}','ProductControlPanel','restore','session');
         $this->addApiRoute('PUT','/api/admin/products/create/options','ProductControlPanel','createOptions','session');       
         $this->addApiRoute('PUT','/api/admin/products/update/meta','ProductControlPanel','updateMetaTags','session');
-        // product type
+        // Product type
         $this->addApiRoute('POST','/api/admin/products/type/add','ProductTypeControlPanel','add','session');  
         $this->addApiRoute('PUT','/api/admin/products/type/update','ProductTypeControlPanel','update','session');
         $this->addApiRoute('DELETE','/api/admin/products/type/delete/{uuid}','ProductTypeControlPanel','delete','session');
-        // price 
+        // Price 
         $this->addApiRoute('PUT','/api/admin/products/price/update','PriceListControlPanel','update','session');
         $this->addApiRoute('PUT','/api/admin/products/price/create','PriceListControlPanel','createPriceList','session');       
-        // external Id
+        // External Id
         $this->addApiRoute('POST','/api/admin/products/external/id','ProductControlPanel','addExternalId','session');    
         $this->addApiRoute('DELETE','/api/admin/products/external/id/{uuid}','ProductControlPanel','deleteExternalId','session');  
-
         // Api      
-        $this->addApiRoute('GET','/api/products/product/list/dropdown/[{query}]','ProductsApi','getDropdownList');   
-        $this->addApiRoute('GET','/api/products/product/list[/{params:.*}]','ProductsApi','getList');   
-        $this->addApiRoute('GET','/api/products/product/details/{uuid}','ProductsApi','getProductDetails');   
+        $this->addApiRoute('GET','/api/products/product/list/dropdown/{data_field}/[{query}]','ProductsApi','getDropdownList');   
+        $this->addApiRoute('GET','/api/products/product/list[/{params:.*}]','ProductsApi','getProductsList');   
+        $this->addApiRoute('GET','/api/products/product/details/{uuid}','ProductsApi','getProductDetails');  
+        $this->addApiRoute('GET','/api/products/price/{uuid}','ProductsApi','getPrice');   
 
         // Events
         $this->registerEvent('product.add','Add product');  

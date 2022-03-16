@@ -58,18 +58,19 @@ class ProductsApi extends ApiController
     public function getDropdownList($request, $response, $data) 
     {       
         $this->onDataValid(function($data) {   
+            $dataField = $data->get('data_field','uuid');
             $search = $data->get('query','');
             $size = $data->get('size',15);
 
             $query = Model::Products('products');
             $model = $query->where('title','like','%' . $search . '%')->take($size)->get();
 
-            $this->setResponse(\is_object($model),function() use($model) {     
+            $this->setResponse(\is_object($model),function() use($model,$dataField) {     
                 $items = [];
                 foreach ($model as $item) {
                     $items[]= [
                         'name'  => $item['title'],
-                        'value' => $item['uuid']
+                        'value' => $item[$dataField]
                     ];
                 }
                 $this                    
