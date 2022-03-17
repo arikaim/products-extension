@@ -1,4 +1,3 @@
-{% set id = id|default('products_dropdown') %}
 {% set name = name|default('product') %}
 {% set size = size|default(15) %}
 {% set data_field = data_field|default('uuid') %}
@@ -10,9 +9,14 @@
 {% set selected_text = (selected is empty) ? labels.select : selected.title %}
 <div 
     class="ui search selection dropdown product-dropdown {{ class }}" 
-    id="{{ id }}" 
+    id="{{ component_id }}" 
+    selected="{{ selected[data_field] }}"
     data-field="{{ data_field }}">
-    <input name="{{ name }}" type="hidden" value="{{ selected[data_field] }}">
+    <input 
+        name="{{ name }}" 
+        type="hidden" 
+        value="{{ selected[data_field] }}" 
+        id="{{ id|default(name) }}">
     <i class="dropdown icon"></i>
     <div class="default text">
         {{ selected_text }}

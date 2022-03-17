@@ -50,6 +50,24 @@ trait Products
     */
     public function getPriceController($request, $response, $data)
     {
+        $data
+            ->addRule('text:required','uuid','Not valid product Id')
+            ->validate(true);
 
+        $uuid = $data->get('uuid');
+        $currencyId = $data->get('currency_id',$this->get('currency')->getDefaultCurrencyId());
+        
+        $product = Model::Products('products')->findById($uuid);
+        if (\is_object($product) == false) {
+            $this->error('errors.id');
+            return false;
+        }
+
+        $this->setResponse(\is_object($product),function() use($product,$currencyId) {     
+            $this   
+                ->message('product.price')                 
+                ->field('uuid',$product->uuid)
+                ->field('items',$product->getPriceList($currencyId)->toArray());
+        },'errors.price'); 
     }
 }

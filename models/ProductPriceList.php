@@ -39,16 +39,6 @@ class ProductPriceList extends Model
     protected $table = 'product_price_list';
 
     /**
-     * Visible columns
-     *
-     * @var array
-     */
-    protected $visible = [        
-        'key',
-        'price'        
-    ];
-
-    /**
      * Fillable columns
      *
      * @var array
