@@ -1,16 +1,14 @@
 {% if uuid is not empty %}
     {% set product = createModel('Products','products').findById(uuid) %}
 {% endif %}
-<div class="ml-2">    
+<div class="ui segment">    
     {{ component('semantic~segment-title',{ title: title, class: 'p-3 rounded', close_button: true }) }}    
     <table class="ui very basic definition table">
-        <thead>
-            <tr>
-                <th class="three wide right aligned"></th>
-                <th></th>
-            </tr>
-        </thead>
         <tbody>
+            <tr>
+                <td class="right aligned">{{ labels.uuid }}</td>
+                <td>{{ product.uuid }}</td>
+            </tr>
             <tr>
                 <td class="right aligned">{{ labels.title }}</td>
                 <td>{{ product.title }}</td>
@@ -26,10 +24,6 @@
             <tr>
                 <td class="right aligned">{{ labels.date }}</td>
                 <td>{{ product.date_created|dateTimeFormat }}</td>
-            </tr>
-            <tr>
-                <td class="right aligned">{{ labels.uuid }}</td>
-                <td>{{ product.uuid }}</td>
             </tr>
         </tbody>
     </table>          

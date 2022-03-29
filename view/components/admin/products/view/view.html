@@ -40,9 +40,9 @@
                 <tr>              
                     <th class="two wide collapsing left aligned">{{ columns.action }}</th>
                     <th class="two wide">{{ columns.created }}</th>
-                    <th class="collapsing one wide">{{ columns.status }}</th>
+                    <th class="two wide">{{ columns.status }}</th>
                     <th class="one wide">{{ columns.type }}</th>  
-                    <th class="five wide">{{ columns.title }}</th>    
+                    <th>{{ columns.title }}</th>    
                     <th class="four wide">{{ columns.category }}</th>                             
                     <th class="two wide">{{ columns.price }}</th>                                      
                 </tr>
@@ -55,6 +55,6 @@
             {{ component("semantic~paginator",{ namespace: 'products' }) }}
         </div>
     </div>
-    <div class="w-1/4 hidden" id="product_details">
+    <div class="px-2 w-1/4 hidden" id="product_details">
     </div>
 </div>

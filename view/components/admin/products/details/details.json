@@ -4,7 +4,7 @@
         "uuid": "Uuid",
         "title": "Title",
         "slug": "Slug",
-        "date": "Date Added",
+        "date": "Date",
         "type": "Type"
     }
 }
