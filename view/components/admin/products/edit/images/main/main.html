@@ -1,0 +1,28 @@
+{% set product = createModel('Products','products').findById(uuid) %}
+<div class="ui two column grid">
+    <div class="column">
+        <div class="ui segment" id="product_image" uuid="{{ uuid }}">
+            <div class="flex flex-row items-start">
+                {% if product.image.src is not empty %}
+                <div>              
+                    <img class="ui image small bordered rounded" src="{{ url(product.image.src) }}">
+                </div>
+                {% endif %}
+                {% if hasExtension('image') == true %}
+                <div class="pl-4 flex-grow">
+                    {{  component('image::upload.form',{ 
+                            class: 'border border-solid rounded border-gray-300 p-2',
+                            button_class: 'upload-button mini',              
+                            hide_path: true,               
+                            hide_labels: true,
+                            private_image: false,                                     
+                            resize_width: 512,                           
+                            resize_height: 512
+                        }) 
+                    }}       
+                </div>           
+                {% endif %}       
+            </div>
+        </div>
+    </div>
+</div>

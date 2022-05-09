@@ -69,6 +69,8 @@ class Products extends Model
         'slug',
         'title',  
         'description',
+        'description_summary',
+        'image_id',
         'price',     
         'options_list',
         'price_list',
@@ -108,10 +110,13 @@ class Products extends Model
         'uuid',     
         'status',
         'date_created',
+        'date_updated',
         'date_deleted',
         'slug',
         'title',   
         'description',    
+        'description_summary',
+        'image_id',
         'type_id',
         'user_id'
     ];
@@ -160,6 +165,29 @@ class Products extends Model
      */
     protected $priceListClass = ProductPriceList::class;
 
+    /**
+     * Find product by slug, uuid
+     *
+     * @param string|int $key
+     * @return Model|null
+     */
+    public function findProduct($key)
+    {
+        $model = $this->findBySlug($key);
+        
+        return (\is_object($model) == true) ? $model : $this->findById($key);         
+    }
+
+    /**
+     * Image relation
+     *
+     * @return Relation|null
+     */
+    public function image()
+    {
+        return $this->belongsTo('Arikaim\\Extensions\\Image\\Models\\Image','image_id');
+    }
+    
     /**
      * Get options type name
      *

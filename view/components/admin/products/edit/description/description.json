@@ -1,8 +1,12 @@
 {    
     "fields": {
         "description": {
-            "label": "",
+            "label": "Product Description",
             "placeholder": "Enter product description."
+        },
+        "summary": {
+            "label": "Summary",
+            "placeholder": "Enter product description summary."
         }
     }
 }

@@ -23,12 +23,7 @@
         </div>
         <div class="four wide column">
         </div>
-        <div class="one wide column" id="products_total">
-            <div class="p-2">
-                {{ component('products::admin.products.total',{ type_id: type_id, class: 'olive mini horizontal' }) }}
-            </div>           
-        </div>
-        <div class="one wide column">
+        <div class="two wide column right aligned">
             {{ component('semantic~paginator.dropdown',{ namespace: 'products' }) }}
         </div>
     </div>

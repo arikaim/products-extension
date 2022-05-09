@@ -1,3 +1,6 @@
 {
-    "message": "Images extension not installed."   
+    "labels": {
+        "main": "Main",
+        "library": "Library"
+    }
 }

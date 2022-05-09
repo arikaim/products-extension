@@ -1,3 +1,4 @@
+{% set product = createModel('Products','products').findById(uuid) %}
 {% component 'semantic~tabs.vertical.content' %}
 {% set column = 'ten' %}
 <div class="mt-4">
@@ -9,8 +10,16 @@
                 rows="20" cols="12" 
                 name="description" 
                 id="description" 
-                placeholder="{{ fields.description.placeholder }}"></textarea>
-        </div>    
+                placeholder="{{ fields.description.placeholder }}">{{ product.description }}</textarea>
+        </div>   
+        <div class="field">
+            <label>{{ fields.summary.label }}</label>
+            <textarea 
+                rows="3" cols="3" 
+                name="description_summary" 
+                id="description_summary" 
+                placeholder="{{ fields.summary.placeholder }}">{{ product.description_summary }}</textarea>
+        </div>   
         {{ component('semantic~form.footer') }}
     </form>
 </div>   

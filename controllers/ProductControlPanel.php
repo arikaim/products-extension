@@ -115,16 +115,17 @@ class ProductControlPanel extends ControlPanelApiController
     public function updateController($request, $response, $data) 
     {         
         $this->onDataValid(function($data) { 
+            if (isset($data['product_type']) == true) {
+                $data['type_id'] = $data['product_type'];
+            }
+           
             $product = Model::Products('products')->findById($data['uuid']); 
             if (\is_object($product) == false) {
                 $this->error('errors.update');
                 return;
             }
            
-            $result = $product->update([
-                'type_id'     => $data['product_type'],
-                'title'       => $data['title']
-            ]);
+            $result = $product->update($data->toArray());               
 
             $this->setResponse(($result !== false),function() use($product) {                  
                 $this
@@ -132,10 +133,7 @@ class ProductControlPanel extends ControlPanelApiController
                     ->field('uuid',$product->uuid);                  
             },'errors.update');                                    
         });
-        $data
-            ->addRule('text:min=2|required','title')
-            ->addRule('number|required','product_type')            
-            ->validate();
+        $data->validate();
     }
 
     /**
@@ -156,7 +154,8 @@ class ProductControlPanel extends ControlPanelApiController
             }
 
             $result = $product->update([
-                'description' => $data['description']           
+                'description' => $data['description'],
+                'description_summary' => $data['description_summary']                
             ]);
 
             $this->setResponse(($result !== false),function() use($product) {                  

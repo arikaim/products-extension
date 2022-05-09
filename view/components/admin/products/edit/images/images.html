@@ -1,15 +1,15 @@
-{% if hasExtension('image') == false %}
-    <div class="ui icon mini message">
-        <i class="icon warning mini"></i>
-        <div class="content">
-            <h4>{{ message }}</h4>      
-        </div>   
-    </div>
-{% else %}
-    {% set product = createModel('Products','products').findById(uuid) %}
-    {{  component('image::admin.library',{ 
-            relation_id: product.id, 
-            relation_type: 'product'
-        }) 
-    }}
-{% endif %}
+{% set params = { uuid: uuid } %}
+{{  component('semantic~tabs.vertical',{ 
+        items: [ 
+            { title: labels.main, component: 'products::admin.products.edit.images.main', icon: 'image', active: true, params : params },
+            { title: labels.library, component: 'products::admin.products.edit.images.library', icon: 'images', params : params }
+        ], 
+        menu: { id: 'products_menu' }, 
+        item_class: 'product-images-tab-item',
+        content: { 
+            id: 'product_images_content',
+            component: 'products::admin.products.edit.images.main',
+            params: params 
+        } 
+    })
+}}

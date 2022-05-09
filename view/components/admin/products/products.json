@@ -2,6 +2,7 @@
     "labels": {
         "view": "View",
         "add": "Add",
+        "stats": "Stats",
         "edit": "Edit"                  
     }
 }

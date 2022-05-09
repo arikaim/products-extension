@@ -37,10 +37,12 @@ class ProductsSchema extends Schema
         $table->slug();
         $table->string('title')->nullable(false);
         $table->text('description')->nullable(true);
+        $table->text('description_summary')->nullable(true);
         $table->userId();
         $table->status();
         $table->position();      
         $table->relation('type_id','product_type'); 
+        $table->relation('image_id','image'); 
         $table->dateCreated();
         $table->dateUpdated();
         $table->dateDeleted();
@@ -58,6 +60,12 @@ class ProductsSchema extends Schema
     {                   
         if ($this->hasColumn('description') == false) {
             $table->text('description')->nullable(true);
+        }
+        if ($this->hasColumn('description_summary') == false) {
+            $table->text('description_summary')->nullable(true);
+        }
+        if ($this->hasColumn('image_id') == false) {
+            $table->relation('image_id','image'); 
         }
     }
 }
