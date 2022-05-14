@@ -16,11 +16,11 @@ use Arikaim\Extensions\Products\Models\ProductOptions;
 use Arikaim\Extensions\Products\Models\ProductPriceList;
 use Arikaim\Extensions\Products\Models\ProductTranslations;
 use Arikaim\Extensions\Products\Models\ProductId;
-use Arikaim\Core\Models\Users;
 
 use Arikaim\Core\Db\Traits\Uuid;
 use Arikaim\Core\Db\Traits\Find;
 use Arikaim\Core\Db\Traits\Status;
+use Arikaim\Core\Db\Traits\UserRelation;
 use Arikaim\Core\Db\Traits\Position;
 use Arikaim\Core\Db\Traits\SoftDelete;
 use Arikaim\Core\Db\Traits\Slug;
@@ -46,6 +46,7 @@ class Products extends Model
         OptionsRelation,
         PriceRelation,
         CategoryRelations,
+        UserRelation,
         Translations,
         Position;
 
@@ -216,16 +217,6 @@ class Products extends Model
     public function type()
     {
         return $this->belongsTo(ProductType::class,'type_id');
-    }
-
-    /**
-     * User relation
-     *
-     * @return mixed
-     */
-    public function user()
-    {
-        return $this->belongsTo(Users::class,'user_id');
     }
 
     /**

@@ -7,7 +7,10 @@
         <tbody>
             <tr>
                 <td class="right aligned">{{ labels.uuid }}</td>
-                <td>{{ product.uuid }}</td>
+                <td>
+                    <div class="ui basic label">{{ product.id }}</div>
+                    {{ product.uuid }}
+                </td>
             </tr>
             <tr>
                 <td class="right aligned">{{ labels.title }}</td>
@@ -20,6 +23,10 @@
             <tr>
                 <td class="right aligned">{{ labels.type }}</td>
                 <td>{{ product.type.title }}</td>
+            </tr>
+            <tr>
+                <td class="right aligned">{{ labels.user }}</td>
+                <td>{{ product.user.username_or_email }}</td>
             </tr>
             <tr>
                 <td class="right aligned">{{ labels.date }}</td>
