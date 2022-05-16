@@ -17,6 +17,7 @@ use Arikaim\Extensions\Products\Models\ProductPriceList;
 use Arikaim\Extensions\Products\Models\ProductTranslations;
 use Arikaim\Extensions\Products\Models\ProductId;
 
+use Arikaim\Core\Utils\Utils;
 use Arikaim\Core\Db\Traits\Uuid;
 use Arikaim\Core\Db\Traits\Find;
 use Arikaim\Core\Db\Traits\Status;
@@ -56,27 +57,6 @@ class Products extends Model
      * @var string
      */
     protected $table = 'products';
-
-    /**
-     * Visible columns
-     *
-     * @var array
-     */
-    protected $visible = [
-        'type',
-        'position',
-        'uuid',           
-        'date_created',      
-        'slug',
-        'title',  
-        'description',
-        'description_summary',
-        'image_id',
-        'price',     
-        'options_list',
-        'price_list',
-        'is_free'            
-    ];
 
     /**
      * Append custom attributes
@@ -167,15 +147,39 @@ class Products extends Model
     protected $priceListClass = ProductPriceList::class;
 
     /**
+     * Hard delete product model
+     *
+     * @return boolean
+     */
+    public function deleteProduct(): bool
+    {
+        // delete external ref
+        $this->external()->delete();
+        // delete options
+        $this->options()->where('reference_id','=',$this->id)->delete();
+        // delete translations
+        $this->translations()->delete();
+        // delete price list 
+        $this->price()->delete();
+
+        // delete prodcut
+        $result = $this->delete();
+        return ($result !== false);
+    }
+
+    /**
      * Find product by slug, uuid
      *
      * @param string|int $key
+     * @param int|null $userId 
      * @return Model|null
      */
-    public function findProduct($key)
+    public function findProduct($key, ?int $userId = null)
     {
-        $model = $this->findBySlug($key);
-        
+        $query = $this->where('slug','=',$key);
+        $query = (empty($userId) == true) ? $query->whereNull('user_id') : $query->where('user_id','=',$userId);
+        $model = $query->first();
+
         return (\is_object($model) == true) ? $model : $this->findById($key);         
     }
 
@@ -223,11 +227,22 @@ class Products extends Model
      * Return true if product exists
      *
      * @param string $title
+     * @param int|null $userId
      * @return boolean
      */
-    public function hasProduct(string $title)
+    public function hasProduct(string $title, ?int $userId = null): bool
     {
-        $model = $this->findByColumn($title,'title');
+        $title = \trim($title);
+        $query = $this->where('title','=',$title);
+        $query = (empty($userId) == true) ? $query->whereNull('user_id') : $query->where('user_id','=',$userId);        
+        $model = $query->first();
+
+        if (\is_object($model) == true) {
+            return true;
+        }
+        // try with slug 
+        $slug = Utils::slug($title);
+        $model = $this->findProduct($slug,$userId);
 
         return \is_object($model);
     }    
@@ -242,5 +257,17 @@ class Products extends Model
     public function scopeTypeQuery($query, ?int $typeId = null)
     {
         return (empty($typeId) == false) ? $query->where('type_id','=',$typeId) : $query;
+    }
+
+    /**
+     * Get user products query
+     *
+     * @param Builder $query
+     * @param int|null $typeId
+     * @return Builder
+     */
+    public function scopeUserProductsQuery($query, ?int $userid)
+    {
+        return $query->where('user_id','=',$userid);
     }
 }

@@ -48,10 +48,13 @@ class Products extends Extension
         $this->addApiRoute('GET','/api/products/product/list[/{params:.*}]','ProductsApi','getProductsList');   
         $this->addApiRoute('GET','/api/products/product/details/{uuid}','ProductsApi','getProductDetails');  
         $this->addApiRoute('GET','/api/products/price/{uuid}','ProductsApi','getPrice');   
-
+        $this->addApiRoute('POST','/api/products/product/add','ProductsApi','add');  
+        $this->addApiRoute('PUT','/api/products/product/update','ProductsApi','update');  
+        $this->addApiRoute('DELETE','/api/products/product/delete/{uuid}','ProductsApi','deleteUserProduct');  
         // Events
         $this->registerEvent('product.add','Add product');  
         $this->registerEvent('product.update','Update product');  
+        $this->registerEvent('product.delete','Delete product');  
         // Relation map 
         $this->addRelationMap('product','Products');
         // Create db tables        

@@ -34,20 +34,21 @@ class ProductsSchema extends Schema
         // columns
         $table->prototype('id');
         $table->prototype('uuid');
-        $table->slug();
+        $table->slug(false);
         $table->string('title')->nullable(false);
         $table->text('description')->nullable(true);
         $table->text('description_summary')->nullable(true);
-        $table->userId();
+        $table->userId(true);
         $table->status();
         $table->position();      
         $table->relation('type_id','product_type'); 
-        $table->relation('image_id','image'); 
+        $table->relation('image_id','image',true); 
         $table->dateCreated();
         $table->dateUpdated();
         $table->dateDeleted();
         // index
-        $table->unique(['title']);
+        $table->unique(['title','user_id']);
+        $table->unique(['slug','user_id']);
     }
 
     /**
@@ -65,7 +66,7 @@ class ProductsSchema extends Schema
             $table->text('description_summary')->nullable(true);
         }
         if ($this->hasColumn('image_id') == false) {
-            $table->relation('image_id','image'); 
+            $table->relation('image_id','image',true); 
         }
     }
 }

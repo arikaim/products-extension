@@ -188,7 +188,8 @@ class ProductControlPanel extends ControlPanelApiController
             $model = Model::ProductId('products');
             $result = $model->addId($product->id,$data['external_id'],$data['api_driver']);
 
-            $this->setResponse($result,function() use($product) {                  
+            $this->setResponse($result,function() use($product) { 
+                $this->get('event')->dispatch('product.add',$product->toArray());                         
                 $this
                     ->message('id.add')
                     ->field('uuid',$product->uuid);                  
