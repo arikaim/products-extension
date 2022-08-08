@@ -37,6 +37,12 @@
         {{ labels.files }}     
     </div>  
     {% endif %}
+    {% if hasExtension('rating') == true %}
+    <div class="item link edit-product-tab-item" component="products::admin.products.edit.rating" uuid="{{ uuid }}">
+        <i class="star outline icon blue"></i>
+        {{ labels.rating }}     
+    </div>  
+    {% endif %}
     <div class="item link edit-product-tab-item" component="products::admin.products.edit.external" uuid="{{ uuid }}">
         <i class="info icon blue"></i>
         {{ labels.external }}     

@@ -1,6 +1,6 @@
 {% set driver = service('driver').create(driver_name) %}
 {% set page = page|default(1) %}
-{% set products = create('Classes\\ExternalProductFactory','products').create(driver_name) %}
+{# todo #}
 {% set products = products.getList(page,driver_name) %}
 
 {% if driver.getError(products) is not empty %}

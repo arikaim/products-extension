@@ -1,0 +1,13 @@
+{% set product = createModel('Products','products').findById(uuid) %}
+<div class="ui grid">
+    <div class="six wide column">
+        <div class="ui segment">
+            {% if service('rating').hasRating(product.id,'product') == false %}
+                <div>
+                    {{ message }}
+                </div>
+            {% else %}
+            {% endif %}
+        </div>
+    </div>
+</div>

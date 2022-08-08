@@ -1,19 +1,11 @@
 /**
  *  Arikaim  
- *  @copyright  Copyright (c) Konstantin Atanasov <info@arikaim.com>
+ *  @copyright  Copyright (c)  <info@arikaim.com>
  *  @license    http://www.arikaim.com/license
  *  http://www.arikaim.com
  */
 'use strict';
 
-function ProductsControlPanel() {
-    this.init = function() {
-        arikaim.ui.tab();    
-    };
-}
-
-var productsControlPanel = new ProductsControlPanel();
-
 arikaim.component.onLoaded(function() {
-    productsControlPanel.init();
+    arikaim.ui.tab();    
 });
