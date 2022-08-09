@@ -9,10 +9,10 @@
 */
 namespace Arikaim\Extensions\Products\Classes;
 
-use Arikaim\Core\Db\Model;
 use Arikaim\Core\Extension\Extension;
 use Arikaim\Core\Db\Traits\Options\OptionType;
 use Arikaim\Core\Utils\Uuid;
+use Arikaim\Core\Db\Seed;
 
 /**
  * Product type options  
@@ -34,7 +34,7 @@ class ProductType
             return false;
         }
 
-        Model::seed('ProductType','products',function($seed) use($items) {     
+        Seed::withModel('ProductType','products',function($seed) use($items) {     
             $seed->updateOrCreateFromArray(['slug'],$items,function($item) {
                 $item['uuid'] = Uuid::create();        
                 return $item;
@@ -59,7 +59,7 @@ class ProductType
             return false;
         }
 
-        Model::seed('ProductOptionsList','products',function($seed) use($items) {     
+        Seed::withModel('ProductOptionsList','products',function($seed) use($items) {     
             $seed->updateOrCreateFromArray(['key','type_name'],$items,function($item) {
                 $item['uuid'] = Uuid::create();        
                 return $item;
@@ -83,7 +83,7 @@ class ProductType
             return false;
         }
 
-        Model::seed('ProductOptionType','products',function($seed) use($items) {
+        Seed::withModel('ProductOptionType','products',function($seed) use($items) {
             $seed->updateOrCreateFromArray(['key'],$items,function($item) {
                 $item['uuid'] = Uuid::create();
                 $item['type'] = OptionType::getOptionTypeId($item['type']);
