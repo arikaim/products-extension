@@ -38,13 +38,14 @@ class ProductsApi extends ApiController
      * @param Validator $data
      * @return Psr\Http\Message\ResponseInterface
     */
-    public function deleteUserProductController($request, $response, $data) 
+    public function deleteUserProduct($request, $response, $data) 
     {         
         $data->validate(true);
+
         $uuid = $data->get('uuid',null);
         $product = Model::Products('products')->findById($uuid); 
-        if (\is_object($product) == false) {
-            $this->error('errors.id');
+        if ($product === null) {
+            $this->error('errors.id','Not valid product id.');
             return;
         }
         
@@ -53,16 +54,20 @@ class ProductsApi extends ApiController
             $this->error('errors.access');
             return;
         }
+
         $this->requireUser($product->user_id);
 
         $result = $product->deleteProduct();
+        if ($result === false) {
+            $this->error('errors.delete','Error delete product');
+            return;
+        }
 
-        $this->setResponse(($result !== false),function() use($product) { 
-            $this->get('event')->dispatch('product.delete',$product->toArray());                  
-            $this
-                ->message('delete')
-                ->field('uuid',$product->uuid);                  
-        },'errors.delete');                                    
+        $this->get('event')->dispatch('product.delete',$product->toArray());        
+
+        $this
+            ->message('delete')
+            ->field('uuid',$product->uuid);                                                          
     }
 
     /**
@@ -73,7 +78,7 @@ class ProductsApi extends ApiController
      * @param Validator $data
      * @return Psr\Http\Message\ResponseInterface
     */
-    public function updateController($request, $response, $data) 
+    public function update($request, $response, $data) 
     {         
         $data->validate(true);
         
@@ -84,8 +89,8 @@ class ProductsApi extends ApiController
         }
         
         $product = Model::Products('products')->findById($data['uuid']); 
-        if (\is_object($product) == false) {
-            $this->error('errors.update');
+        if ($product == null) {
+            $this->error('errors.id','Not valid product id.');
             return;
         }
         
@@ -96,17 +101,22 @@ class ProductsApi extends ApiController
             'description' => $data['description']
         ]);               
 
-        if (empty($price) != true) {
+        if ($result === false) {
+            $this->error('errors.update','Error save product.');
+            return;
+        }
+
+        if (empty($price) == false) {
             // save price
             Model::ProductPriceList('products')->savePrice($product->id,'price',$price,"USD"); 
         }
 
-        $this->setResponse(($result !== false),function() use($product) { 
-            $this->get('event')->dispatch('product.update',$product->toArray());                  
-            $this
-                ->message('update')
-                ->field('uuid',$product->uuid);                  
-        },'errors.update');                                    
+        // dispatch event
+        $this->get('event')->dispatch('product.update',$product->toArray()); 
+
+        $this
+            ->message('update')
+            ->field('uuid',$product->uuid);                                                          
     }
 
     /**
@@ -117,7 +127,7 @@ class ProductsApi extends ApiController
      * @param Validator $data
      * @return Psr\Http\Message\ResponseInterface
     */
-    public function addController($request, $response, $data) 
+    public function add($request, $response, $data) 
     {         
         $data
             ->addRule('text:min=2|required','title')
@@ -130,7 +140,7 @@ class ProductsApi extends ApiController
       
         $model = Model::Products('products');
         if ($model->hasProduct($data['title'],$userId) == true) {
-            $this->error('errors.exist');
+            $this->error('errors.exist','Product with this name exists.');
             return;
         }
  
@@ -141,22 +151,22 @@ class ProductsApi extends ApiController
             'description' => $description
         ]);
 
-        if (\is_object($product) == false) {
-            $this->error('errors.add');
+        if ($product == null) {
+            $this->error('errors.add','Error add product');
             return;
         }
 
-        if (empty($price) != true) {
+        if (empty($price) == false) {
             // save price
             Model::ProductPriceList('products')->savePrice($product->id,'price',$price,"USD"); 
         }
-       
-        $this->setResponse(\is_object($product),function() use($product) {     
-            $this->get('event')->dispatch('product.add',$product->toArray());             
-            $this
-                ->message('add')
-                ->field('uuid',$product->uuid);                  
-        },'errors.add');                                    
+
+        // dispatch event
+        $this->get('event')->dispatch('product.add',$product->toArray());    
+
+        $this
+            ->message('add')
+            ->field('uuid',$product->uuid);                                             
     }
 
     /**
@@ -167,7 +177,7 @@ class ProductsApi extends ApiController
      * @param Validator $data
      * @return Psr\Http\Message\ResponseInterface
     */
-    public function getListController($request, $response, $data) 
+    public function getList($request, $response, $data) 
     {          
         $products = $this->getProductsList($request,$response,$data);
         $result = $products->toArray();
@@ -186,29 +196,30 @@ class ProductsApi extends ApiController
     */
     public function getDropdownList($request, $response, $data) 
     {       
-        $this->onDataValid(function($data) {   
-            $dataField = $data->get('data_field','uuid');
-            $search = $data->get('query','');
-            $size = $data->get('size',15);
+        $data->validate(true);
 
-            $query = Model::Products('products');
-            $model = $query->where('title','like','%' . $search . '%')->take($size)->get();
+        $dataField = $data->get('data_field','uuid');
+        $search = $data->get('query','');
+        $size = $data->get('size',15);
 
-            $this->setResponse(\is_object($model),function() use($model,$dataField) {     
-                $items = [];
-                foreach ($model as $item) {
-                    $items[]= [
-                        'name'  => $item['title'],
-                        'value' => $item[$dataField]
-                    ];
-                }
-                $this                    
-                    ->field('success',true)
-                    ->field('results',$items);  
-            },'errors.list');                                
-        });
-        $data->validate();
+        $products = Model::Products('products')->where('title','like','%' . $search . '%')->take($size)->get();
+        if ($products == null) {
+            $this->error('errors.list');
+            return;
+        }
+           
+        $items = [];
+        foreach ($products as $item) {
+            $items[] = [
+                'name'  => $item['title'],
+                'value' => $item[$dataField]
+            ];
+        }
 
+        $this                    
+            ->field('success',true)
+            ->field('results',$items);  
+                                        
         return $this->getResponse(true);
     }
 
@@ -220,33 +231,33 @@ class ProductsApi extends ApiController
      * @param Validator $data
      * @return Psr\Http\Message\ResponseInterface
     */
-    public function getProductDetailsController($request, $response, $data) 
+    public function getProductDetails($request, $response, $data) 
     {          
-        $this->onDataValid(function($data) { 
-            $product = Model::Products('products')->findById($data['uuid']);
-            if (empty($product) == true) {
-                $this->error('Product not exist.');
-                return false;
-            }
-            if ($product->status != $product->ACTIVE()) {
-                $this->error('Product not exist or not published.');
-                return false;
-            }
-
-            $this->setResultFields($product->toArray());
-
-            $categories = [];
-            foreach ($product->categories as $item) {
-                $categories[] = [
-                    'title' => $item->getTitle(),
-                    'slug'  => $item->getSlug()
-                ];
-            }
-        
-            $this->setResultFields($categories,'categories');
-        });
         $data
             ->addRule('text:required','uuid')
-            ->validate();      
+            ->validate(true);    
+
+        $product = Model::Products('products')->findById($data['uuid']);
+        if ($product == null) {
+            $this->error('Product not exist.');
+            return false;
+        }
+
+        if ($product->status != $product->ACTIVE()) {
+            $this->error('Product not exist or not published.');
+            return false;
+        }
+
+        $this->setResultFields($product->toArray());
+
+        $categories = [];
+        foreach ($product->categories as $item) {
+            $categories[] = [
+                'title' => $item->getTitle(),
+                'slug'  => $item->getSlug()
+            ];
+        }
+        
+        $this->setResultFields($categories,'categories');         
     }
 }

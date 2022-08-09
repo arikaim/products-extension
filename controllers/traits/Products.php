@@ -58,16 +58,14 @@ trait Products
         $currencyId = $data->get('currency_id',$this->get('currency')->getDefaultCurrencyId());
         
         $product = Model::Products('products')->findById($uuid);
-        if (\is_object($product) == false) {
-            $this->error('errors.id');
+        if ($product == null) {
+            $this->error('errors.id','Not valid product id');
             return false;
         }
 
-        $this->setResponse(\is_object($product),function() use($product,$currencyId) {     
-            $this   
-                ->message('product.price')                 
-                ->field('uuid',$product->uuid)
-                ->field('items',$product->getPriceList($currencyId)->toArray());
-        },'errors.price'); 
+        $this   
+            ->message('product.price')                 
+            ->field('uuid',$product->uuid)
+            ->field('items',$product->getPriceList($currencyId)->toArray());
     }
 }
