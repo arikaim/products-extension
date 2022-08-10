@@ -14,6 +14,7 @@
         "status": "Status",
         "price": "Price",
         "type": "Type",
+        "user": "User",
         "created": "Date Added"
     }
 }

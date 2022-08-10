@@ -56,6 +56,9 @@
         </td>                  
         <td>
             {{ component('products::admin.products.price',{ product: item }) }}          
+        </td>
+        <td>
+            {{ item.user.user_name_or_email }}
         </td>                        
     </tr>
 {% endfor %}

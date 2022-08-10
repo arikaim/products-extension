@@ -33,13 +33,14 @@
         <table class="ui compact stackable selectable borderless basic table">
             <thead class="table-head">
                 <tr>              
-                    <th class="two wide collapsing left aligned">{{ columns.action }}</th>
+                    <th class="two wide">{{ columns.action }}</th>
                     <th class="two wide">{{ columns.created }}</th>
                     <th class="two wide">{{ columns.status }}</th>
                     <th class="one wide">{{ columns.type }}</th>  
                     <th>{{ columns.title }}</th>    
-                    <th class="four wide">{{ columns.category }}</th>                             
-                    <th class="two wide">{{ columns.price }}</th>                                      
+                    <th>{{ columns.category }}</th>                             
+                    <th class="two wide">{{ columns.price }}</th>  
+                    <th class="two wide">{{ columns.user }}</th>                                      
                 </tr>
             </thead>
             <tbody id="product_rows" component="products::admin.products.view.rows" namespace="products">
