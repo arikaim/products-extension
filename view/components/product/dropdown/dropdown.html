@@ -2,6 +2,9 @@
 {% set size = size|default(15) %}
 {% set data_field = data_field|default('uuid') %}
 {% set model = createModel('Products','products') %}
+{% if user_id is not empty %}
+{% set model = model.userQuery(user_id) %}
+{% endif %}
 {% set items = model.orderBy('position').take(size).get() %}
 {% if selected is not empty %}
     {% set selected = model.findById(selected) %}
