@@ -5,31 +5,23 @@
 {% if user_id is not empty %}
 {% set model = model.userQuery(user_id) %}
 {% endif %}
-{% set items = model.orderBy('position').take(size).get() %}
+{% set items = model.take(size).get() %}
 {% if selected is not empty %}
     {% set selected = model.findById(selected) %}
 {% endif %}
 {% set selected_text = (selected is empty) ? labels.select : selected.title %}
-<div 
-    class="ui search selection dropdown product-dropdown {{ class }}" 
-    id="{{ component_id }}" 
+<div class="ui search selection dropdown product-dropdown {{ class }}" 
+    id="{{ component_id|default('product-dropdown') }}" 
     selected="{{ selected[data_field] }}"
     data-field="{{ data_field }}">
-    <input 
-        name="{{ name }}" 
-        type="hidden" 
-        value="{{ selected[data_field] }}" 
-        id="{{ id|default(name) }}">
-    <i class="dropdown icon"></i>
-    <div class="default text">
+    <input {{ rule|attr('rule') }} name="{{ name }}" type="hidden" value="{{ selected[data_field] }}">
+    <div class="text">
         {{ selected_text }}
     </div>
+    <i class="dropdown icon"></i>
     <div class="menu">
-        <div class="item" data-value="">
-            {{ labels.select }}
-        </div>
         {% for item in items %}
-        <div class="item" data-value="{{ selected[data_field] }}">
+        <div class="item" data-value="{{ item[data_field] }}">
             {{ item.title }}
         </div>
         {% endfor %}
