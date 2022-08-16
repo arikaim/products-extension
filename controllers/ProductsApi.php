@@ -201,8 +201,14 @@ class ProductsApi extends ApiController
         $dataField = $data->get('data_field','uuid');
         $search = $data->get('query','');
         $size = $data->get('size',15);
+        $userId = $data->get('user',$this->getUserId());
 
-        $products = Model::Products('products')->where('title','like','%' . $search . '%')->take($size)->get();
+        $products = Model::Products('products')
+            ->userQuery($userId)
+            ->where('title','like','%' . $search . '%')
+            ->take($size)
+            ->get();
+
         if ($products == null) {
             $this->error('errors.list');
             return;
