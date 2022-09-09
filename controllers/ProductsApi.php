@@ -131,7 +131,7 @@ class ProductsApi extends ApiController
     {         
         $data
             ->addRule('text:min=2|required','title')
-            ->addRule('number|required','product_type')            
+            ->addRule('number:required','product_type')            
             ->validate(true);
 
         $description = $data->get('description',null);
