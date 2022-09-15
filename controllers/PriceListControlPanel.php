@@ -28,14 +28,6 @@ class PriceListControlPanel extends ControlPanelApiController
     }
 
     /**
-     * Constructor
-     */
-    public function __construct($container = null) 
-    {
-        parent::__construct($container);
-    }
-
-    /**
      * Update product price list
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request

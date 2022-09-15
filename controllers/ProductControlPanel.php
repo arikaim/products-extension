@@ -33,14 +33,6 @@ class ProductControlPanel extends ControlPanelApiController
     public function init()
     {
         $this->loadMessages('products::admin.messages');
-    }
-
-    /**
-     * Constructor
-     */
-    public function __construct($container = null) 
-    {
-        parent::__construct($container);
         $this->setModelClass('Products');
         $this->setExtensionName('products');
     }
