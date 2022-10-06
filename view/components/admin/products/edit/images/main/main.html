@@ -11,13 +11,11 @@
                 {% if hasExtension('image') == true %}
                 <div class="pl-4 flex-grow">
                     {{  component('image::upload.form',{ 
-                            class: 'border border-solid rounded border-gray-300 p-2',
-                            button_class: 'upload-button mini',              
+                            class: 'border border-solid rounded border-gray-300 p-2',                       
                             hide_path: true,               
                             hide_labels: true,
                             private_image: false,                                     
-                            resize_width: 512,                           
-                            resize_height: 512
+                            file_name: 'product-image-' ~ product.uuid ~ '.png'
                         }) 
                     }}       
                 </div>           
