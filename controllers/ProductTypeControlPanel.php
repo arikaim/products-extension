@@ -46,7 +46,7 @@ class ProductTypeControlPanel extends ControlPanelApiController
 
             $productType = $model->create($data->toArray());
 
-            $this->setResponse(\is_object($productType),function() use($productType) {                  
+            $this->setResponse(($productType != null),function() use($productType) {                  
                 $this
                     ->message('type.add')
                     ->field('uuid',$productType->uuid);                  
@@ -68,7 +68,7 @@ class ProductTypeControlPanel extends ControlPanelApiController
         $this->onDataValid(function($data) { 
             $uuid = $data['uuid'];
             $model = Model::ProductType('products')->findById($uuid); 
-            if (\is_object($model) == false) {
+            if ($model == null) {
                 $this->error('errors.type.exist');
                 return;
             }

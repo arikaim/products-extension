@@ -47,19 +47,18 @@ class ProductControlPanel extends ControlPanelApiController
     */
     public function createOptionsController($request, $response, $data) 
     { 
-        $this->onDataValid(function($data) { 
-            $product = Model::Products('products')->findById($data['uuid']);
-            $result = $product->createOptions();
-
-            $this->setResponse($result,function() use($product) {                  
-                $this
-                    ->message('options')
-                    ->field('uuid',$product->uuid);                  
-            },'errors.options'); 
-        });
         $data
             ->addRule('text:required','uuid')          
-            ->validate();
+            ->validate(true);
+
+        $product = Model::Products('products')->findById($data['uuid']);
+        $result = $product->createOptions();
+
+        $this->setResponse($result,function() use($product) {                  
+            $this
+                ->message('options')
+                ->field('uuid',$product->uuid);                  
+        },'errors.options'); 
     }
 
     /**
@@ -72,28 +71,30 @@ class ProductControlPanel extends ControlPanelApiController
     */
     public function addController($request, $response, $data) 
     {         
-        $this->onDataValid(function($data) { 
-            $model = Model::Products('products');
-            $data = [
-                'type_id'     => $data['product_type'],
-                'title'       => $data['title']
-            ];
-
-            if ($model->hasProduct($data['title']) == true) {
-                $this->error('errors.exist');
-                return;
-            }
-            $product = $model->create($data);
-            $this->setResponse(is_object($product),function() use($product) {                  
-                $this
-                    ->message('add')
-                    ->field('uuid',$product->uuid);                  
-            },'errors.add');                                    
-        });
         $data
             ->addRule('text:min=2|required','title')
-            ->addRule('number|required','product_type')            
-            ->validate();
+            ->addRule('number:required','product_type')            
+            ->validate(true);
+
+        $model = Model::Products('products');
+        $data = [
+            'type_id' => $data['product_type'],
+            'title'   => $data['title'],
+            'user_id' => $this->getUserId()
+        ];
+
+        if ($model->hasProduct($data['title']) == true) {
+            $this->error('errors.exist');
+            return;
+        }
+
+        $product = $model->create($data);
+
+        $this->setResponse(($product != null),function() use($product) {                  
+            $this
+                ->message('add')
+                ->field('uuid',$product->uuid);                  
+        },'errors.add');                                    
     }
 
     /**
@@ -106,26 +107,28 @@ class ProductControlPanel extends ControlPanelApiController
     */
     public function updateController($request, $response, $data) 
     {         
-        $this->onDataValid(function($data) { 
-            if (isset($data['product_type']) == true) {
-                $data['type_id'] = $data['product_type'];
-            }
-           
-            $product = Model::Products('products')->findById($data['uuid']); 
-            if (\is_object($product) == false) {
-                $this->error('errors.update');
-                return;
-            }
-           
-            $result = $product->update($data->toArray());               
+        $data->validate(true);
 
-            $this->setResponse(($result !== false),function() use($product) {                  
-                $this
-                    ->message('update')
-                    ->field('uuid',$product->uuid);                  
-            },'errors.update');                                    
-        });
-        $data->validate();
+        if (isset($data['product_type']) == true) {
+            $data['type_id'] = $data['product_type'];
+        }
+        if (isset($data['image_id']) == true) {
+            $data['image_id'] = (empty($data['image_id']) == true) ? null : $data['image_id'];
+        }
+
+        $product = Model::Products('products')->findById($data['uuid']); 
+        if ($product == null) {
+            $this->error('errors.id','Not valid product id');
+            return;
+        }
+        
+        $result = $product->update($data->toArray());               
+
+        $this->setResponse(($result !== false),function() use($product) {                  
+            $this
+                ->message('update')
+                ->field('uuid',$product->uuid);                  
+        },'errors.update');                                    
     }
 
     /**
@@ -138,26 +141,25 @@ class ProductControlPanel extends ControlPanelApiController
     */
     public function updateDescriptionController($request, $response, $data) 
     {         
-        $this->onDataValid(function($data) { 
-            $product = Model::Products('products')->findById($data['uuid']); 
-            if (\is_object($product) == false) {
-                $this->error('errors.update');
-                return;
-            }
-
-            $result = $product->update([
-                'description' => $data['description'],
-                'description_summary' => $data['description_summary']                
-            ]);
-
-            $this->setResponse(($result !== false),function() use($product) {                  
-                $this
-                    ->message('description')
-                    ->field('uuid',$product->uuid);                  
-            },'errors.description');                                    
-        });
         $data                     
-            ->validate();
+            ->validate(true);
+
+        $product = Model::Products('products')->findById($data['uuid']); 
+        if ($product == null) {
+            $this->error('errors.id','Not valid product id.');
+            return;
+        }
+
+        $result = $product->update([
+            'description' => $data['description'],
+            'description_summary' => $data['description_summary']                
+        ]);
+
+        $this->setResponse(($result !== false),function() use($product) {                  
+            $this
+                ->message('description')
+                ->field('uuid',$product->uuid);                  
+        },'errors.description');                                    
     }
 
     /**
@@ -170,26 +172,25 @@ class ProductControlPanel extends ControlPanelApiController
     */
     public function addExternalIdController($request, $response, $data) 
     {         
-        $this->onDataValid(function($data) { 
-            $product = Model::Products('products')->findById($data['uuid']); 
-            if (is_object($product) == false) {
-                $this->error('errors.id');
-                return;
-            }
-
-            $model = Model::ProductId('products');
-            $result = $model->addId($product->id,$data['external_id'],$data['api_driver']);
-
-            $this->setResponse($result,function() use($product) { 
-                $this->get('event')->dispatch('product.add',$product->toArray());                         
-                $this
-                    ->message('id.add')
-                    ->field('uuid',$product->uuid);                  
-            },'errors.id.exists');                                    
-        });
         $data
             ->addRule('text:min=2|required','external_id')                
-            ->validate();
+            ->validate(true);
+
+        $product = Model::Products('products')->findById($data['uuid']); 
+        if ($product == null) {
+            $this->error('errors.id','Not valid product id.');
+            return;
+        }
+
+        $model = Model::ProductId('products');
+        $result = $model->addId($product->id,$data['external_id'],$data['api_driver']);
+
+        $this->setResponse($result,function() use($product) { 
+            $this->get('event')->dispatch('product.add',$product->toArray());                         
+            $this
+                ->message('id.add')
+                ->field('uuid',$product->uuid);                  
+        },'errors.id.exists');                                      
     }
 
     /**
@@ -202,23 +203,51 @@ class ProductControlPanel extends ControlPanelApiController
     */
     public function deleteExternalIdController($request, $response, $data) 
     {         
-        $this->onDataValid(function($data) { 
-            $model = Model::ProductId('products')->findById($data['uuid']); 
-            if (is_object($model) == false) {
-                $this->error('errors.id.delete');
-                return;
-            }
-
-            $result = $model->delete();
-
-            $this->setResponse($result,function() use($model) {                  
-                $this
-                    ->message('id.delete')
-                    ->field('uuid',$model->uuid);                  
-            },'errors.id.delete');                                    
-        });
         $data
             ->addRule('text:min=2|required','uuid')                
-            ->validate();
+            ->validate(true);
+
+        $model = Model::ProductId('products')->findById($data['uuid']); 
+        if ($model == null) {
+            $this->error('errors.id','Not valid extenal product Id');
+            return;
+        }
+
+        $result = $model->delete();
+
+        $this->setResponse($result,function() use($model) {                  
+            $this
+                ->message('product.delete')
+                ->field('uuid',$model->uuid);                  
+        },'errors.delete');                                    
+    }
+
+    /**
+     * Delete product
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param Validator $data
+     * @return Psr\Http\Message\ResponseInterface
+    */
+    public function deleteProduct($request, $response, $data) 
+    {         
+        $data
+            ->addRule('text:min=2|required','uuid')                
+            ->validate(true);
+
+        $product = Model::Products('products')->findById($data['uuid']); 
+        if ($product == null) {
+            $this->error('errors.id','Not valid product Id');
+            return;
+        }
+
+        $result = $product->deleteProduct();
+
+        $this->setResponse($result,function() use($product) {                  
+            $this
+                ->message('product.delete')
+                ->field('uuid',$product->uuid);                  
+        },'errors.delete');                                    
     }
 }

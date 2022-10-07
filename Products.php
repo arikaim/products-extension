@@ -29,7 +29,7 @@ class Products extends Extension
         $this->addApiRoute('PUT','/api/admin/products/update','ProductControlPanel','update','session');
         $this->addApiRoute('PUT','/api/admin/products/update/description','ProductControlPanel','updateDescription','session');
         $this->addApiRoute('PUT','/api/admin/products/status','ProductControlPanel','setStatus','session');
-        $this->addApiRoute('DELETE','/api/admin/products/delete/{uuid}','ProductControlPanel','softDelete','session');
+        $this->addApiRoute('DELETE','/api/admin/products/delete/{uuid}','ProductControlPanel','deleteProduct','session');
         $this->addApiRoute('PUT','/api/admin/products/restore/{uuid}','ProductControlPanel','restore','session');
         $this->addApiRoute('PUT','/api/admin/products/create/options','ProductControlPanel','createOptions','session');       
         $this->addApiRoute('PUT','/api/admin/products/update/meta','ProductControlPanel','updateMetaTags','session');
@@ -44,13 +44,13 @@ class Products extends Extension
         $this->addApiRoute('POST','/api/admin/products/external/id','ProductControlPanel','addExternalId','session');    
         $this->addApiRoute('DELETE','/api/admin/products/external/id/{uuid}','ProductControlPanel','deleteExternalId','session');  
         // Api      
+        $this->addApiRoute('GET','/api/products/list/{category}','ProductsApi','getList');   
         $this->addApiRoute('GET','/api/products/product/list/dropdown/{data_field}/[{query}]','ProductsApi','getDropdownList');   
-        $this->addApiRoute('GET','/api/products/product/list[/{params:.*}]','ProductsApi','getProductsList');   
-        $this->addApiRoute('GET','/api/products/product/details/{uuid}','ProductsApi','getProductDetails');  
+        $this->addApiRoute('GET','/api/products/product/details/{uuid}','ProductsApi','productDetails');  
         $this->addApiRoute('GET','/api/products/price/{uuid}','ProductsApi','getPrice');   
-        $this->addApiRoute('POST','/api/products/product/add','ProductsApi','add');  
-        $this->addApiRoute('PUT','/api/products/product/update','ProductsApi','update');  
-        $this->addApiRoute('DELETE','/api/products/product/delete/{uuid}','ProductsApi','deleteUserProduct');  
+        $this->addApiRoute('POST','/api/products/product/add','ProductsApi','add',['session','token']);  
+        $this->addApiRoute('PUT','/api/products/product/update','ProductsApi','update',['session','token']);  
+        $this->addApiRoute('DELETE','/api/products/product/delete/{uuid}','ProductsApi','deleteUserProduct',['session','token']);  
         // Events
         $this->registerEvent('product.add','Add product');  
         $this->registerEvent('product.update','Update product');  

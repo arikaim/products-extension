@@ -37,24 +37,22 @@ class PriceListControlPanel extends ControlPanelApiController
     */
     public function updateController($request, $response, $data) 
     {         
-        $this->onDataValid(function($data) { 
-            $price = $data->get('price',null);
+        $data->validate(true);
 
-            $product = Model::Products('products')->findById($data['uuid']); 
-            if (is_object($product) == false) {
-                $this->error('errors.price.update');
-                return;
-            }
-            
-            $result = Model::ProductPriceList('products')->savePriceList($product->id,$price); 
-         
-            $this->setResponse($result,function() use($product) {                  
-                $this
-                    ->message('price.update')
-                    ->field('uuid',$product->uuid);                  
-            },'errors.price.update');                                    
-        });
-        $data->validate();
+        $price = $data->get('price',null);
+        $product = Model::Products('products')->findById($data['uuid']); 
+        if ($product == null) {
+            $this->error('errors.id','Not valid product id');
+            return false;
+        }
+        
+        $result = Model::ProductPriceList('products')->savePriceList($product->id,$price); 
+        
+        $this->setResponse($result,function() use($product) {                  
+            $this
+                ->message('price.update')
+                ->field('uuid',$product->uuid);                  
+        },'errors.price.update');                                    
     }
 
     /**
@@ -67,16 +65,15 @@ class PriceListControlPanel extends ControlPanelApiController
     */
     public function createPriceListController($request, $response, $data) 
     {
-        $this->onDataValid(function($data) { 
-            $product = Model::Products('products')->findById($data['uuid']);
-            $result = $product->createPriceList();
+        $data->validate(true);
 
-            $this->setResponse($result,function() use($product) {                  
-                $this
-                    ->message('pricelist')
-                    ->field('uuid',$product->uuid);                  
-            },'errors.pricelist'); 
-        });
-        $data->validate();
+        $product = Model::Products('products')->findById($data['uuid']);
+        $result = $product->createPriceList();
+
+        $this->setResponse($result,function() use($product) {                  
+            $this
+                ->message('pricelist')
+                ->field('uuid',$product->uuid);                  
+        },'errors.pricelist');        
     }
 }

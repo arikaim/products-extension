@@ -59,7 +59,7 @@ class ProductId extends Model
     {
         $model = $this->findProduct($externalId,$apiDriver)->first();
 
-        return \is_object($model);
+        return ($model != null);
     }
 
     /**
@@ -95,6 +95,6 @@ class ProductId extends Model
             'product_id'  => $productId
         ]);
 
-        return \is_object($model);
+        return ($model != null);
     }
 }

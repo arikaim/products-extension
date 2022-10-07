@@ -1,15 +1,6 @@
-{% if hasExtension('image') == false %}
-<div class="ui icon mini message">
-    <i class="icon warning mini"></i>
-    <div class="content">
-        <h4>{{ message }}</h4>      
-    </div>   
-</div>
-{% else %}   
-    {% set product = createModel('Products','products').findById(uuid) %}
-    {{  component('image::admin.library',{ 
-            relation_id: product.id, 
-            relation_type: 'product'
-        }) 
-    }}
-{% endif %}
+{% set product = createModel('Products','products').findById(uuid) %}
+{{  component('image::admin.library',{ 
+        relation_id: product.id, 
+        relation_type: 'product'
+    }) 
+}}

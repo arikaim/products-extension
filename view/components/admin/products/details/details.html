@@ -13,8 +13,26 @@
                 </td>
             </tr>
             <tr>
+                <td class="right aligned">{{ labels.image }}</td>
+                <td>
+                    {{ component('image::admin.view.image',{ image: product.image }) }}
+                </td>
+            </tr> 
+            <tr>
+                <td class="right aligned">{{ labels.status }}</td>
+                <td>
+                    {{ component('semantic~status.label',{ status: product.status }) }}
+                </td>
+            </tr>    
+            <tr>
                 <td class="right aligned">{{ labels.title }}</td>
                 <td>{{ product.title }}</td>
+            </tr>
+            <tr>
+                <td class="right aligned">{{ labels.price }}</td>
+                <td>
+                    {{ component('products::admin.products.price',{ product: product }) }}      
+                </td>
             </tr>
             <tr>
                 <td class="right aligned">{{ labels.slug }}</td>
@@ -32,6 +50,12 @@
                 <td class="right aligned">{{ labels.date }}</td>
                 <td>{{ product.date_created|dateTimeFormat }}</td>
             </tr>
+            <tr>
+                <td class="right aligned">{{ labels.updated }}</td>
+                <td>
+                    {{ product.date_updated|dateFormat }}
+                </td>
+            </tr> 
         </tbody>
     </table>          
 </div>

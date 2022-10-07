@@ -237,7 +237,7 @@ class ProductsApi extends ApiController
      * @param Validator $data
      * @return Psr\Http\Message\ResponseInterface
     */
-    public function getProductDetails($request, $response, $data) 
+    public function productDetails($request, $response, $data) 
     {          
         $data
             ->addRule('text:required','uuid')

@@ -4,6 +4,7 @@
         "description": "Description",
         "options": "Options",
         "price": "Price",
+        "files": "Files",
         "images": "Images",
         "repository": "Git Repository",
         "external": "External Id",

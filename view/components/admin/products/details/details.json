@@ -4,7 +4,11 @@
         "uuid": "Uuid",
         "title": "Title",
         "slug": "Slug",
-        "date": "Date",
+        "date": "Created",
+        "image": "Image",
+        "price": "Price",
+        "status": "Status",
+        "updated": "Updated",
         "user": "User",
         "type": "Type"
     }

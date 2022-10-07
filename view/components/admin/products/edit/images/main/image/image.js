@@ -1,11 +1,10 @@
 'use strict';
 
 arikaim.component.onLoaded(function() { 
-    var uuid = $('#product_image').attr('uuid');
-
-    arikaim.events.on('image.library.main.use',function(result) {   
+    arikaim.ui.button('.delete-image-button',function(element) {
+        var uuid = $(element).attr('uuid');
         products.update({
-            image_id: result.image_id,
+            image_id: null,
             uuid: uuid
         },function(result) {
             return arikaim.page.loadContent({
@@ -16,5 +15,5 @@ arikaim.component.onLoaded(function() {
                 }
             });  
         });
-    },'productMainImageUse');   
+    });
 });

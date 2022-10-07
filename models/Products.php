@@ -174,13 +174,13 @@ class Products extends Model
      * @param int|null $userId 
      * @return Model|null
      */
-    public function findProduct($key, ?int $userId = null)
+    public function findProduct($key, ?int $userId = null): ?object
     {
         $query = $this->where('slug','=',$key);
         $query = (empty($userId) == true) ? $query->whereNull('user_id') : $query->where('user_id','=',$userId);
         $model = $query->first();
 
-        return (\is_object($model) == true) ? $model : $this->findById($key);         
+        return ($model != null) ? $model : $this->findById($key);         
     }
 
     /**
@@ -235,16 +235,14 @@ class Products extends Model
         $title = \trim($title);
         $query = $this->where('title','=',$title);
         $query = (empty($userId) == true) ? $query->whereNull('user_id') : $query->where('user_id','=',$userId);        
-        $model = $query->first();
-
-        if (\is_object($model) == true) {
+       
+        if ($query->first() !== null) {
             return true;
         }
         // try with slug 
-        $slug = Utils::slug($title);
-        $model = $this->findProduct($slug,$userId);
+        $model = $this->findProduct(Utils::slug($title),$userId);
 
-        return \is_object($model);
+        return ($model != null);
     }    
 
     /**
