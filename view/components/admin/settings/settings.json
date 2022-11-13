@@ -1,5 +1,6 @@
 {
-    "labels": {
-        "checkout": "Checkout"
+    "title": {
+        "content": "Settings",
+        "icon": "cogs"
     }
 }

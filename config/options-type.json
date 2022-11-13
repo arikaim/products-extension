@@ -33,5 +33,12 @@
         "description": "Release Version",
         "default": null,
         "type": "text"          
+    },
+    {
+        "key": "nfc-card-relation",
+        "title": "NFC card relation",
+        "description": "NFC card relation",
+        "default": null,
+        "type": "relation"          
     }
 ]

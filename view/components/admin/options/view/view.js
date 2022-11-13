@@ -1,0 +1,53 @@
+/**
+ *  Arikaim
+ *  @copyright  Copyright (c)  <info@arikaim.com>
+ *  @license    http://www.arikaim.com/license
+ *  http://www.arikaim.com
+ */
+'use strict';
+
+function ProductOptionsView() {
+    var self = this;
+
+    this.init = function() {
+        this.loadMessages('products::admin.messages');
+
+        paginator.init('product_type_rows');   
+    };
+
+    this.initRows = function() {       
+        arikaim.ui.button('.delete-button',function(element) {
+            var uuid = $(element).attr('uuid');
+            var title = $(element).attr('data-title');
+            var message = arikaim.ui.template.render(self.getMessage('type.remove.content'),{ title: title });
+            
+            modal.confirmDelete({ 
+                title: self.getMessage('type.remove.title'),
+                description: message
+            },function() {
+                productType.delete(uuid,function(result) {
+                    arikaim.ui.table.removeRow('#' + uuid); 
+                    arikaim.page.toastMessage(result.message);    
+                });
+            });
+        });
+
+        arikaim.ui.button('.edit-button',function(element) {
+            var uuid = $(element).attr('uuid');    
+            arikaim.ui.setActiveTab('#edit_product','.product-type-tab-item');
+            
+            arikaim.page.loadContent({
+                id: 'product_type_content',
+                component: 'products::admin.type.edit',
+                params: { uuid: uuid }
+            });          
+        });
+    };
+};
+
+var productOptionsView = createObject(ProductOptionsView,ControlPanelView);
+
+arikaim.component.onLoaded(function() {
+    productOptionsView.init();
+    productOptionsView.initRows();  
+}); 

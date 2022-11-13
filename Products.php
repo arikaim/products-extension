@@ -67,7 +67,9 @@ class Products extends Extension
         $this->createDbTable('ProductOptionTypeSchema');
         $this->createDbTable('ProductOptionsListSchema');
         $this->createDbTable('ProductOptionsSchema');     
-        $this->createDbTable('ProductPriceListSchema');   
+        $this->createDbTable('ProductPriceListSchema'); 
+        // Links
+        $this->registerService('ProductsService');  
     }   
 
     /**

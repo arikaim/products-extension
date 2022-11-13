@@ -71,7 +71,7 @@ class ProductType extends Model
     /**
      * Producucs relation
      *
-     * @return Relation
+     * @return Relation|null
      */
     public function products()
     {
@@ -119,7 +119,7 @@ class ProductType extends Model
      * @param string $key
      * @return Model|null
      */
-    public function getOptionType(string $key)
+    public function getOptionType(string $key): ?object
     {
         $optionType = new ProductOptionType();
 

@@ -1,0 +1,11 @@
+{
+    "labels": {
+        "empty": "..",
+        "edit": "Edit",
+        "readonly": "readonly",
+        "status": {
+            "active": "active",
+            "disabled": "disabled"
+        }                    
+    }
+}

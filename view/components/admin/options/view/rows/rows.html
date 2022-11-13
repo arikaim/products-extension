@@ -1,0 +1,36 @@
+{% set model = createModel('ProductOptionType','products').orderBy('title') %}
+{% set items = paginate(model,'product-type') %}
+
+{% if items.getItems()|length == 0 %}
+<tr>
+    <td colspan="5">..</td>
+</tr>
+{% endif %}
+
+{% for item in items.getItems() %}  
+    <tr id="{{ item.uuid }}">              
+        <td>  
+            <!-- 
+            <button class="ui icon mini basic button edit-button" uuid="{{ item.uuid }}" title="{{ labels.edit }}">
+                <i class="icon edit"></i>
+            </button>     
+          
+            <button class="ui icon mini basic button delete-button" uuid="{{ item.uuid }}" data-title="{{ item.title }}">
+                <i class="icon trash orange"></i>
+            </button>  
+            -->                                     
+        </td>         
+        <td>{{ item.title }}</td> 
+        <td>
+            <div class="ui horizontal basic label">{{ item.key }}</div>
+        </td> 
+        <td>
+            <div class="ui horizontal basic blue label">
+                {{ item.getTypeText() }}
+            </div>           
+        </td>
+        <td>
+            {{ item.description|sliceLabel(30) }}
+        </td>                         
+    </tr>
+{% endfor %}

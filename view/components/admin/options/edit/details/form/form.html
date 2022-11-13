@@ -1,0 +1,22 @@
+{% if uuid is not empty %}
+    {% set product_type = createModel('ProductType','products').findById(uuid) %}
+{% endif %}
+<form class="ui form" id="product_type_form" method="POST">  
+    <input type="hidden" name="uuid" id="uuid" value="{{ uuid }}">        
+    <div class="field">
+        <label>{{ fields.title.label }}</label>
+        <input rule="empty" type="text" name="title" id="title" {{ fields.title.placeholder|attr('placeholder') }} value="{{ product_type.title }}"> 
+    </div>       
+    {{  component('semantic~form.fields.slug',{ 
+            slug_source: 'title',
+            label: fields.slug.label,
+            show_url: false,
+            field_class: 'basic large label' 
+        }) 
+    }}   
+    <div class="field">
+        <label>{{ fields.description.label }}</label>
+        <textarea name="description" id="description" placeholder="{{ fields.description.placeholder }}">{{ product_type.description }}</textarea>
+    </div> 
+    {{ component('semantic~form.footer') }}
+</form>

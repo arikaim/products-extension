@@ -1,0 +1,17 @@
+<div class="ui stackable tabular menu product-type-edit-tabs">      
+    <div class="item link active product-type-tab-item" component="products::admin.type.edit.details" uuid="{{ uuid }}">
+        <i class="icon stream blue"></i>
+        {{ labels.details }}     
+    </div>  
+    <div class="item link product-type-tab-item" component="products::admin.type.edit.options" uuid="{{ uuid }}">
+        <i class="horizontal sliders icon blue"></i>
+        {{ labels.options }}     
+    </div>  
+</div>
+<div class="ui grid">
+    <div class="seven wide column">
+        <div class="ui active tab segment" id="product_type_editor">           
+            {{ component('products::admin.type.edit.details',{ uuid: uuid }) }}       
+        </div>  
+    </div>
+</div>
