@@ -40,7 +40,12 @@
             </tr>
             <tr>
                 <td class="right aligned">{{ labels.type }}</td>
-                <td>{{ product.type.title }}</td>
+                <td>
+                    {{ product.type.title }}
+                    <div class="ui basic label">
+                        {{ product.type.slug }}
+                    </div>
+                </td>
             </tr>
             <tr>
                 <td class="right aligned">{{ labels.user }}</td>

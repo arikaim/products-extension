@@ -28,9 +28,23 @@ class ProductsService extends Service implements ServiceInterface
         $this->setServiceName('products');
     }
 
-    public function findProductByType(string $type): ?object
+    /**
+     * Find product by type
+     *
+     * @param string $type
+     * @param string|null $productSlug
+     * @return object|null
+     */
+    public function findProductByType(string $type, ?string $productSlug = null): ?object
     {
-
-        return null;
+        $type = Model::ProductType('products')->findBySlug($type);
+        if ($type == null) {
+            return null;
+        }
+        if (empty($productSlug) == true) {
+            return $type->products()->first();
+        }
+        
+        return $type->products()->where('slug','=',$productSlug)->first();
     }
 }
