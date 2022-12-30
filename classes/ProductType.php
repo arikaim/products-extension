@@ -10,7 +10,7 @@
 namespace Arikaim\Extensions\Products\Classes;
 
 use Arikaim\Core\Extension\Extension;
-use Arikaim\Core\Db\Traits\Options\OptionType;
+use Arikaim\Core\Db\OptionType;
 use Arikaim\Core\Utils\Uuid;
 use Arikaim\Core\Db\Seed;
 
