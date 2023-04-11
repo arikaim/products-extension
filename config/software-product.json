@@ -11,13 +11,5 @@
         "type_name": "software",
         "key": "price",
         "branch": "price"
-    },
-    {
-        "type_name": "software",
-        "key": "repository"       
-    },
-    {
-        "type_name": "software",
-        "key": "version"       
     }
 ]

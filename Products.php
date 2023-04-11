@@ -24,6 +24,8 @@ class Products extends Extension
      */
     public function install()
     {
+        // Pages
+        $this->addPageRoute('/product/{slug}','ProductPages','productDetails','current>products.details',null,'productDetails',true);
         // Control Panel Routes      
         $this->addApiRoute('POST','/api/admin/products/add','ProductControlPanel','add','session');  
         $this->addApiRoute('PUT','/api/admin/products/update','ProductControlPanel','update','session');
