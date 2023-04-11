@@ -25,7 +25,7 @@
         <i class="project diagram icon blue"></i>
         {{ labels.relations }}     
     </div>  
-    {% if hasExtension('repository') == true %}
+    {% if hasExtension('_repository') == true %}
     <div class="item link edit-product-tab-item" component="products::admin.products.edit.repository" uuid="{{ uuid }}">
         <i class="git icon blue"></i>
         {{ labels.repository }}     

@@ -8,6 +8,8 @@
         "image": "Image",
         "price": "Price",
         "status": "Status",
+        "description": "Description",
+        "summary": "Summary",
         "updated": "Updated",
         "user": "User",
         "type": "Type"
