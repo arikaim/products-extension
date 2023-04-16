@@ -11,5 +11,13 @@
         "type_name": "software",
         "key": "price",
         "branch": "price"
+    },
+    {
+        "type_name": "software",
+        "key": "demo-url"
+    },
+    {
+        "type_name": "software",
+        "key": "admin-demo-url"
     }
 ]
