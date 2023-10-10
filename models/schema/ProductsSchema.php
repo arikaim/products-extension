@@ -36,6 +36,7 @@ class ProductsSchema extends Schema
         $table->prototype('uuid');
         $table->slug(false);
         $table->string('title')->nullable(false);
+        $table->string('sku')->nullable(true);
         $table->text('description')->nullable(true);
         $table->text('description_summary')->nullable(true);
         $table->userId(true);
@@ -49,6 +50,7 @@ class ProductsSchema extends Schema
         // index
         $table->unique(['title','user_id']);
         $table->unique(['slug','user_id']);
+        $table->unique(['sku','user_id']);
     }
 
     /**
@@ -67,6 +69,11 @@ class ProductsSchema extends Schema
         }
         if ($this->hasColumn('image_id') == false) {
             $table->relation('image_id','image',true); 
+        }
+        
+        if ($this->hasColumn('sku') == false) {
+            $table->string('sku')->nullable(true);
+            $table->unique(['sku','user_id']);
         }
     }
 }
