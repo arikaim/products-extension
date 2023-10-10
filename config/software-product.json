@@ -14,10 +14,10 @@
     },
     {
         "type_name": "software",
-        "key": "repository"       
+        "key": "demo-url"
     },
     {
         "type_name": "software",
-        "key": "version"       
+        "key": "admin-demo-url"
     }
 ]

@@ -1,8 +1,7 @@
 {% if uuid is not empty %}
     {% set product = createModel('Products','products').findById(uuid) %}
 {% endif %}
-<div class="ui segment">    
-    {{ component('semantic~segment-title',{ title: title, class: 'p-3 rounded', close_button: true }) }}    
+{% component 'semantic~panel' %}
     <table class="ui very basic definition table">
         <tbody>
             <tr>
@@ -28,6 +27,18 @@
                 <td class="right aligned">{{ labels.title }}</td>
                 <td>{{ product.title }}</td>
             </tr>
+            {% if product.description is not empty %}
+            <tr>
+                <td class="right aligned">{{ labels.description }}</td>
+                <td>{{ product.description }}</td>
+            </tr>
+            {% endif %}
+            {% if product.description_summary is not empty %}
+            <tr>
+                <td class="right aligned">{{ labels.summary }}</td>
+                <td>{{ product.description_summary }}</td>
+            </tr>
+            {% endif %}
             <tr>
                 <td class="right aligned">{{ labels.price }}</td>
                 <td>
@@ -63,4 +74,4 @@
             </tr> 
         </tbody>
     </table>          
-</div>
+{% endcomponent %}

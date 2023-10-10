@@ -40,5 +40,19 @@
         "description": "NFC card relation",
         "default": null,
         "type": "relation"          
+    },
+    {
+        "key": "demo-url",
+        "title": "Demo Url",
+        "description": "Demo url",
+        "default": null,
+        "type": "text"          
+    },
+    {
+        "key": "admin-demo-url",
+        "title": "Admin Demo Url",
+        "description": "Admin demo url",
+        "default": null,
+        "type": "text"          
     }
 ]

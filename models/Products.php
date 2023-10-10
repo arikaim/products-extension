@@ -16,6 +16,7 @@ use Arikaim\Extensions\Products\Models\ProductOptions;
 use Arikaim\Extensions\Products\Models\ProductPriceList;
 use Arikaim\Extensions\Products\Models\ProductTranslations;
 use Arikaim\Extensions\Products\Models\ProductId;
+use Arikaim\Extensions\Products\Models\ProductRelations;
 
 use Arikaim\Core\Utils\Utils;
 use Arikaim\Core\Db\Traits\Uuid;
@@ -201,6 +202,31 @@ class Products extends Model
     public function getOptionsType()
     {
         return $this->type->slug;
+    }
+
+    /**
+     * Get product relations
+     *
+     * @return Relatins|null
+     */
+    public function relations()
+    {
+        return $this->hasMany(ProductRelations::class,'product_id')->without('product');
+    }
+
+    /**
+     * Find product relations
+     *
+     * @param string       $type
+     * @param integer|null $id
+     * @return object|null
+     */
+    public function findRelation(string $type, ?int $id = null): ?object 
+    {
+        $query = $this->relations()->where('relation_type','=',$type);
+        $query = (empty($id) == false) ? $query->where('relation_id','=',$id) : $query;
+
+        return $query->first();
     }
 
     /**
