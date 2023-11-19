@@ -1,5 +1,7 @@
-{% set product = createModel('Products','products').findById(uuid) %}
-{% set translation = product.translation(language) %}
-{% set language = language|default(current_language) %}
 
-{{ component('semantic~form.meta',{ uuid: uuid, language: language, translation: translation }) }}
+{{ uuid }}
+{{  component('semantic~form.meta',{ 
+        uuid: uuid, 
+        model: createModel('Products','products').findById(uuid) 
+    }) 
+}}

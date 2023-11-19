@@ -30,6 +30,8 @@ use Arikaim\Core\Db\Traits\DateCreated;
 use Arikaim\Core\Db\Traits\DateUpdated;
 use Arikaim\Core\Db\Traits\Options\OptionsRelation;
 use Arikaim\Core\Db\Traits\Price\PriceRelation;
+use Arikaim\Core\Db\Traits\MetaTags;
+
 use Arikaim\Extensions\Category\Models\Traits\CategoryRelations;
 use Arikaim\Core\Db\Traits\Translations;
 
@@ -41,6 +43,7 @@ class Products extends Model
     use Uuid,
         Status,
         Find,
+        MetaTags,
         DateCreated,
         DateUpdated,
         SoftDelete,
@@ -109,7 +112,10 @@ class Products extends Model
      * @var array
      */
     protected $translatedAttributes = [
-        'title'       
+        'title',
+        'meta_title',
+        'meta_description',
+        'meta_keywords'    
     ];
 
     /**

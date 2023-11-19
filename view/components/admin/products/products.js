@@ -48,6 +48,10 @@ function ProductsControlPanel() {
         return arikaim.put('/api/admin/products/price/update',formId, onSuccess, onError);          
     };
 
+    this.updateMetaTags = function(formId, onSuccess, onError) {
+        return arikaim.put('/api/admin/products/update/meta',formId,onSuccess,onError);          
+    };
+
     this.setStatus = function(uuid, status, onSuccess, onError) {
         var data = {
             uuid: uuid,

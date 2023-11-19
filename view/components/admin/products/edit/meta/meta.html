@@ -1,18 +1,5 @@
 {% component 'semantic~tabs.vertical.content' %}
-    {% set language = language|default(current_language) %}
-    <div>
-        <div class="ui segment">
-            <h4>{{ labels.language }}</h4>
-            {{  component('semantic~language.dropdown',{
-                    name: 'language', 
-                    id: 'choose_language', 
-                    selected: language, 
-                    class: 'inline search selection' 
-                }) 
-            }}            
-        </div>     
-        <div class="mt-2" id="meta_content" product-uuid="{{ uuid }}">                 
-            {{ component('products::admin.products.edit.meta.form',{ uuid: uuid, language: language }) }}
-        </div>  
-    </div>     
+    <div class="mt-2" >                
+        {{ component('products::admin.products.edit.meta.form',{ uuid: uuid }) }}
+    </div>  
 {% endcomponent %}

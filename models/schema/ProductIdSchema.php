@@ -38,6 +38,8 @@ class ProductIdSchema extends Schema
 
         $table->string('external_id')->nullable(false);      
         $table->string('api_driver')->nullable(false);  
+        $table->metaTags();      
+        // index
         $table->unique(['external_id','api_driver']);         
     }
 
@@ -48,6 +50,9 @@ class ProductIdSchema extends Schema
      * @return void
      */
     public function update($table) 
-    {                      
+    {                  
+        if ($this->hasColumn('meta_title') == false) {
+            $table->metaTags();      
+        } 
     }
 }
