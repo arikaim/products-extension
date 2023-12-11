@@ -1,24 +1,18 @@
 {% set product = createModel('Products','products').findById(uuid) %}
-<div class="ui grid">
-    <div class="six wide column">
-        <div class="ui segment">
-            <div id="relations_items">
-                {{  component('system:admin.orm.relations.view',{ 
-                        uuid: uuid,
-                        extension: 'products',
-                        model: 'ProductRelations',
-                        id: product.id 
-                    }) 
-                }}
-            </div>
-            <div class="mt-4">
-                {% if hasExtension('repository') == true %}
-                    {{ component('repository::admin.package.dropdown',{ class: 'mini selection', data_field: 'id' }) }} 
-                    <button class="ui mini green icon button add-relation" type="package" product-id="{{ product.id }}">
-                        <i class="icon plus"></i>
-                    </button>
-                {% endif %}
-            </div>                    
-        </div>
-    </div>
+<div id="relations_items">
+    {{  component('system:admin.orm.relations.view',{ 
+            uuid: uuid,
+            extension: 'products',
+            model: 'ProductRelations',
+            id: product.id 
+        }) 
+    }}
+</div>
+<div class="mt-4">
+    {% if hasExtension('repository') == true %}
+        {{ component('repository::admin.package.dropdown',{ class: 'mini selection', data_field: 'id' }) }} 
+        <button class="ui mini green icon button add-relation" type="package" product-id="{{ product.id }}">
+            <i class="icon plus"></i>
+        </button>
+    {% endif %}
 </div>

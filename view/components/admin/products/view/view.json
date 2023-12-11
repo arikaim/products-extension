@@ -4,7 +4,9 @@
         "icon": "list"      
     },
     "labels": {
-        "deleted": "Show deleted"
+        "create": "Add Product",
+        "deleted": "Show deleted",
+        "type" : "Type"
     },
     "columns": {
         "action": "Action",

@@ -5,11 +5,11 @@
             "title": "Manage products"
         },    
         "type": {
-            "content": "Product Type",
+            "content": "Type",
             "title": "Product Type"
         },  
         "options": {
-            "content": "Product Options",
+            "content": "Options",
             "title": "Product Options"
         },
         "import": {

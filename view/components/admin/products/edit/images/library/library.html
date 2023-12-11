@@ -1,6 +1,0 @@
-{% set product = createModel('Products','products').findById(uuid) %}
-{{  component('image::admin.library',{ 
-        relation_id: product.id, 
-        relation_type: 'product'
-    }) 
-}}

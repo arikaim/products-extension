@@ -1,13 +1,16 @@
-{% component 'semantic~tabs.vertical.content' %}
-{% set class = 'sixteen wide column' %}
-{% set panel_class = '' %}
-<div class="ui segment padded">
-    <span class="font-bold mr-2">{{ labels.product }}</span>
-    {{ component('products::product.dropdown',{ selected: uuid }) }}
-</div>
-<div id="edit_product_tab">
-    {% if uuid is not null %}
-    {{ component('products::admin.products.edit.tab',{ uuid: uuid }) }}
-    {% endif %}
-</div>
+{% if uuid is not empty %}
+    {% set product = createModel('Products','products').findById(uuid) %}
+{% endif %}
+{% component 'semantic~panel' %}   
+    <div class="my-4 flex flex-row items-center">
+        <div class="font-bold px-2">
+            {{ labels.product }}
+        </div>
+        <div class="ui basic label">
+            {{ product.title }}
+        </div>
+    </div>
+    <div>
+        {{ component('products::admin.products.edit.tab',{ uuid: product.uuid }) }}       
+    </div>
 {% endcomponent %}

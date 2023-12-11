@@ -1,4 +1,3 @@
-{% component 'semantic~tabs.vertical.content' %}
 {% set product = createModel('Products','products').findById(uuid) %}
 {% set options = createModel('ProductOptionsList','products').getItemsQuery(product.type.slug) %}
 {% if product.options.count() != options.count() %}
@@ -22,5 +21,3 @@
         hide: false 
     }) 
 }}
-
-{% endcomponent %}

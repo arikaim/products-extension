@@ -1,11 +1,5 @@
 {
     "labels": {
-        "empty": "No products",
-        "free": "Free",
-        "resotre": "Resotre",
-        "status": {
-            "active": "active",
-            "disabled": "disabled"
-        }                    
+        "empty": "No products"          
     }
 }

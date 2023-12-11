@@ -1,0 +1,45 @@
+{% if uuid is not empty %}
+    {% set item = createModel('Products','products').findById(uuid) %}
+{% endif %}
+<tr id="row_{{ item.uuid }}">              
+    <td>              
+        {% if item.isDeleted() == false %} 
+            <button 
+                class="ui icon mini compact basic button edit-button" 
+                uuid="{{ item.uuid }}">
+                <i class="icon edit"></i>
+            </button>            
+            <button class="ui icon mini compact basic button delete-button" uuid="{{ item.uuid }}" data-title="{{ item.title }}">
+                <i class="icon trash orange"></i>
+            </button>                       
+        {% else %}
+            <button class="ui icon mini compact basic button restore-button" uuid="{{ item.uuid }}" title="{{ labels.resotre }}">
+                <i class="trash restore olive icon"></i>
+            </button>    
+        {% endif %} 
+        <button class="ui icon mini basic compact button product-details" uuid="{{ item.uuid }}">
+            <i class="icon info blue"></i>
+        </button>  
+    </td>
+    <td>{{ item.date_created|dateFormat }}</td>  
+    <td>
+        {{ component('semantic~status.dropdown',{ status: item.status, uuid: item.uuid, skip: [2,3,4,5] }) }}
+    </td>
+    <td>
+       {{ item.type.title }}       
+    </td>
+    <td>{{ item.title }}</td>         
+    <td>
+        {% for category in item.categories %}
+        <div class="ui mini left pointign basic label">
+            {{ category.getTitle()|string }}
+        </div>            
+        {% endfor %}
+    </td>                  
+    <td>
+        {{ component('products::admin.products.price',{ product: item }) }}          
+    </td>
+    <td>
+        {{ item.user.user_name_or_email }}
+    </td>                        
+</tr>

@@ -1,16 +1,7 @@
-{{  component('semantic~tabs.vertical',{ 
-        items: [ 
-            { title: labels.view, component: 'products::admin.products.view', icon: 'list', active: true },
-            { title: labels.add, component: 'products::admin.products.add', icon: 'plus' },
-            { id: 'edit_product', title: labels.edit, component: 'products::admin.products.edit', icon: 'edit' },
-            { id: 'stats_button', title: labels.stats, component: 'products::admin.products.stats', icon: 'chart outline bar' }      
-        ], 
-        menu: { id: 'products_menu' }, 
-        item_class: 'product-tab-item',
-        content: { 
-            id: 'products_content',
-            component: 'products::admin.products.view',
-            params: params 
-        } 
-    })
-}}
+<div class="flex flex-row items-start">
+    <div class="px-2 hidden" id="product_details">
+    </div>
+    <div class="px-2 flex-grow">
+        {{ component('products::admin.products.view',{}) }}
+    </div> 
+</div>

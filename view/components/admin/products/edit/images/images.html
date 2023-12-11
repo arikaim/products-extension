@@ -1,15 +1,2 @@
-{% set params = { uuid: uuid } %}
-{# title: labels.library, component: 'products::admin.products.edit.images.library', icon: 'images', params : params #}
-{{  component('semantic~tabs.vertical',{ 
-        items: [ 
-            { title: labels.main, component: 'products::admin.products.edit.images.main', icon: 'image', active: true, params : params },           
-        ], 
-        menu: { id: 'products_menu' }, 
-        item_class: 'product-images-tab-item',
-        content: { 
-            id: 'product_images_content',
-            component: 'products::admin.products.edit.images.main',
-            params: params 
-        } 
-    })
-}}
+
+Images

@@ -1,0 +1,10 @@
+{
+    "labels": {        
+        "free": "Free",
+        "resotre": "Resotre",
+        "status": {
+            "active": "active",
+            "disabled": "disabled"
+        }                    
+    }
+}

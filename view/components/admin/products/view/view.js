@@ -22,6 +22,8 @@ function ProductsView() {
     };
 
     this.init = function() {
+        arikaim.ui.loadComponentButton('.add-product');
+
         this.loadMessages('products::admin.messages');
 
         paginator.init('product_rows');   
@@ -57,6 +59,25 @@ function ProductsView() {
             paginator.reload();
             self.initRows();    
         },'productSearch');
+
+        arikaim.events.on('product.add',function(result) {      
+            self.loadItem(result.uuid,true);    
+        },'onProductAdd');
+    };
+
+    this.loadItem = function(uuid, prepend) {
+        console.log(uuid);
+        
+        arikaim.page.loadContent({
+            id: 'product_rows',     
+            prepend: prepend,   
+            component: 'products::admin.products.view.item',
+            params: { 
+                uuid: uuid
+            }                       
+        },function(result) {
+            self.initRows();           
+        });
     };
 
     this.loadList = function() {
@@ -107,10 +128,9 @@ function ProductsView() {
 
         arikaim.ui.button('.edit-button',function(element) {
             var uuid = $(element).attr('uuid');    
-            arikaim.ui.setActiveTab('#edit_product','.product-tab-item');
-
+           
             arikaim.page.loadContent({
-                id: 'products_content',
+                id: 'product_details',
                 component: 'products::admin.products.edit',
                 params: { uuid: uuid }
             });          

@@ -1,6 +1,4 @@
 {% set product = createModel('Products','products').findById(uuid) %}
-{% component 'semantic~tabs.vertical.content' %}
-{% set column = 'ten' %}
 <div class="mt-4">
     <form class="ui form" id="product_description_form">  
         <input type="hidden" name="uuid" id="uuid" value="{{ uuid }}">  
@@ -23,4 +21,3 @@
         {{ component('semantic~form.footer') }}
     </form>
 </div>   
-{% endcomponent %}

@@ -2,7 +2,8 @@
 {% if uuid is not empty %}
     {% set product = createModel('Products','products').findById(uuid) %}
 {% endif %}
-<form class="ui form" id="product_form">  
+<form  
+    class="ui form fluid" id="product_form">  
     <input type="hidden" name="uuid" id="uuid" value="{{ uuid }}">        
     <div class="field">
         <label>{{ fields.title.label }}</label>
@@ -31,10 +32,11 @@
             }}   
         </div>
         {% endif %}
-        <div class="field">
-            <label>{{ fields.type.label }}</label>
-            {{ component('products::admin.type.dropdown',{ selected: product.type_id, class: 'basic button fluid' }) }}
-        </div>    
+      
     </div>
+    <div class="field fluid">
+        <label>{{ fields.type.label }}</label>
+        {{ component('products::admin.type.dropdown',{ selected: product.type_id, class: 'basic button fluid' }) }}
+    </div>    
     {{ component('semantic~form.footer') }}
 </form>
