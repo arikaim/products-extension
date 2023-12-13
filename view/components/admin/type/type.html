@@ -1,15 +1,6 @@
-{{  component('semantic~tabs.vertical',{ 
-        items: [ 
-            { title: labels.view, component: 'products::admin.type.view', icon: 'list', active: true },
-            { title: labels.add, component: 'products::admin.type.add', icon: 'plus' },
-            { title: labels.edit, component: 'products::admin.type.edit', icon: 'edit' }
-        ], 
-        menu: { id: 'product_type_menu' }, 
-        item_class: 'product-type-item',
-        content: { 
-            id: 'product_type_content',
-            component: 'products::admin.type.view',
-            params: params 
-        } 
-    })
-}}
+<div class="ui two column grid">
+    <div class="column">
+        {{ component('products::admin.type.view') }}
+    </div>
+    <div class="column" id="product_type_details"></div>
+</div>

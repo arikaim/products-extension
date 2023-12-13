@@ -1,9 +1,7 @@
 {
-    "title": {
-        "content": "Edit",
-        "icon": "edit"
-    },
+    "title":"Edit",
+    "icon": "edit",
     "labels": {
-        "product": "Product"
+        "type": "Product Type"
     }
 }

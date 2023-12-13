@@ -1,21 +1,19 @@
-{{ component('semantic~segment-title',{ title: title.content, icon: title.icon }) }}
-<div class="mt-4">   
-    <div class="ui segment">
-        <div class="ui grid">
-            <div class="three wide column">
-                {{  component('products::admin.type.dropdown',{ 
-                        class: 'basic button fluid',
-                        selected: uuid, 
-                        data_column: 'uuid',
-                        hide_readonly: true
-                    }) 
-                }}
+{% if uuid is not empty %}
+    {% set product_type = createModel('ProductType','products').findById(uuid) %}
+{% endif %}
+
+{% component 'semantic~panel' %}
+    <div class="mt-2">   
+        <div class="my-2 flex flex-row items-center">
+            <div class="font-bold pr-2">
+                {{ labels.type }}
+            </div>     
+            <div class="ui basic label">
+                {{ product_type.title }}
             </div>
+        </div>  
+        <div class="mt-4">
+            {{ component('products::admin.type.edit.tabs',{ uuid: uuid }) }}
         </div>     
     </div>  
-    <div class="mt-1" id="product_type_edit_content">
-        {% if uuid is not empty %} 
-            {{ component('products::admin.type.edit.tabs',{ uuid: uuid }) }}
-        {% endif %}
-    </div>     
-</div>       
+{% endcomponent %}     

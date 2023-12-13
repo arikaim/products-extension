@@ -13,9 +13,13 @@ function ProductTypeView() {
         this.loadMessages('products::admin.messages');
 
         paginator.init('product_type_rows');   
+
+        self.initRows();  
     };
 
     this.initRows = function() {       
+        arikaim.ui.loadComponentButton('.product-type-action');
+
         arikaim.ui.button('.delete-button',function(element) {
             var uuid = $(element).attr('uuid');
             var title = $(element).attr('data-title');
@@ -31,17 +35,6 @@ function ProductTypeView() {
                 });
             });
         });
-
-        arikaim.ui.button('.edit-button',function(element) {
-            var uuid = $(element).attr('uuid');    
-            arikaim.ui.setActiveTab('#edit_product','.product-type-tab-item');
-            
-            arikaim.page.loadContent({
-                id: 'product_type_content',
-                component: 'products::admin.type.edit',
-                params: { uuid: uuid }
-            });          
-        });
     };
 };
 
@@ -49,5 +42,4 @@ var productTypeView = createObject(ProductTypeView,ControlPanelView);
 
 arikaim.component.onLoaded(function() {
     productTypeView.init();
-    productTypeView.initRows();  
 }); 

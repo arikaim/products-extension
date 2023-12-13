@@ -8,15 +8,29 @@
 {% endif %}
 
 {% for item in items.getItems() %}  
-    <tr id="{{ item.uuid }}">              
+    <tr id="row_{{ item.uuid }}">              
         <td>  
             {% if item.readonly != 1 %}
-                <div class="ui buttons">        
-                    <button class="ui icon mini basic button edit-button" uuid="{{ item.uuid }}" title="{{ labels.edit }}">
+                <div class="ui buttons">   
+                    <button 
+                        mountTo="product_type_details"
+                        component="products::admin.type.details"
+                        params="uuid:{{ item.uuid }}"
+                        class="ui icon mini compact basic button product-type-action" 
+                        uuid="{{ item.uuid }}" 
+                        title="{{ labels.details }}">
+                        <i class="icon info"></i>
+                    </button>          
+                    <button 
+                        mountTo="product_type_details"
+                        component="products::admin.type.edit"
+                        class="ui icon mini compact basic button product-type-action" 
+                        params="uuid:{{ item.uuid }}" 
+                        title="{{ labels.edit }}">
                         <i class="icon edit"></i>
                     </button>     
                     {% if item.hasProducts() == false %}       
-                    <button class="ui icon mini basic button delete-button" uuid="{{ item.uuid }}" data-title="{{ item.title }}">
+                    <button class="ui icon mini compact basic button delete-button" uuid="{{ item.uuid }}" data-title="{{ item.title }}">
                         <i class="icon trash orange"></i>
                     </button>  
                     {% endif %}
