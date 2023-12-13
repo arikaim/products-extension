@@ -12,13 +12,13 @@ namespace Arikaim\Extensions\Products\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Arikaim\Extensions\Products\Models\Products;
-use Arikaim\Extensions\Products\Models\ProductOptionsList;
 use Arikaim\Extensions\Products\Models\ProductOptionType;
 
 use Arikaim\Core\Db\Traits\Uuid;
 use Arikaim\Core\Db\Traits\Status;
 use Arikaim\Core\Db\Traits\Slug;
 use Arikaim\Core\Db\Traits\Find;
+use Arikaim\Core\Db\Traits\OptionsAttribute;
 
 /**
  * Product type model class
@@ -28,6 +28,7 @@ class ProductType extends Model
     use Uuid,
         Slug,
         Status,
+        OptionsAttribute,
         Find;
 
     /**
@@ -48,7 +49,8 @@ class ProductType extends Model
         'slug',
         'title',
         'readonly',
-        'description'
+        'description',
+        'options'
     ];
    
     /**
@@ -57,16 +59,6 @@ class ProductType extends Model
      * @var boolean
      */
     public $timestamps = false;
-
-    /**
-     * Visible columns
-     *
-     * @var array
-     */
-    protected $visible = [             
-        'slug',
-        'title',              
-    ];
 
     /**
      * Producucs relation
@@ -85,9 +77,7 @@ class ProductType extends Model
      */
     public function hasProducts(): bool
     {
-        $count = $this->products()->count();
-
-        return ($count > 0);
+        return ($this->products()->count() > 0);
     }
 
     /**
@@ -102,27 +92,22 @@ class ProductType extends Model
     }    
 
     /**
-     * Gte options list
+     * Get options list
      *
-     * @return Collection
+     * @return array
      */
-    public function getOptionsType()
-    {
-        $optionsList = new ProductOptionsList();
-
-        return $optionsList->where('type_name','=',$this->slug)->get();
-    }
-
-    /**
-     * Get option type
-     *
-     * @param string $key
-     * @return Model|null
-     */
-    public function getOptionType(string $key): ?object
+    public function getOptionsType(): array
     {
         $optionType = new ProductOptionType();
+        $result = [];
 
-        return $optionType->where('key','=',$key)->first();
+        foreach ($this->options as $key => $value) {
+            $option = $optionType->where('key','=',$key)->first();
+            if ($option !== null) {
+                $result[] = $option->toArray();
+            }
+        }
+
+        return $result;
     }
 }

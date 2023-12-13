@@ -33,6 +33,7 @@ use Arikaim\Core\Db\Traits\Price\PriceRelation;
 use Arikaim\Core\Db\Traits\MetaTags;
 
 use Arikaim\Extensions\Category\Models\Traits\CategoryRelations;
+use Arikaim\Extensions\Image\Models\Traits\ImageRelation;
 use Arikaim\Core\Db\Traits\Translations;
 
 /**
@@ -51,6 +52,7 @@ class Products extends Model
         OptionsRelation,
         PriceRelation,
         CategoryRelations,
+        ImageRelation,
         UserRelation,
         Translations,
         Position;
@@ -113,6 +115,8 @@ class Products extends Model
      */
     protected $translatedAttributes = [
         'title',
+        'description',    
+        'description_summary',
         'meta_title',
         'meta_description',
         'meta_keywords'    
@@ -191,16 +195,6 @@ class Products extends Model
     }
 
     /**
-     * Image relation
-     *
-     * @return Relation|null
-     */
-    public function image()
-    {
-        return $this->belongsTo('Arikaim\\Extensions\\Image\\Models\\Image','image_id');
-    }
-    
-    /**
      * Get options type name
      *
      * @return string|null
@@ -248,7 +242,7 @@ class Products extends Model
     /**
      * Product type relation
      *
-     * @return mixed
+     * @return Relation|null
      */
     public function type()
     {

@@ -38,7 +38,8 @@ class ProductTypeSchema extends Schema
         $table->string('title')->nullable(false);
         $table->status();
         $table->integer('readonly')->nullable(true);
-        $table->string('description')->nullable(true);           
+        $table->string('description')->nullable(true);    
+        $table->options();       
     }
 
     /**
@@ -52,15 +53,8 @@ class ProductTypeSchema extends Schema
         if ($this->hasColumn('readonly') == false) {
             $table->integer('readonly')->nullable(true);
         } 
-    }
-
-    /**
-     * Insert or update rows in table
-     *
-     * @param Seed $seed
-     * @return void
-     */
-    public function seeds($seed)
-    {  
+        if ($this->hasColumn('options') == false) {
+            $table->options();    
+        } 
     }
 }

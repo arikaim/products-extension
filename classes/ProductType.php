@@ -26,7 +26,7 @@ class ProductType
      * @param string $extensionName
      * @return boolean
      */
-    public static function importTypes(string $configFile, string $extensionName): bool
+    public static function import(string $configFile, string $extensionName): bool
     {
         // Products types
         $items = Extension::loadJsonConfigFile($configFile,$extensionName);   
@@ -36,7 +36,10 @@ class ProductType
 
         Seed::withModel('ProductType','products',function($seed) use($items) {     
             $seed->updateOrCreateFromArray(['slug'],$items,function($item) {
-                $item['uuid'] = Uuid::create();        
+                $options = $item['options'] ?? null;
+
+                $item['uuid'] = Uuid::create();  
+                $item['options'] = (empty($options) == false) ? \json_encode($options) : null;      
                 return $item;
             });
         });
@@ -51,7 +54,7 @@ class ProductType
      * @param string $extensionName
      * @return boolean
      */
-    public static function import(string $configFile, string $extensionName): bool
+    public static function _import(string $configFile, string $extensionName): bool
     {
         // Product type options
         $items = Extension::loadJsonConfigFile($configFile,$extensionName);   

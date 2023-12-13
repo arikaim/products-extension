@@ -2,16 +2,29 @@
     {        
         "title": "Software",
         "description": "Software Product",
-        "slug": "software"               
+        "slug": "software",
+        "options": [
+            "features",
+            "requirements",
+            "demo-url",
+            "admin-demo-url"
+        ]   
     },
     {        
         "title": "Service",
         "description": "Service Product",
-        "slug": "service"               
+        "slug": "service",
+        "options": [
+            "features",
+            "duration"     
+        ]               
     },
     {        
         "title": "Consumer Product",
         "description": "Consumer Product Type",
-        "slug": "consumer"               
+        "slug": "consumer",
+        "options": [
+            "features"
+        ]              
     }
 ]

@@ -37,15 +37,4 @@ class ProductOptionType extends Model
      * @var boolean
      */
     public $timestamps = false;
-
-    /**
-     * Visible columns
-     *
-     * @var array
-     */
-    protected $visible = [
-        'description',
-        'value',
-        'title'             
-    ];
 }

@@ -44,14 +44,4 @@ class ProductOptionTypeSchema extends Schema
     public function update($table) 
     {              
     }
-
-    /**
-     * Insert or update rows in table
-     *
-     * @param Seed $seed
-     * @return void
-     */
-    public function seeds($seed)
-    {        
-    }
 }

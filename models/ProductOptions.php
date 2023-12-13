@@ -35,16 +35,6 @@ class ProductOptions extends Model
     protected $table = 'product_options';
 
     /**
-     * Visible columns
-     *
-     * @var array
-     */
-    protected $visible = [
-        'key',
-        'value'                
-    ];
-
-    /**
      * Fillable columns
      *
      * @var array

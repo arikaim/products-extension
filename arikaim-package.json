@@ -5,7 +5,7 @@
     "type": "user",
     "description": "Manage products",
     "short-description": "Products",
-    "version": "1.2.11",
+    "version": "1.2.12",
     "private-repository": true,
     "repository-type": "arikaim",
     "repository": "arikaim-repository/products-extension",
