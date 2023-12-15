@@ -70,8 +70,7 @@ class Products extends Model
      * @var array
      */
     protected $appends = [
-        'options_list',
-        'price_list',
+        'options_list',      
         'is_free'
     ];
 
@@ -82,7 +81,7 @@ class Products extends Model
      */
     protected $with = [       
         'type',
-        'price',
+        'prices',
         'options',
         'categories'
     ];
@@ -171,7 +170,7 @@ class Products extends Model
         // delete translations
         $this->translations()->delete();
         // delete price list 
-        $this->price()->delete();
+        $this->prices()->delete();
 
         // delete prodcut
         $result = $this->delete();
@@ -192,16 +191,6 @@ class Products extends Model
         $model = $query->first();
 
         return ($model != null) ? $model : $this->findById($key);         
-    }
-
-    /**
-     * Get options type name
-     *
-     * @return string|null
-     */
-    public function getOptionsType()
-    {
-        return $this->type->slug;
     }
 
     /**
@@ -265,10 +254,9 @@ class Products extends Model
         if ($query->first() !== null) {
             return true;
         }
-        // try with slug 
-        $model = $this->findProduct(Utils::slug($title),$userId);
 
-        return ($model != null);
+        // try with slug 
+        return ($this->findProduct(Utils::slug($title),$userId) != null);
     }    
 
     /**

@@ -96,7 +96,7 @@ class ProductType extends Model
      *
      * @return array
      */
-    public function getOptionsType(): array
+    public function getOptionsType(?string $type = null): array
     {
         $optionType = new ProductOptionType();
         $result = [];
@@ -104,7 +104,13 @@ class ProductType extends Model
         foreach ($this->options as $key) {
             $option = $optionType->where('key','=',$key)->first();
             if ($option !== null) {
-                $result[$key] = $option->toArray();
+                if (empty($type) == false) {
+                    if ($optionType->getOptionTypeId($type) == $option->type) {
+                        $result[$key] = $option->toArray();
+                    }
+                } else {
+                    $result[$key] = $option->toArray();
+                }
             }
         }
 

@@ -12,7 +12,6 @@ namespace Arikaim\Extensions\Products\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Arikaim\Extensions\Products\Models\ProductOptionType;
-use Arikaim\Extensions\Products\Models\ProductOptionsList;
 
 use Arikaim\Core\Db\Traits\Uuid;
 use Arikaim\Core\Db\Traits\Find;
@@ -60,11 +59,4 @@ class ProductOptions extends Model
      * @var string
      */
     protected $optionTypeClass = ProductOptionType::class;
-
-    /**
-     * Options definition model class
-     *
-     * @var string
-     */
-    protected $optionsDefinitionClass = ProductOptionsList::class;
 }

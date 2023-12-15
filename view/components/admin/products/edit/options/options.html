@@ -1,5 +1,4 @@
 {% set product = createModel('Products','products').findById(uuid) %}
-{% set options = createModel('ProductOptionsList','products').getItemsQuery(product.type.slug) %}
 {% if product.options.count() != options.count() %}
 <div class="ui icon mini message">
     <i class="icon warning mini"></i>

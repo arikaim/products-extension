@@ -49,6 +49,15 @@ class ProductPriceList extends Model
     ];
 
     /**
+     * Add relation
+     *
+     * @var array
+     */
+    protected $with = [
+        'currency'
+    ];
+
+    /**
      * Disable timestamps
      *
      * @var boolean

@@ -37,7 +37,10 @@
         {% endfor %}
     </td>                  
     <td>
-        {{ component('products::admin.products.price',{ product: item }) }}          
+        <div class="ui label basic horizontal">
+            {{ product.price().currency.sign }}
+            {{ product.getPrice().price|default(0)|numberFormat }}
+        </div>    
     </td>
     <td>
         {{ item.user.user_name_or_email }}

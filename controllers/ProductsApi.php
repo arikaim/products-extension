@@ -158,7 +158,7 @@ class ProductsApi extends ApiController
 
         if (empty($price) == false) {
             // save price
-            Model::ProductPriceList('products')->savePrice($product->id,'price',$price,"USD"); 
+            Model::ProductPriceList('products')->savePrice($product->id,$price); 
         }
 
         // dispatch event

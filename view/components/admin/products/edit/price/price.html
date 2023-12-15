@@ -1,34 +1,26 @@
-{% component 'semantic~tabs.vertical.content' %}
 {% set product = createModel('Products','products').findById(uuid) %}
-{% set priceList = createModel('ProductOptionsList','products').getItemsQuery(product.type.slug,'price') %}
-{% if product.price.count() != priceList.count() %}
+{% set price_options = product.type.getOptionsType('price') %}
+
+{% if price_options|length == 0 %}
 <div class="ui icon mini message">
     <i class="icon warning mini"></i>
     <div class="content">
-        <h4>{{ messages.price }}</h4>
-        <div class="ui button mini primary add-price-list" uuid="{{ product.uuid }}">
-            <i class="icon plus"></i>
-            {{ buttons.add }} 
-        </div>
+        <h4>{{ messages.price }}</h4>       
     </div>   
 </div>
-{% endif %}
-{% if product.price.count() > 0 %}
+{% else %}
     <form class="ui form" id="price_form">       
         <input type="hidden" value="{{ uuid }}" name="uuid">
-        {% for price in product.price %}              
-            {% set field_name = 'price[' ~ price.key ~ ']' %}
+        {% for price in price_options %}              
             {{  component('semantic~form.fields.price',{ 
                     label: price.type.title,
-                    value: price.price,
-                    icon: price.currency.icon,
-                    name: field_name,
+                    value: product.getPriceValue(price.key),
+                    icon: product.getPrice(price.key).currency.icon,
+                    name: 'price[' ~ price.key ~ ']',
                     id: price.key
                 }) 
             }}        
-            {{ component('system:admin.orm.options.form.fields.type',{ option: price }) }} 
         {% endfor %}
         {{ component('semantic~form.footer') }}
     </form>
 {% endif %}
-{% endcomponent %}

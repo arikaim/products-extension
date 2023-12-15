@@ -39,16 +39,20 @@ class PriceListControlPanel extends ControlPanelApiController
     {         
         $data->validate(true);
 
-        $price = $data->get('price',null);
+        $prices = $data->get('price',null);
         $product = Model::Products('products')->findById($data['uuid']); 
         if ($product == null) {
             $this->error('errors.id','Not valid product id');
             return false;
         }
         
-        $result = Model::ProductPriceList('products')->savePriceList($product->id,$price); 
+        $priceList = Model::ProductPriceList('products');
+
+        foreach ($prices as $key => $value) {
+            $priceList->savePrice($product->id,$value,$key,null);
+        }
         
-        $this->setResponse($result,function() use($product) {                  
+        $this->setResponse(true,function() use($product) {                  
             $this
                 ->message('price.update')
                 ->field('uuid',$product->uuid);                  

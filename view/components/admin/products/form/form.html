@@ -1,4 +1,3 @@
-{% set currency = createModel('Currency','currency').getDefault() %}
 {% if uuid is not empty %}
     {% set product = createModel('Products','products').findById(uuid) %}
 {% endif %}
@@ -7,7 +6,13 @@
     <input type="hidden" name="uuid" id="uuid" value="{{ uuid }}">        
     <div class="field">
         <label>{{ fields.title.label }}</label>
-        <input type="text" name="title" id="title" {{ fields.title.placeholder|attr('placeholder') }} value="{{ product.title }}"> 
+        <input 
+            rule="minLength[2]"
+            type="text" 
+            name="title" 
+            id="title" 
+            {{ fields.title.placeholder|attr('placeholder') }} 
+            value="{{ product.title }}"> 
     </div>       
     {{  component('semantic~form.fields.slug',{ 
             slug_source: 'title',
@@ -20,13 +25,12 @@
         {% if product is not empty %}
         <div class="field">
             <label>{{ fields.category.label }}</label>
-            {% set category = createModel('Category','category').getList(null,'product') %}
             {{  component('system:admin.orm.relations.fields.dropdown',{ 
                     model: 'CategoryRelations',
                     extension: 'category',
                     type: 'product',
                     relation_id: product.id,
-                    items: category,
+                    items: createModel('Category','category').getList(null,'product'),
                     class: 'fluid'
                 }) 
             }}   
@@ -36,7 +40,12 @@
     </div>
     <div class="field fluid">
         <label>{{ fields.type.label }}</label>
-        {{ component('products::admin.type.dropdown',{ selected: product.type_id, class: 'basic button fluid' }) }}
+        {{  component('products::admin.type.dropdown',{ 
+                selected: product.type_id, 
+                rule: 'empty',
+                class: 'basic button fluid' 
+            }) 
+        }}
     </div>    
     {{ component('semantic~form.footer') }}
 </form>
