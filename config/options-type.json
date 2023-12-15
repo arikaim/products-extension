@@ -1,5 +1,12 @@
 [   
     {
+        "key": "price",
+        "title": "Price",
+        "description": "Product Price",
+        "default": 0.00,
+        "type": "price"          
+    },
+    {
         "key": "features",
         "title": "Features",
         "description": "Product Features",

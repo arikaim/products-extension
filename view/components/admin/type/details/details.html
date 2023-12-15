@@ -36,7 +36,5 @@
     <h4>
         {{ labels.options }}
     </h4>    
-    {{ product_type.getOptionsType()|dump }}
     {{ component('semantic~properties.details',{ properties: product_type.getOptionsType() }) }}
-    
 {% endcomponent %}

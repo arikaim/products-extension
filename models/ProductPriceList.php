@@ -11,10 +11,9 @@ namespace Arikaim\Extensions\Products\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-use Arikaim\Extensions\Products\Models\ProductOptionType;
-use Arikaim\Extensions\Currency\Models\Currency;
 use Arikaim\Extensions\Products\Models\Products;
 
+use Arikaim\Extensions\Currency\Models\Traits\CurrencyRelation;
 use Arikaim\Core\Db\Traits\Uuid;
 use Arikaim\Core\Db\Traits\Find;
 use Arikaim\Core\Db\Traits\Price\PriceList;
@@ -24,7 +23,8 @@ use Arikaim\Core\Db\Traits\Price\PriceList;
  */
 class ProductPriceList extends Model  
 {
-    use Uuid,       
+    use Uuid,     
+        CurrencyRelation,  
         PriceList,
         Find;
     
@@ -54,20 +54,6 @@ class ProductPriceList extends Model
      * @var boolean
      */
     public $timestamps = false;
-
-    /**
-     * Price type model class
-     *
-     * @var string
-     */
-    protected $priceTypeClass = ProductOptionType::class;
-    
-    /**
-     * Currency class
-     *
-     * @var string
-     */
-    protected $currencyClass = Currency::class;
 
     /**
      * Get free products

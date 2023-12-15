@@ -4,6 +4,7 @@
         "description": "Software Product",
         "slug": "software",
         "options": [
+            "price",
             "features",
             "requirements",
             "demo-url",
@@ -15,6 +16,7 @@
         "description": "Service Product",
         "slug": "service",
         "options": [
+            "price",
             "features",
             "duration"     
         ]               
@@ -24,6 +26,7 @@
         "description": "Consumer Product Type",
         "slug": "consumer",
         "options": [
+            "price",
             "features"
         ]              
     }

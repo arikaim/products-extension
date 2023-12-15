@@ -9,11 +9,13 @@
                 <th>{{ columns.description }}</th>                                                                                
             </tr>
         </thead>
-        <tbody id="product_options_rows" component="products::admin.options.view.rows" namespace="product-options">
+        <tbody 
+            id="product_options_rows" 
+            component="products::admin.options.view.rows" 
+            namespace="product-options">
             {{ component('products::admin.options.view.rows') }} 
         </tbody>
     </table> 
-    <div id="paginator">      
-        {{ component("semantic~paginator",{ namespace: 'product-options' }) }}
+    <div id="paginator">       
     </div>
 </div>

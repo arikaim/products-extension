@@ -1,0 +1,30 @@
+{% if uuid is not empty %}
+    {% set option = createModel('ProductOptionType','products').findById(uuid) %}
+{% endif %}
+{% component 'semantic~panel' %}
+    <table class="ui very basic definition table">
+        <tbody>
+            <tr>
+                <td class="right aligned">{{ labels.uuid }}</td>
+                <td>
+                    <div class="ui basic label">{{ option.id }}</div>
+                    {{ option.uuid }}
+                </td>
+            </tr>  
+            <tr>
+                <td class="right aligned">{{ labels.title }}</td>
+                <td>{{ option.title }}</td>
+            </tr>
+            {% if option.description is not empty %}
+            <tr>
+                <td class="right aligned">{{ labels.description }}</td>
+                <td>{{ option.description }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td class="right aligned">{{ labels.key }}</td>
+                <td>{{ option.key }}</td>
+            </tr>
+        </tbody>
+    </table>     
+{% endcomponent %}

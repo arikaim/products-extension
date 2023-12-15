@@ -1,0 +1,10 @@
+{
+    "title": "Option Type",
+    "icon": "info",
+    "labels": {
+        "uuid": "Uuid",
+        "title": "Title",
+        "key": "Key",       
+        "description": "Description"
+    }
+}

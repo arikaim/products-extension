@@ -1,24 +1,21 @@
-{% set model = createModel('ProductOptionType','products').orderBy('title') %}
-{% set items = paginate(model,'product-type') %}
-
-{% if items.getItems()|length == 0 %}
+{% set items = createModel('ProductOptionType','products').orderBy('title').get() %}
+{% if items|length == 0 %}
 <tr>
     <td colspan="5">..</td>
 </tr>
 {% endif %}
 
-{% for item in items.getItems() %}  
+{% for item in items %}  
     <tr id="{{ item.uuid }}">              
         <td>  
-            <!-- 
-            <button class="ui icon mini basic button edit-button" uuid="{{ item.uuid }}" title="{{ labels.edit }}">
-                <i class="icon edit"></i>
-            </button>     
-          
-            <button class="ui icon mini basic button delete-button" uuid="{{ item.uuid }}" data-title="{{ item.title }}">
-                <i class="icon trash orange"></i>
-            </button>  
-            -->                                     
+            <button 
+                mountTo="option_details"
+                component="products::admin.options.details"
+                class="ui icon mini compact basic button option-action-button" 
+                params="uuid:{{ item.uuid }}" 
+                title="{{ labels.info }}">
+                <i class="icon info"></i>
+            </button>                 
         </td>         
         <td>{{ item.title }}</td> 
         <td>
