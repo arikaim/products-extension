@@ -12,14 +12,12 @@ namespace Arikaim\Extensions\Products\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Arikaim\Extensions\Products\Models\ProductOptionType;
-use Arikaim\Extensions\Products\Models\ProductOptionsList;
 use Arikaim\Extensions\Currency\Models\Currency;
 use Arikaim\Extensions\Products\Models\Products;
 
 use Arikaim\Core\Db\Traits\Uuid;
 use Arikaim\Core\Db\Traits\Find;
 use Arikaim\Core\Db\Traits\Price\PriceList;
-use Arikaim\Core\Db\Traits\Options\OptionsListDefinition;
 
 /**
  * Price list model class
@@ -28,7 +26,6 @@ class ProductPriceList extends Model
 {
     use Uuid,       
         PriceList,
-        OptionsListDefinition,
         Find;
     
     /**
@@ -65,13 +62,6 @@ class ProductPriceList extends Model
      */
     protected $priceTypeClass = ProductOptionType::class;
     
-    /**
-     * Price list definition model class
-     *
-     * @var string
-     */
-    protected $priceListDefinitionClass = ProductOptionsList::class;
-
     /**
      * Currency class
      *

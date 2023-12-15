@@ -101,10 +101,10 @@ class ProductType extends Model
         $optionType = new ProductOptionType();
         $result = [];
 
-        foreach ($this->options as $key => $value) {
+        foreach ($this->options as $key) {
             $option = $optionType->where('key','=',$key)->first();
             if ($option !== null) {
-                $result[] = $option->toArray();
+                $result[$key] = $option->toArray();
             }
         }
 

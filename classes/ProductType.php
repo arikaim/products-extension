@@ -48,31 +48,6 @@ class ProductType
     }
 
     /**
-     * Import product type
-     *
-     * @param string $configFile
-     * @param string $extensionName
-     * @return boolean
-     */
-    public static function _import(string $configFile, string $extensionName): bool
-    {
-        // Product type options
-        $items = Extension::loadJsonConfigFile($configFile,$extensionName);   
-        if (\is_array($items) == false) {
-            return false;
-        }
-
-        Seed::withModel('ProductOptionsList','products',function($seed) use($items) {     
-            $seed->updateOrCreateFromArray(['key','type_name'],$items,function($item) {
-                $item['uuid'] = Uuid::create();        
-                return $item;
-            });
-        });
-
-        return true;
-    } 
-
-    /**
      * Import options type
      *
      * @param string $configFile
