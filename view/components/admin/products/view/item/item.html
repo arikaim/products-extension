@@ -38,8 +38,8 @@
     </td>                  
     <td>
         <div class="ui label basic horizontal">
-            {{ product.price().currency.sign }}
-            {{ product.getPrice().price|default(0)|numberFormat }}
+            {{ item.getPrice('price').currency.sign }}
+            {{ item.getPrice('price').price|default(0)|numberFormat }}
         </div>    
     </td>
     <td>
