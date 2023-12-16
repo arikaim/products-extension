@@ -2,6 +2,8 @@
     {% set product = createModel('Products','products').findById(uuid) %}
 {% endif %}
 {% component 'semantic~panel' %}
+    
+    {{ component('semantic~view.image',{ model: product }) }} 
     <table class="ui very basic definition table">
         <tbody>
             <tr>
@@ -11,12 +13,6 @@
                     {{ product.uuid }}
                 </td>
             </tr>
-            <tr>
-                <td class="right aligned">{{ labels.image }}</td>
-                <td>
-                    {{ component('image::admin.view.image',{ image: product.image }) }}
-                </td>
-            </tr> 
             <tr>
                 <td class="right aligned">{{ labels.status }}</td>
                 <td>
@@ -42,7 +38,10 @@
             <tr>
                 <td class="right aligned">{{ labels.price }}</td>
                 <td>
-                    {{ component('products::admin.products.price',{ product: product }) }}      
+                    <div class="ui label basic horizontal">
+                        {{ product.getPrice('price').currency.sign }}
+                        {{ product.getPrice('price').price|default(0)|numberFormat }}
+                    </div>        
                 </td>
             </tr>
             <tr>
@@ -73,5 +72,6 @@
                 </td>
             </tr> 
         </tbody>
-    </table>          
+    </table>      
+    {{ component('semantic~view.metatags',{ model: product }) }}    
 {% endcomponent %}

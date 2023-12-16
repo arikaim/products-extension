@@ -21,6 +21,14 @@ function ProductsApi() {
     this.getPrice = function(uuid, onSuccess, onError) {
         return arikaim.get('/api/products/price/' + uuid,onSuccess,onError);          
     };
+
+    this.updatePrice = function(formId, onSuccess, onError) {
+        return arikaim.put('/api/products/price/update',formId, onSuccess, onError);          
+    };
+
+    this.updateOptions = function(formId, onSuccess, onError) {
+        return arikaim.put('/api/products/options/update',formId, onSuccess, onError);          
+    };
 }
 
 var productsApi = new ProductsApi();

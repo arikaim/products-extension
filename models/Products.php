@@ -102,6 +102,9 @@ class Products extends Model
         'title',   
         'description',    
         'description_summary',
+        'meta_title',
+        'meta_description',
+        'meta_keywords',   
         'image_id',
         'type_id',
         'user_id'

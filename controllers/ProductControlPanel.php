@@ -38,30 +38,6 @@ class ProductControlPanel extends ControlPanelApiController
     }
 
     /**
-     * Creeate product options
-     *
-     * @param \Psr\Http\Message\ServerRequestInterface $request
-     * @param \Psr\Http\Message\ResponseInterface $response
-     * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
-    */
-    public function createOptionsController($request, $response, $data) 
-    { 
-        $data
-            ->addRule('text:required','uuid')          
-            ->validate(true);
-
-        $product = Model::Products('products')->findById($data['uuid']);
-        $result = $product->createOptions();
-
-        $this->setResponse($result,function() use($product) {                  
-            $this
-                ->message('options')
-                ->field('uuid',$product->uuid);                  
-        },'errors.options'); 
-    }
-
-    /**
      * Add product
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request

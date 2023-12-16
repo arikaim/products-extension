@@ -44,6 +44,7 @@ class ProductsSchema extends Schema
         $table->position();      
         $table->relation('type_id','product_type'); 
         $table->relation('image_id','image',true); 
+        $table->metaTags();     
         $table->dateCreated();
         $table->dateUpdated();
         $table->dateDeleted();
@@ -60,7 +61,11 @@ class ProductsSchema extends Schema
      * @return void
      */
     public function update($table) 
-    {                   
+    {           
+        if ($this->hasColumn('meta_title') == false) {
+            $table->metaTags();
+        }   
+
         if ($this->hasColumn('description') == false) {
             $table->text('description')->nullable(true);
         }

@@ -1,8 +1,7 @@
 {
     "messages": {
-        "options": "New options available from product type"
+        "options": "No options available."
     },
-    "buttons": {
-        "add": "Add to Product"
+    "buttons": {        
     }
 }

@@ -1,7 +1,8 @@
 {
     "include": {
         "js": [
-            "semantic~search"
+            "semantic~search",
+            "products::api"
         ]
     },
     "access": {

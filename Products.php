@@ -32,16 +32,12 @@ class Products extends Extension
         $this->addApiRoute('PUT','/api/admin/products/update/description','ProductControlPanel','updateDescription','session');
         $this->addApiRoute('PUT','/api/admin/products/status','ProductControlPanel','setStatus','session');
         $this->addApiRoute('DELETE','/api/admin/products/delete/{uuid}','ProductControlPanel','deleteProduct','session');
-        $this->addApiRoute('PUT','/api/admin/products/restore/{uuid}','ProductControlPanel','restore','session');
-        $this->addApiRoute('PUT','/api/admin/products/create/options','ProductControlPanel','createOptions','session');       
+        $this->addApiRoute('PUT','/api/admin/products/restore/{uuid}','ProductControlPanel','restore','session');     
         $this->addApiRoute('PUT','/api/admin/products/update/meta','ProductControlPanel','updateMetaTags','session');
         // Product type
         $this->addApiRoute('POST','/api/admin/products/type/add','ProductTypeControlPanel','add','session');  
         $this->addApiRoute('PUT','/api/admin/products/type/update','ProductTypeControlPanel','update','session');
         $this->addApiRoute('DELETE','/api/admin/products/type/delete/{uuid}','ProductTypeControlPanel','delete','session');
-        // Price 
-        $this->addApiRoute('PUT','/api/admin/products/price/update','PriceListControlPanel','update','session');
-        $this->addApiRoute('PUT','/api/admin/products/price/create','PriceListControlPanel','createPriceList','session');       
         // External Id
         $this->addApiRoute('POST','/api/admin/products/external/id','ProductControlPanel','addExternalId','session');    
         $this->addApiRoute('DELETE','/api/admin/products/external/id/{uuid}','ProductControlPanel','deleteExternalId','session');  
@@ -53,6 +49,10 @@ class Products extends Extension
         $this->addApiRoute('POST','/api/products/product/add','ProductsApi','add',['session','token']);  
         $this->addApiRoute('PUT','/api/products/product/update','ProductsApi','update',['session','token']);  
         $this->addApiRoute('DELETE','/api/products/product/delete/{uuid}','ProductsApi','deleteUserProduct',['session','token']);  
+        // Price 
+        $this->addApiRoute('PUT','/api/products/price/update','ProductsApi','updatePrice','session');
+        // Options
+        $this->addApiRoute('PUT','/api/products/options/update','ProductsApi','updateOptions','session');
         // Events
         $this->registerEvent('product.add','Add product');  
         $this->registerEvent('product.update','Update product');  
@@ -67,7 +67,6 @@ class Products extends Extension
         $this->createDbTable('ProductRelationsSchema');
         // Product options
         $this->createDbTable('ProductOptionTypeSchema');
-        $this->createDbTable('ProductOptionsListSchema');
         $this->createDbTable('ProductOptionsSchema');     
         $this->createDbTable('ProductPriceListSchema'); 
         // Service

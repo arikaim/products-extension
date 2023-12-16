@@ -1,14 +1,9 @@
 'use strict';
 
 arikaim.component.onLoaded(function() {
-    arikaim.ui.button('.add-options',function(element) {
-        var uuid = $(element).attr('uuid');
-        return products.createOptions(uuid);
+    arikaim.ui.form.onSubmit('#product_options_form',function() {
+        return productsApi.updateOptions('#product_options_form');
     },function(result) {
-        arikaim.page.loadContent({
-            id: 'product_edit_content',
-            component: 'products::admin.products.edit.options',
-            params: { uuid: result.uuid }
-        }); 
+        arikaim.ui.form.showMessage(result.message);
     });
 });

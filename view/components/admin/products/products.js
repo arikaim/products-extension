@@ -7,22 +7,6 @@
 'use strict';
 
 function ProductsControlPanel() {
-    
-    this.createPriceList = function(uuid, onSuccess, onError) {
-        var data = {
-            uuid: uuid
-        };
-
-        return arikaim.put('/api/admin/products/price/create',data,onSuccess,onError);          
-    };
-
-    this.createOptions = function(uuid, onSuccess, onError) {
-        var data = {
-            uuid: uuid
-        };
-
-        return arikaim.put('/api/admin/products/create/options',data,onSuccess,onError);          
-    };
 
     this.add = function(formId, onSuccess, onError) {
         return arikaim.post('/api/admin/products/add',formId,onSuccess,onError);          
@@ -42,10 +26,6 @@ function ProductsControlPanel() {
 
     this.updateDescription = function(formId, onSuccess, onError) {
         return arikaim.put('/api/admin/products/update/description',formId, onSuccess, onError);          
-    };
-
-    this.updatePrice = function(formId, onSuccess, onError) {
-        return arikaim.put('/api/admin/products/price/update',formId, onSuccess, onError);          
     };
 
     this.updateMetaTags = function(formId, onSuccess, onError) {

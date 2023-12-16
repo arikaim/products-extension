@@ -49,7 +49,7 @@ class ProductTypeSchema extends Schema
      * @return void
      */
     public function update($table) 
-    {              
+    {            
         if ($this->hasColumn('readonly') == false) {
             $table->integer('readonly')->nullable(true);
         } 

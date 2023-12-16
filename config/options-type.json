@@ -11,7 +11,7 @@
         "title": "Features",
         "description": "Product Features",
         "default": null,
-        "type": "textarea"          
+        "type": "text-area"          
     },
     {
         "key": "duration",
@@ -32,7 +32,7 @@
         "title": "Requirements",
         "description": "Installation Requirements",
         "default": null,
-        "type": "textarea"          
+        "type": "text-area"          
     },
     {
         "key": "version",

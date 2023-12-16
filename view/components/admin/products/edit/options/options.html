@@ -1,22 +1,19 @@
 {% set product = createModel('Products','products').findById(uuid) %}
-{% if product.options.count() != options.count() %}
-<div class="ui icon mini message">
-    <i class="icon warning mini"></i>
-    <div class="content">
-        <h4>{{ messages.options }}</h4>
-        <div class="ui button mini primary add-options" uuid="{{ product.uuid }}">
-            <i class="icon plus"></i>
-            {{ buttons.add }} 
-        </div>
-    </div>   
-</div>
-{% endif %}
+{% set options = product.type.getOptionsType('price',true) %}
+{% set properties = createProperties(options) %}
+{% set prop = properties.setPropertyValues(product.options_list.toArray()) %}
 
-{{  component('system:admin.orm.options.edit',{ 
-        model: 'ProductOptions',
-        extension: 'products',
-        model_id: product.id,
-        class: 'mt-2 basic',
-        hide: false 
-    }) 
-}}
+{% if properties|length == 0 %}
+    <div class="ui icon mini message">
+        <i class="icon warning mini"></i>
+        <div class="content">
+            <h4>{{ messages.options }}</h4>        
+        </div>   
+    </div>
+{% else %}
+    <form class="ui form" id="product_options_form">
+        <input type="hidden" name="uuid" value="{{ product.uuid }}" id="product_id">                  
+        {{ component('semantic~properties.items',{ items: properties }) }}  
+        {{ component('semantic~form.footer') }}   
+    </form>
+{% endif %}

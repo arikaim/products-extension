@@ -96,21 +96,32 @@ class ProductType extends Model
      *
      * @return array
      */
-    public function getOptionsType(?string $type = null): array
+    public function getOptionsType(?string $type = null, bool $exclude = false): array
     {
         $optionType = new ProductOptionType();
         $result = [];
 
         foreach ($this->options as $key) {
             $option = $optionType->where('key','=',$key)->first();
-            if ($option !== null) {
-                if (empty($type) == false) {
-                    if ($optionType->getOptionTypeId($type) == $option->type) {
-                        $result[$key] = $option->toArray();
+            
+            if ($option == null) continue;
+            
+            $option = $option->toArray();
+            $option['name'] = $option['key'];
+
+            if (empty($type) == false) {
+                $typeId = $optionType->getOptionTypeId($type);
+                if ($exclude == false) {
+                    if ($typeId == $option['type']) {
+                        $result[$key] = $option;
                     }
                 } else {
-                    $result[$key] = $option->toArray();
+                    if ($typeId != $option['type']) {
+                        $result[$key] = $option;
+                    }
                 }
+            } else {   
+                $result[$key] = $option;
             }
         }
 

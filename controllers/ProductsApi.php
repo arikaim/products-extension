@@ -31,6 +31,79 @@ class ProductsApi extends ApiController
     }
 
     /**
+     * Update product options
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param Validator $data
+     * @return Psr\Http\Message\ResponseInterface
+    */
+    public function updateOptions($request, $response, $data) 
+    {         
+        $data
+            ->validate(true);
+
+        $prices = $data->get('price',null);
+
+        $product = Model::Products('products')->findById($data['uuid']); 
+        if ($product == null) {
+            $this->error('errors.id','Not valid product id');
+            return false;
+        }
+        
+        // check access
+        $this->requireUserOrControlPanel($product->user_id);
+        
+        $data->offsetUnset('uuid');
+        $options = Model::ProductOptions('products');
+
+        foreach ($data->toArray() as $key => $value) {
+            $options->saveOption($product->id,$key,$value);
+        }
+         
+        $this->setResponse(true,function() use($product) {                  
+            $this
+                ->message('options.update')
+                ->field('uuid',$product->uuid);                  
+        },'errors.options.update');                                    
+    }
+
+    /**
+     * Update product price list
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param Validator $data
+     * @return Psr\Http\Message\ResponseInterface
+    */
+    public function updatePrice($request, $response, $data) 
+    {         
+        $data->validate(true);
+
+        $prices = $data->get('price',null);
+        $product = Model::Products('products')->findById($data['uuid']); 
+        if ($product == null) {
+            $this->error('errors.id','Not valid product id');
+            return false;
+        }
+        
+        // check access
+        $this->requireUserOrControlPanel($product->user_id);
+
+        $priceList = Model::ProductPriceList('products');
+
+        foreach ($prices as $key => $value) {
+            $priceList->savePrice($product->id,$value,$key,null);
+        }
+        
+        $this->setResponse(true,function() use($product) {                  
+            $this
+                ->message('price.update')
+                ->field('uuid',$product->uuid);                  
+        },'errors.price.update');                                    
+    }
+
+    /**
      * Delete user product
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
