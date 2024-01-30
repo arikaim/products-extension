@@ -12,13 +12,16 @@ namespace Arikaim\Extensions\Products\Controllers;
 use Arikaim\Core\Db\Model;
 use Arikaim\Core\Controllers\ApiController;
 use Arikaim\Extensions\Products\Controllers\Traits\Products;
+use Arikaim\Extensions\Products\Controllers\Traits\Options;
 
 /**
  * Products api controller
 */
 class ProductsApi extends ApiController
 {
-    use Products;
+    use 
+        Products,
+        Options;
 
     /**
      * Init controller
@@ -36,7 +39,6 @@ class ProductsApi extends ApiController
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
     */
     public function updatePrice($request, $response, $data) 
     {         
@@ -72,7 +74,6 @@ class ProductsApi extends ApiController
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
     */
     public function deleteUserProduct($request, $response, $data) 
     {         
@@ -112,7 +113,6 @@ class ProductsApi extends ApiController
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
     */
     public function update($request, $response, $data) 
     {         
@@ -161,7 +161,6 @@ class ProductsApi extends ApiController
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
     */
     public function add($request, $response, $data) 
     {         
@@ -211,7 +210,6 @@ class ProductsApi extends ApiController
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
     */
     public function getList($request, $response, $data) 
     {          
@@ -228,7 +226,6 @@ class ProductsApi extends ApiController
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
     */
     public function getDropdownList($request, $response, $data) 
     {       

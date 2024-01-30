@@ -10,12 +10,11 @@
 namespace Arikaim\Extensions\Products\Controllers\Traits;
 
 use Arikaim\Core\Db\Model;
-use Arikaim\Core\Paginator\Paginator;
 
 /**
  * Products list trait
 */
-trait Products 
+trait Options 
 {
     /**
      * Update product options
@@ -23,14 +22,11 @@ trait Products
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
     */
     public function updateOptions($request, $response, $data) 
     {         
         $data
             ->validate(true);
-
-        $prices = $data->get('price',null);
 
         $product = Model::Products('products')->findById($data['uuid']); 
         if ($product == null) {
@@ -54,6 +50,4 @@ trait Products
                 ->field('uuid',$product->uuid);                  
         },'errors.options.update');                                    
     }
-
-   
 }
