@@ -132,7 +132,8 @@ class ProductsApi extends ApiController
         
         $this->requireUser($product->user_id);
 
-        $result = $product->update([                
+        $result = $product->update([         
+            'type_id'     => $data['product_type'],       
             'title'       => $data['title'],
             'description' => $data['description']
         ]);               
