@@ -235,7 +235,7 @@ class ProductsApi extends ApiController
         $dataField = $data->get('data_field','uuid');
         $search = $data->get('query','');
         $size = $data->get('size',15);
-        $userId = $data->get('user',$this->getUserId());
+        $userId = (int)$data->get('user',$this->getUserId());
 
         $products = Model::Products('products');
 

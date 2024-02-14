@@ -13,6 +13,7 @@
 <div class="ui search selection dropdown product-dropdown {{ class }}" 
     id="{{ component_id|default('product-dropdown') }}" 
     selected="{{ selected[data_field] }}"
+    user="{{ user_id }}"
     data-field="{{ data_field }}">
     <input {{ rule|attr('rule') }} name="{{ name }}" type="hidden" value="{{ selected[data_field] }}">
     <div class="text">
