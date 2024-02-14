@@ -237,11 +237,17 @@ class ProductsApi extends ApiController
         $size = $data->get('size',15);
         $userId = $data->get('user',$this->getUserId());
 
-        $products = Model::Products('products')
-            ->userQuery($userId)
-            ->where('title','like','%' . $search . '%')
-            ->take($size)
-            ->get();
+        $products = Model::Products('products');
+
+        if (empty($userId) == false) {
+            $products->userQuery($userId);
+        }
+
+        if (empty($search) == false) {
+            $products = $products->searchIgnoreCase('title',$search)->get();
+        } else {
+            $products = $products->take($size)->get();
+        }
 
         if ($products == null) {
             $this->error('errors.list');

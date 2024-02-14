@@ -43,7 +43,7 @@ class Products extends Extension
         $this->addApiRoute('DELETE','/api/admin/products/external/id/{uuid}','ProductControlPanel','deleteExternalId','session');  
         // Api      
         $this->addApiRoute('GET','/api/products/list/{category}','ProductsApi','getList');   
-        $this->addApiRoute('GET','/api/products/product/list/dropdown/{data_field}/[{query}]','ProductsApi','getDropdownList');   
+        $this->addApiRoute('GET','/api/products/product/list/dropdown/{data_field}/[{query}[/{user}]]','ProductsApi','getDropdownList');   
         $this->addApiRoute('GET','/api/products/product/details/{uuid}','ProductsApi','productDetails');  
         $this->addApiRoute('GET','/api/products/price/{uuid}','ProductsApi','getPrice');   
         $this->addApiRoute('POST','/api/products/product/add','ProductsApi','add',['session','token']);  
@@ -60,15 +60,15 @@ class Products extends Extension
         // Relation map 
         $this->addRelationMap('product','Products');
         // Create db tables        
-        $this->createDbTable('ProductTypeSchema');
-        $this->createDbTable('ProductsSchema');
-        $this->createDbTable('ProductIdSchema');   
-        $this->createDbTable('ProductTranslationsSchema');
-        $this->createDbTable('ProductRelationsSchema');
+        $this->createDbTable('ProductType');
+        $this->createDbTable('Products');
+        $this->createDbTable('ProductId');   
+        $this->createDbTable('ProductTranslations');
+        $this->createDbTable('ProductRelations');
         // Product options
-        $this->createDbTable('ProductOptionTypeSchema');
-        $this->createDbTable('ProductOptionsSchema');     
-        $this->createDbTable('ProductPriceListSchema'); 
+        $this->createDbTable('ProductOptionType');
+        $this->createDbTable('ProductOptions');     
+        $this->createDbTable('ProductPriceList'); 
         // Service
         $this->registerService('ProductsService');  
     }   
