@@ -35,6 +35,13 @@
         "type": "text-area"          
     },
     {
+        "key": "notes",
+        "title": "Notes",
+        "description": "Product Notes",
+        "default": null,
+        "type": "text-area"          
+    },
+    {
         "key": "version",
         "title": "Version",
         "description": "Release Version",

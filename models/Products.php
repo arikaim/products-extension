@@ -199,7 +199,7 @@ class Products extends Model
     /**
      * Get product relations
      *
-     * @return Relatins|null
+     * @return Relation|null
      */
     public function relations()
     {

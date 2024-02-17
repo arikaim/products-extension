@@ -8,7 +8,9 @@
             "features",
             "requirements",
             "demo-url",
-            "admin-demo-url"
+            "admin-demo-url",
+            "version",
+            "notes"
         ]   
     },
     {        
