@@ -27,20 +27,10 @@
                     }) 
                 }}
             </div>
-        </div>
-         <!-- 
-        <div class="two wide column">
-           
-            <div class="ui toggle checkbox show-deleted p-2">
-                <input type="checkbox" name="show_deleted" {{ (show_deleted == 'true') ? 'checked': '' }}>
-                <label>{{ labels.deleted }}</label>
-            </div>           
-        </div>
-         -->
+        </div>       
         <div class="six wide centered column">                 
             {{ component("semantic~search.form",{ namespace: 'products' }) }}                    
         </div>
-       
         <div class="two wide column right aligned">
             {{ component('semantic~paginator.dropdown',{ namespace: 'products' }) }}
         </div>
@@ -50,7 +40,8 @@
     <table class="ui compact stackable selectable borderless basic table">
         <thead class="table-head">
             <tr>              
-                <th class="two wide centered">{{ columns.action }}</th>
+                <th class="one wide centered">{{ columns.action }}</th>
+                <th class="one wide centered">{{ columns.image }}</th>
                 <th class="two wide">{{ columns.created }}</th>
                 <th class="two wide">{{ columns.status }}</th>
                 <th class="four wide">{{ columns.type }}</th>  

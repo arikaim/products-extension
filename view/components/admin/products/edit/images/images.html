@@ -1,2 +1,13 @@
-
-Images
+{% if uuid is not empty %}
+    {% set product = createModel('Products','products').findById(uuid) %}
+{% endif %}
+<div>
+    {{  component('image::admin.library',{
+            model: product,
+            relation_id: product.id,
+            relation_type: 'product',
+            extension: 'products',
+            model_class: 'Products'
+        }) 
+    }}
+</div>

@@ -2,7 +2,6 @@
     {% set product = createModel('Products','products').findById(uuid) %}
 {% endif %}
 {% component 'semantic~panel' %}
-    
     {{ component('semantic~view.image',{ model: product }) }} 
     <table class="ui very basic definition table">
         <tbody>

@@ -21,6 +21,15 @@
             <i class="icon info blue"></i>
         </button>  
     </td>
+    <td>
+        {% if item.hasImage() == true %}
+            <img       
+                class="ui mini image bordered rounded" 
+                src="{{ url(item.image.thumbnail(64,64).src) }}?t={{ today() }}">             
+        {% else %}
+            <i class="image bordered outline icon large grey"></i>
+        {% endif %}
+    </td>  
     <td>{{ item.date_created|dateFormat }}</td>  
     <td>
         {{ component('semantic~status.dropdown',{ status: item.status, uuid: item.uuid, skip: [2,3,4,5] }) }}

@@ -10,6 +10,7 @@
     },
     "columns": {
         "action": "Action",
+        "image": "Image",
         "name": "Name",
         "title": "Title",
         "category": "Category",
