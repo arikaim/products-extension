@@ -23,7 +23,7 @@ trait Products
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
+     * @return mixed
     */
     public function getProductsList($request, $response, $data)
     {
@@ -33,10 +33,16 @@ trait Products
         $page = $queryParams['page'] ?? 1;
         $categorySlug = $this->getParam('category_slug',$queryParams['category_slug']);
         
-        $products = Model::Category('category',function($model) use($categorySlug,$products) {                
-            return $model->relationsQuery($products,$categorySlug);           
-        });
+        $category = Model::Category('category')->findCategory($categorySlug);
 
+        if ($category == null) {
+            $products = [];
+        } else {
+            $products = $category->relations()->whereHasMorph('related','product',function ($query) {
+                $query->where('status','=',1);
+            })->get();
+        }
+       
         return Paginator::create($products,$page);
     }
 
