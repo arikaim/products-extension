@@ -23,11 +23,12 @@ class ProductPages extends Controller
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
      * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
+     * @return mixed
     */
-    public function productDetails($request, $response, $data)
+    public function productDetailsPage($request, $response, $data)
     {
         $language = $this->getPageLanguage($data);
+
         $product = Model::Products('products')->findBySlug($data['slug']);
         if ($product == null) {
             return $this->pageLoad($request,$response,$data,'current>products.not-found',$language);          
@@ -55,7 +56,5 @@ class ProductPages extends Controller
             ->twitterSite($this->getUrl($request));    
             
         $data['product'] = $product;
-
-        return $this->pageLoad($request,$response,$data,'current>products.details',$language);  
     }
 }

@@ -26,24 +26,19 @@ trait Products
      * @return mixed
     */
     public function getProductsList($request, $response, $data)
-    {
-        $products = Model::Products('products')->getActive();
-       
-        $queryParams = $this->resolveRequestParams($request,['category_slug','page']);
-        $page = $queryParams['page'] ?? 1;
+    { 
+        $queryParams = $this->resolveRequestParams($request,['category_slug']);
         $categorySlug = $this->getParam('category_slug',$queryParams['category_slug']);
         
         $category = Model::Category('category')->findCategory($categorySlug);
 
         if ($category == null) {
-            $products = [];
-        } else {
-            $products = $category->relations()->whereHasMorph('related','product',function ($query) {
-                $query->where('status','=',1);
-            })->get();
+            return [];
         }
-       
-        return Paginator::create($products,$page);
+
+        return $category->relations()->whereHasMorph('related','product',function ($query) {
+            $query->where('status','=',1);
+        });
     }
 
     /**
