@@ -64,7 +64,7 @@ class ProductsApi extends ApiController
         }
         
         $this
-            ->message('price.update')
+            ->message('price.update','Price saved successfully')
             ->field('uuid',$product->uuid);                                                  
     }
 
@@ -88,7 +88,7 @@ class ProductsApi extends ApiController
         
         // only product created from logged user
         if (empty($product->user_id) == true) {
-            $this->error('errors.access');
+            $this->error('errors.access','Access denied');
             return;
         }
 
@@ -152,7 +152,7 @@ class ProductsApi extends ApiController
         $this->get('event')->dispatch('product.update',$product->toArray()); 
 
         $this
-            ->message('update')
+            ->message('update','Product was saved successfully.')
             ->field('uuid',$product->uuid);                                                          
     }
 
@@ -201,7 +201,7 @@ class ProductsApi extends ApiController
         $this->get('event')->dispatch('product.add',$product->toArray());    
 
         $this
-            ->message('add')
+            ->message('add','Product created successfully.')
             ->field('uuid',$product->uuid);                                             
     }
 

@@ -12,6 +12,9 @@
         "update": "Product type was saved successfully.",
         "delete": "Product type was deleted successfully."
     },
+    "options": {
+        "update": "Product options was saved successfully."
+    },
     "errors": {
         "description": "Can't save product description.",
         "type": {

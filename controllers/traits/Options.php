@@ -46,7 +46,7 @@ trait Options
          
         $this->setResponse(true,function() use($product) {                  
             $this
-                ->message('options.update')
+                ->message('options.update','Product options was saved successfully.')
                 ->field('uuid',$product->uuid);                  
         },'errors.options.update');                                    
     }

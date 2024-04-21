@@ -61,12 +61,19 @@ function ProductsView() {
         },'productSearch');
 
         arikaim.events.on('product.add',function(result) {      
-            self.loadItem(result.uuid,true);    
+            self.loadItem(result.uuid,true);  
+            arikaim.page.loadContent({
+                id: 'product_details',     
+                component: 'products::admin.products.edit',
+                params: { 
+                    uuid: result.uuid
+                }                       
+            });
+
         },'onProductAdd');
     };
 
     this.loadItem = function(uuid, prepend) {
-        console.log(uuid);
         
         arikaim.page.loadContent({
             id: 'product_rows',     

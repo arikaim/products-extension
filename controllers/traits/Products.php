@@ -65,7 +65,7 @@ trait Products
         }
 
         $this   
-            ->message('product.price')                 
+            ->message('product.price','Product price was saved successfully.')                 
             ->field('uuid',$product->uuid)
             ->field('items',$product->getPriceList($currencyId)->toArray());
     }
