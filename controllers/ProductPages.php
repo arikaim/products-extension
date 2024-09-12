@@ -28,7 +28,7 @@ class ProductPages extends Controller
     public function productDetailsPage($request, $response, $data)
     {
         $language = $this->getPageLanguage($data);
-
+        
         $product = Model::Products('products')->findBySlug($data['slug']);
         if ($product == null) {
             return $this->pageLoad($request,$response,$data,'current>products.not-found',$language);          
