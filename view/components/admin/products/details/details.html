@@ -69,8 +69,12 @@
                 <td>
                     {{ product.date_updated|dateFormat }}
                 </td>
-            </tr> 
+            </tr>   
         </tbody>
-    </table>      
+    </table>   
+    {{  component('semantic~options',{
+            options: product.options_list.toArray() 
+        }) 
+    }}      
     {{ component('semantic~view.metatags',{ model: product }) }}    
 {% endcomponent %}
