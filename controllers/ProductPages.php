@@ -42,6 +42,22 @@ class ProductPages extends Controller
         $metaTags = $product->getMetaTags($language);      
         $description = $product->getOptionValue('description','');
 
+        // schema def
+        $this->withService('schema',function($service) use($product,$request,$data) {
+            $service->graph()
+                ->product()
+                    ->name($product->display_title)
+                    ->category($data['categories'][0])
+                    ->if(($product->hasImage() == true),function($schema) use($product) {
+                        $schema->image($product->image->src);
+                    })
+                    ->url($this->getUrl($request))        
+                    ->sku($product->slug)     
+                    ->description($product->description);
+
+            $service->addToPageHead();
+        });
+
         $this->get('page')->head()  
             ->setMetaTags($metaTags)     
             ->applyDefault('title',['title' => $product->title])
