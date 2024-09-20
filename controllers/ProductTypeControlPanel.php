@@ -37,22 +37,22 @@ class ProductTypeControlPanel extends ControlPanelApiController
     */
     public function addController($request, $response, $data) 
     {         
-        $this->onDataValid(function($data) { 
-            $model = Model::ProductType('products');            
-            if ($model->findBySlug($data['title']) == true) {
-                $this->error('errors.type.exist');
-                return;
-            }
+        $data
+            ->validate(true);
 
-            $productType = $model->create($data->toArray());
+        $model = Model::ProductType('products');            
+        if ($model->findBySlug($data['title']) == true) {
+            $this->error('errors.type.exist');
+            return;
+        }
 
-            $this->setResponse(($productType != null),function() use($productType) {                  
-                $this
-                    ->message('type.add')
-                    ->field('uuid',$productType->uuid);                  
-            },'errors.type.add');                                    
-        });
-        $data->validate();
+        $productType = $model->create($data->toArray());
+
+        $this->setResponse(($productType != null),function() use($productType) {                  
+            $this
+                ->message('type.add')
+                ->field('uuid',$productType->uuid);                  
+        },'errors.type.add');                                    
     }
 
     /**
@@ -65,28 +65,28 @@ class ProductTypeControlPanel extends ControlPanelApiController
     */
     public function updateController($request, $response, $data) 
     {         
-        $this->onDataValid(function($data) { 
-            $uuid = $data['uuid'];
-            $model = Model::ProductType('products')->findById($uuid); 
-            if ($model == null) {
-                $this->error('errors.type.exist');
-                return;
-            }
+        $data
+            ->validate(true);
 
-            if ($model->readonly == 1) {
-                $this->error('errors.type.readonly');
-                return;
-            }
+        $uuid = $data['uuid'];
+        $model = Model::ProductType('products')->findById($uuid); 
+        if ($model == null) {
+            $this->error('errors.type.exist');
+            return;
+        }
 
-            $result = (bool)$model->update($data->toArray());
+        if ($model->readonly == 1) {
+            $this->error('errors.type.readonly');
+            return;
+        }
 
-            $this->setResponse($result,function() use($uuid) {                  
-                $this
-                    ->message('type.update')
-                    ->field('uuid',$uuid);                  
-            },'errors.type.update');                                    
-        });
-        $data->validate();
+        $result = (bool)$model->update($data->toArray());
+
+        $this->setResponse($result,function() use($uuid) {                  
+            $this
+                ->message('type.update')
+                ->field('uuid',$uuid);                  
+        },'errors.type.update');                                    
     }
 
     /**
@@ -99,27 +99,27 @@ class ProductTypeControlPanel extends ControlPanelApiController
     */
     public function deleteController($request, $response, $data) 
     {         
-        $this->onDataValid(function($data) { 
-            $uuid = $data['uuid'];
-            $model = Model::ProductType('products')->findById($uuid);
-            
-            if ($model->hasProducts() == true) {
-                $this->error('errors.type.used');
-                return;
-            }
-           
-            if ($model->readonly == 1) {
-                $this->error('errors.type.readonly');
-                return;
-            }
+        $data
+            ->validate(true);
 
-            $result = $model->delete();
-            $this->setResponse($result,function() use($uuid) {                  
-                $this
-                    ->message('type.delete')
-                    ->field('uuid',$uuid);                  
-            },'errors.type.delete');                                    
-        });
-        $data->validate();
+        $uuid = $data['uuid'];
+        $model = Model::ProductType('products')->findById($uuid);
+        
+        if ($model->hasProducts() == true) {
+            $this->error('errors.type.used');
+            return;
+        }
+        
+        if ($model->readonly == 1) {
+            $this->error('errors.type.readonly');
+            return;
+        }
+
+        $result = $model->delete();
+        $this->setResponse($result,function() use($uuid) {                  
+            $this
+                ->message('type.delete')
+                ->field('uuid',$uuid);                  
+        },'errors.type.delete');                                    
     }
 }

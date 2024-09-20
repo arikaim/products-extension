@@ -50,6 +50,7 @@ class ProductType extends Model
         'title',
         'readonly',
         'description',
+        'include_in_sitemap',
         'options'
     ];
    

@@ -2,11 +2,20 @@
     {% set product_type = createModel('ProductType','products').findById(uuid) %}
 {% endif %}
 <form class="ui form" id="product_type_form" method="POST">  
-    <input type="hidden" name="uuid" id="uuid" value="{{ uuid }}">        
-    <div class="field">
-        <label>{{ fields.title.label }}</label>
-        <input rule="empty" type="text" name="title" id="title" {{ fields.title.placeholder|attr('placeholder') }} value="{{ product_type.title }}"> 
-    </div>       
+    <input type="hidden" name="uuid" id="uuid" value="{{ uuid }}">   
+    <div class="two fields">
+        <div class="field">
+            <label>{{ fields.title.label }}</label>
+            <input rule="empty" type="text" name="title" id="title" {{ fields.title.placeholder|attr('placeholder') }} value="{{ product_type.title }}"> 
+        </div>  
+        {{  component('semantic~form.fields.checkbox',{
+                name: 'include_in_sitemap',
+                field_label: fields.sitemap.label,
+                value: product_type.include_in_sitemap
+            }) 
+        }}
+    </div>
+        
     {{  component('semantic~form.fields.slug',{ 
             slug_source: 'title',
             label: fields.slug.label,

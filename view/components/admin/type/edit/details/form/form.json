@@ -10,6 +10,9 @@
         },
         "slug": {
             "label": "Slug"
+        },
+        "sitemap": {
+            "label": "Include in sitemap"
         }        
     }
 }

@@ -39,7 +39,9 @@ class ProductType extends Schema
         $table->status();
         $table->integer('readonly')->nullable(true);
         $table->string('description')->nullable(true);    
+        $table->integer('include_in_sitemap')->nullable(false)->default(1);
         $table->options();       
+
     }
 
     /**
@@ -49,7 +51,11 @@ class ProductType extends Schema
      * @return void
      */
     public function update($table) 
-    {            
+    {        
+        if ($this->hasColumn('include_in_sitemap') == false) {
+            $table->integer('include_in_sitemap')->nullable(false)->default(1);
+        } 
+
         if ($this->hasColumn('readonly') == false) {
             $table->integer('readonly')->nullable(true);
         } 
