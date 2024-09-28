@@ -22,8 +22,7 @@ function ProductsView() {
     };
 
     this.init = function() {
-        arikaim.ui.loadComponentButton('.add-product');
-
+        arikaim.ui.loadComponentButton('.product-action');
         this.loadMessages('products::admin.messages');
 
         paginator.init('product_rows');   
@@ -99,6 +98,8 @@ function ProductsView() {
     };
 
     this.initRows = function() {
+        arikaim.ui.loadComponentButton('.product-action');
+        
         $('.status-dropdown').dropdown({
             onChange: function(value) {               
                 var uuid = $(this).attr('uuid');

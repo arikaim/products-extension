@@ -2,6 +2,7 @@
     "labels": {        
         "free": "Free",
         "resotre": "Resotre",
+        "export": "Export to Json",
         "status": {
             "active": "active",
             "disabled": "disabled"

@@ -20,6 +20,14 @@
         <button class="ui icon mini basic compact button product-details" uuid="{{ item.uuid }}">
             <i class="icon info blue"></i>
         </button>  
+        <button 
+            title="{{ labels.export }}"
+            mountTo="product_details"
+            component="content::admin.export"
+            params="uuid:{{ item.uuid }},model_class:Products,schema_class:Products,extension:products"
+            class="ui icon mini basic compact button product-action">
+            <i class="icon file export blue"></i>
+        </button>  
     </td>
     <td>
         {% if item.hasImage() == true %}
