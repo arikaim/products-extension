@@ -30,7 +30,7 @@ function ProductTypeView() {
                 description: message
             },function() {
                 productType.delete(uuid,function(result) {
-                    arikaim.ui.table.removeRow('#' + uuid); 
+                    arikaim.ui.table.removeRow('#product_type_row_' + uuid); 
                     arikaim.page.toastMessage(result.message);    
                 });
             });

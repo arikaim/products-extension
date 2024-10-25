@@ -128,7 +128,7 @@ function ProductsView() {
                 description: message
             },function() {
                 products.delete(uuid,function(result) {
-                    arikaim.ui.table.removeRow('#' + uuid);  
+                    arikaim.ui.table.removeRow('#row_' + uuid);  
                     arikaim.page.toastMessage(result.message);  
                 });
             });
