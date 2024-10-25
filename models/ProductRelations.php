@@ -40,6 +40,7 @@ class ProductRelations extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'product_id',
         'relation_id',
         'relation_type'       

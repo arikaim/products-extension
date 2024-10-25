@@ -92,6 +92,7 @@ class Products extends Model
      * @var array
     */
     protected $fillable = [
+        'id',
         'position',
         'uuid',     
         'status',

@@ -35,6 +35,7 @@ class ProductId extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'uuid',
         'external_id',
         'api_driver',

@@ -41,6 +41,7 @@ class ProductPriceList extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'currency_id',  
         'product_id',          
         'price',

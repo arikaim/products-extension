@@ -39,6 +39,7 @@ class ProductOptions extends Model
      * @var array
      */
     protected $fillable = [
+        'id',
         'reference_id',       
         'value',
         'key',
