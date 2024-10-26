@@ -3,7 +3,15 @@
 <div class="ui segment">
     <div class="ui stackable grid">
         <div class="one wide column">
-            <div class="pt-1">
+            <div class="flex felx-rows items-center">
+                <button 
+                    title="{{ labels.import }}"
+                    mountTo="product_details"
+                    component="content::admin.import"
+                    params="uuid:{{ item.uuid }},model_class:Products,schema_class:Products,extension:products"
+                    class="ui icon mini curcular blue button product-action">
+                    <i class="icon file import"></i>
+                </button>  
                 <button 
                     mountTo="product_details"
                     component="products::admin.products.add"
@@ -11,7 +19,7 @@
                     class="ui mini curcular green icon button product-action">
                     <i class="icon plus"></i>
                 </button>
-            </div>           
+            </div>
         </div>
         <div class="five wide column">
             <div class="flex flex-row items-center">

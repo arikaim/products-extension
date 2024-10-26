@@ -4,6 +4,7 @@
         "icon": "list"      
     },
     "labels": {
+        "import": "Import Product",
         "create": "Add Product",
         "deleted": "Show deleted",
         "type" : "Type"

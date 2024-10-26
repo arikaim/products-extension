@@ -59,6 +59,17 @@ class Products extends Extension
         $this->registerEvent('product.delete','Delete product');  
         // Relation map 
         $this->addRelationMap('product','Products');
+        // Service
+        $this->registerService('ProductsService');  
+    }   
+
+    /**
+     * Create db tables
+     *
+     * @return void
+     */
+    public function dbInstall(): void
+    {
         // Create db tables        
         $this->createDbTable('ProductType');
         $this->createDbTable('Products');
@@ -69,9 +80,7 @@ class Products extends Extension
         $this->createDbTable('ProductOptionType');
         $this->createDbTable('ProductOptions');     
         $this->createDbTable('ProductPriceList'); 
-        // Service
-        $this->registerService('ProductsService');  
-    }   
+    }
 
     /**
      * Post install actions
