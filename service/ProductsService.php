@@ -41,6 +41,34 @@ class ProductsService extends Service implements ServiceInterface
     }
 
     /**
+     * Save product
+     * @param string $title
+     * @param string $typeSlug
+     * @param mixed $userId
+     * @return bool
+     */
+    public function saveProduct(string $title, string $typeSlug, ?int $userId = null): bool
+    {
+        $model = Model::Products('products');
+        if ($model->hasProduct($title,$userId) == true) {
+            return true;
+        }
+
+        $type = Model::ProductType('products')->findBySlug($typeSlug);
+        if ($type == null) {
+            return false;
+        }
+
+        $created = $model->create([
+            'type_id' => $type->id,
+            'title'   => $title,
+            'user_id' => $userId,
+        ]);
+
+        return ($created !== null);
+    }
+
+    /**
      * Find product by type
      *
      * @param string $type
