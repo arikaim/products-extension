@@ -5,10 +5,10 @@
     "type": "user",
     "description": "Manage products",
     "short-description": "Products",
-    "version": "1.2.30",
+    "version": "1.2.32",
     "private-repository": true,
     "repository-type": "arikaim",
-    "repository": "arikaim-repository/products-extension",
+    "repository": "https://github.com/arikaim-repository/products-extension",
     "position": "3",
     "require": {
         "extensions": [
