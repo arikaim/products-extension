@@ -23,10 +23,10 @@ function ProductTypeView() {
         arikaim.ui.button('.delete-button',function(element) {
             var uuid = $(element).attr('uuid');
             var title = $(element).attr('data-title');
-            var message = arikaim.ui.template.render(self.getMessage('type.remove.content'),{ title: title });
+            var message = arikaim.ui.template.render(self.getMessage('messages.type.remove.content'),{ title: title });
             
             modal.confirmDelete({ 
-                title: self.getMessage('type.remove.title'),
+                title: self.getMessage('messages.type.remove.title'),
                 description: message
             },function() {
                 productType.delete(uuid,function(result) {

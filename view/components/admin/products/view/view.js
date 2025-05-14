@@ -121,13 +121,13 @@ function ProductsView() {
         arikaim.ui.button('.delete-button',function(element) {
             var uuid = $(element).attr('uuid');
             var title = $(element).attr('data-title');
-            var message = arikaim.ui.template.render(self.getMessage('remove.content'),{ title: title });
+            var message = arikaim.ui.template.render(self.getMessage('messages.remove.content'),{ title: title });
 
             modal.confirmDelete({ 
-                title: self.getMessage('remove.title'),
+                title: self.getMessage('messages.remove.title'),
                 description: message
             },function() {
-                products.delete(uuid,function(result) {
+                productsApi.delete(uuid,function(result) {
                     arikaim.ui.table.removeRow('#row_' + uuid);  
                     arikaim.page.toastMessage(result.message);  
                 });

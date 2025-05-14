@@ -2,8 +2,8 @@
 {% set type_id = searchValue('type_id','products') %}
 <div class="ui segment">
     <div class="ui stackable grid">
-        <div class="one wide column">
-            <div class="flex felx-rows items-center">
+        <div class="two wide column">
+            <div class="flex felx-rows items-center pt-1">
                 <button 
                     title="{{ labels.import }}"
                     mountTo="product_details"
@@ -21,25 +21,20 @@
                 </button>
             </div>
         </div>
-        <div class="five wide column">
-            <div class="flex flex-row items-center">
-                <div class="px-2 font-bold">
-                    {{ labels.type }}
-                </div>
-                {{  component('products::admin.type.dropdown',{ 
-                        class: 'fluid basic button',
-                        icon: 'filter',
-                        selected: type_id, 
-                        show_all: true,
-                        data_column: 'id'                       
-                    }) 
-                }}
-            </div>
+        <div class="four wide column">
+            {{  component('products::admin.type.dropdown',{ 
+                    class: 'fluid basic button',
+                    icon: 'filter',
+                    selected: type_id, 
+                    show_all: true,
+                    data_column: 'id'                       
+                }) 
+            }}
         </div>       
-        <div class="six wide centered column">                 
+        <div class="seven wide centered column">                 
             {{ component("semantic~search.form",{ namespace: 'products' }) }}                    
         </div>
-        <div class="two wide column right aligned">
+        <div class="three wide column right aligned">
             {{ component('semantic~paginator.dropdown',{ namespace: 'products' }) }}
         </div>
     </div>

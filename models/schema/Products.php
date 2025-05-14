@@ -39,7 +39,7 @@ class Products extends Schema
         $table->string('sku')->nullable(true);
         $table->text('description')->nullable(true);
         $table->text('description_summary')->nullable(true);
-        $table->userId(true);
+        $table->userId(false);
         $table->status();
         $table->position();      
         $table->relation('type_id','product_type'); 

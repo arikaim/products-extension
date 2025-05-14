@@ -13,6 +13,9 @@ use Arikaim\Core\Db\Model;
 use Arikaim\Core\Controllers\ApiController;
 use Arikaim\Extensions\Products\Controllers\Traits\Products;
 use Arikaim\Extensions\Products\Controllers\Traits\Options;
+use Arikaim\Core\Controllers\Traits\Status;
+use Arikaim\Core\Controllers\Traits\SoftDelete;
+use Arikaim\Core\Controllers\Traits\MetaTags;
 
 /**
  * Products api controller
@@ -20,7 +23,10 @@ use Arikaim\Extensions\Products\Controllers\Traits\Options;
 class ProductsApi extends ApiController
 {
     use 
+        Status,
         Products,
+        SoftDelete,
+        MetaTags,
         Options;
 
     /**
@@ -31,6 +37,8 @@ class ProductsApi extends ApiController
     public function init()
     {
         $this->loadMessages('current>products.messages');
+        $this->setModelClass('Products');
+        $this->setExtensionName('products');
     }
 
     /**
@@ -38,7 +46,7 @@ class ProductsApi extends ApiController
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
-     * @param Validator $data
+     * @param \Arikaim\Core\Validator\Validator $data
     */
     public function updatePrice($request, $response, $data) 
     {         
@@ -73,7 +81,7 @@ class ProductsApi extends ApiController
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
-     * @param Validator $data
+     * @param \Arikaim\Core\Validator\Validator $data
     */
     public function deleteUserProduct($request, $response, $data) 
     {         
@@ -92,7 +100,8 @@ class ProductsApi extends ApiController
             return;
         }
 
-        $this->requireUser($product->user_id);
+        // check access
+        $this->requireUserOrControlPanel($product->user_id);
 
         $result = $product->deleteProduct();
         if ($result === false) {
@@ -112,11 +121,12 @@ class ProductsApi extends ApiController
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
-     * @param Validator $data
+     * @param \Arikaim\Core\Validator\Validator $data
     */
     public function update($request, $response, $data) 
     {         
-        $data->validate(true);
+        $data
+            ->validate(true);
         
         $price = $data->get('price',null);
 
@@ -130,7 +140,8 @@ class ProductsApi extends ApiController
             return;
         }
         
-        $this->requireUser($product->user_id);
+        // check access
+        $this->requireUserOrControlPanel($product->user_id);
 
         $result = $product->update([         
             'type_id'     => $data['product_type'],       
@@ -161,7 +172,7 @@ class ProductsApi extends ApiController
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
-     * @param Validator $data
+     * @param \Arikaim\Core\Validator\Validator $data
     */
     public function add($request, $response, $data) 
     {         
@@ -170,10 +181,21 @@ class ProductsApi extends ApiController
             ->addRule('number:required','product_type')            
             ->validate(true);
 
+        
         $description = $data->get('description',null);
         $price = $data->get('price',null);
         $userId = $this->getUserId();
       
+        // check access
+        if ($this->get('access')->hasAccessOneFrom([
+                'ControlPanel:full',
+                'Products:write'
+            ]) == false) {
+            // deny
+            $this->error('errors.access','Access Denied');
+            return false;
+        }
+
         $model = Model::Products('products');
         if ($model->hasProduct($data['title'],$userId) == true) {
             $this->error('errors.exist','Product with this name exists.');
@@ -210,15 +232,16 @@ class ProductsApi extends ApiController
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
-     * @param Validator $data
+     * @param \Arikaim\Core\Validator\Validator $data
     */
     public function getList($request, $response, $data) 
     {          
         $products = $this->getProductsList($request,$response,$data);
         $result = $products->toArray();
              
-        $this->field('paginator',$result['paginator']); 
-        $this->field('items',$result['rows']);
+        $this
+            ->field('paginator',$result['paginator']) 
+            ->field('items',$result['rows']);
     }
     
     /**
@@ -226,7 +249,7 @@ class ProductsApi extends ApiController
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
-     * @param Validator $data
+     * @param \Arikaim\Core\Validator\Validator $data
     */
     public function getDropdownList($request, $response, $data) 
     {       
@@ -274,8 +297,8 @@ class ProductsApi extends ApiController
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
-     * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
+     * @param \Arikaim\Core\Validator\Validator $data
+     * @return mixed
     */
     public function productDetails($request, $response, $data) 
     {          
@@ -305,5 +328,106 @@ class ProductsApi extends ApiController
         }
         
         $this->setResultFields($categories,'categories');         
+    }
+
+    /**
+     * Update product description
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param \Arikaim\Core\Validator\Validator $data
+     * @return mixed
+    */
+    public function updateDescription($request, $response, $data) 
+    {         
+        $data                     
+            ->validate(true);
+
+        $product = Model::Products('products')->findById($data['uuid']); 
+        if ($product == null) {
+            $this->error('errors.id','Not valid product id.');
+            return;
+        }
+
+        // check access
+        $this->requireUserOrControlPanel($product->user_id);
+
+        $result = $product->update([
+            'description'         => $data['description'],
+            'description_summary' => $data['description_summary']                
+        ]);
+
+        $this->setResponse(($result !== false),function() use($product) {                  
+            $this
+                ->message('description')
+                ->field('uuid',$product->uuid);                  
+        },'errors.description');                                    
+    }
+
+    /**
+     * Add external id
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param \Arikaim\Core\Validator\Validator $data
+     * @return mixed
+    */
+    public function addExternalId($request, $response, $data) 
+    {         
+        $data
+            ->addRule('text:min=2|required','external_id')                
+            ->validate(true);
+
+        $product = Model::Products('products')->findById($data['uuid']); 
+        if ($product == null) {
+            $this->error('errors.id','Not valid product id.');
+            return;
+        }
+
+        // check access
+        $this->requireUserOrControlPanel($product->user_id);
+
+
+        $model = Model::ProductId('products');
+        $result = $model->addId($product->id,$data['external_id'],$data['api_driver']);
+
+        $this->setResponse($result,function() use($product) { 
+            $this->get('event')->dispatch('product.add',$product->toArray());                         
+            $this
+                ->message('id.add')
+                ->field('uuid',$product->uuid);                  
+        },'errors.id.exists');                                      
+    }
+
+    /**
+     * Delete external id
+     *
+     * @param \Psr\Http\Message\ServerRequestInterface $request
+     * @param \Psr\Http\Message\ResponseInterface $response
+     * @param \Arikaim\Core\Validator\Validator $data
+     * @return mixed
+    */
+    public function deleteExternalId($request, $response, $data) 
+    {         
+        $data
+            ->addRule('text:min=2|required','uuid')                
+            ->validate(true);
+
+        $model = Model::ProductId('products')->findById($data['uuid']); 
+        if ($model == null) {
+            $this->error('errors.id','Not valid extenal product Id');
+            return;
+        }
+
+        // check access
+        $this->requireUserOrControlPanel($model->product->user_id);
+
+        $result = $model->delete();
+
+        $this->setResponse($result,function() use($model) {                  
+            $this
+                ->message('product.delete')
+                ->field('uuid',$model->uuid);                  
+        },'errors.delete');                                    
     }
 }

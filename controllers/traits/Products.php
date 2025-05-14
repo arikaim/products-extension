@@ -10,7 +10,6 @@
 namespace Arikaim\Extensions\Products\Controllers\Traits;
 
 use Arikaim\Core\Db\Model;
-use Arikaim\Core\Paginator\Paginator;
 
 /**
  * Products list trait
