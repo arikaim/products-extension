@@ -63,7 +63,7 @@ class BrandsApi extends ApiController
         }
 
         $this
-            ->message('delete')
+            ->message('delete','Brand was deleted successfully.')
             ->field('uuid',$brand->uuid);                                                          
     }
 
@@ -140,6 +140,7 @@ class BrandsApi extends ApiController
         }
  
         $brand = $model->create([         
+            'icon'        => $data['icon'],
             'title'       => $data['title'],
             'user_id'     => $userId,
             'description' => $description

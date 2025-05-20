@@ -22,6 +22,8 @@ function ProductBrandsView() {
                 params: { 
                     uuid: uuid
                 }                       
+            },function() {
+                self.initRows();
             });
         },'onBrandAdd');
 
@@ -33,6 +35,8 @@ function ProductBrandsView() {
                 params: { 
                     uuid: uuid
                 }                       
+            },function() {
+                self.initRows();
             });
         },'onBrandUpdate');
 
@@ -58,7 +62,7 @@ function ProductBrandsView() {
                 title: self.getMessage('messages.brand.remove.title'),
                 description: message
             },function() {
-                productType.delete(uuid,function(result) {
+                brandsApi.delete(uuid,function(result) {
                     arikaim.ui.table.removeRow('#row_' + uuid); 
                     arikaim.page.toastMessage(result.message);    
                 });
