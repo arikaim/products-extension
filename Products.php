@@ -43,7 +43,13 @@ class Products extends Extension
         // External Id
         $this->addApiRoute('POST','/api/products/external/id','ProductsApi','addExternalId','session');    
         $this->addApiRoute('DELETE','/api/products/external/id/{uuid}','ProductsApi','deleteExternalId','session');  
-        // Product type
+        // Brands
+        $this->addApiRoute('POST','/api/products/brand/add','BrandsApi','add','session');  
+        $this->addApiRoute('PUT','/api/products/brand/update','BrandsApi','update','session');
+        $this->addApiRoute('DELETE','/api/products/brand/delete/{uuid}','BrandsApi','delete','session');
+        $this->addApiRoute('PUT','/api/products/brand/status','BrandsApi','setStatus','session');
+
+        // Product type (Control Panel)
         $this->addApiRoute('POST','/api/admin/products/type/add','ProductTypeControlPanel','add','session');  
         $this->addApiRoute('PUT','/api/admin/products/type/update','ProductTypeControlPanel','update','session');
         $this->addApiRoute('DELETE','/api/admin/products/type/delete/{uuid}','ProductTypeControlPanel','delete','session');
@@ -53,6 +59,7 @@ class Products extends Extension
         $this->registerEvent('product.delete','Delete product');  
         // Relation map 
         $this->addRelationMap('product','Products');
+        $this->addRelationMap('brand','Brands');
         // Service
         $this->registerService('ProductsService');  
         // Add Permissions
@@ -67,6 +74,7 @@ class Products extends Extension
     public function dbInstall(): void
     {
         // Create db tables        
+        $this->createDbTable('Brands');
         $this->createDbTable('ProductType');
         $this->createDbTable('Products');
         $this->createDbTable('ProductId');   

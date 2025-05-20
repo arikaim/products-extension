@@ -43,6 +43,12 @@
                 "title": "Confirm Remove",
                 "content": "Confirm remove product type '<b><% title %></b>'"
             }
+        },
+        "brand": {
+            "remove": {
+                "title": "Confirm Remove",
+                "content": "Confirm remove brand '<b><% title %></b>'"
+            }
         }
     }
 }

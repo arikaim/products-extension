@@ -1,0 +1,11 @@
+{
+    "tooltips": {
+        "create": "New brand"
+    },
+    "columns": {
+        "action": "Action",
+        "title": "Title",
+        "user": "User",
+        "status": "Status" 
+    }
+}

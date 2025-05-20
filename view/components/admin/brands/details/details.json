@@ -1,0 +1,16 @@
+{
+    "title": "Product Brand",
+    "icon": "info",
+    "labels": {
+        "uuid": "Uuid",
+        "title": "Title",
+        "slug": "Slug",
+        "icon": "Icon",
+        "date": "Created",
+        "status": "Status",
+        "products": "Products",
+        "description": "Description",
+        "user": "User",
+        "options": "Options"
+    }
+}

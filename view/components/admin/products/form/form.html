@@ -22,21 +22,28 @@
         }) 
     }}   
     <div class="two fields">
-        {% if product is not empty %}
         <div class="field">
-            <label>{{ fields.category.label }}</label>
-            {{  component('system:admin.orm.relations.fields.dropdown',{ 
-                    model: 'CategoryRelations',
-                    extension: 'category',
-                    type: 'product',
-                    relation_id: product.id,
-                    items: createModel('Category','category').getList(null),
-                    class: 'fluid'
+            <label>{{ fields.brand.label }}</label>
+            {{  component('products::admin.brands.dropdown',{ 
+                    selected: product.brand_id,
+                    class: 'clearable selection'                   
                 }) 
             }}   
         </div>
+        {% if product is not empty %}
+            <div class="field">
+                <label>{{ fields.category.label }}</label>
+                {{  component('system:admin.orm.relations.fields.dropdown',{ 
+                        model: 'CategoryRelations',
+                        extension: 'category',
+                        type: 'product',
+                        relation_id: product.id,
+                        items: createModel('Category','category').getList(null),
+                        class: 'fluid'
+                    }) 
+                }}   
+            </div>
         {% endif %}
-      
     </div>
     <div class="field fluid">
         <label>{{ fields.type.label }}</label>

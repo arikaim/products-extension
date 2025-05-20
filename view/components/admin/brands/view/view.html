@@ -1,0 +1,42 @@
+<div class="ui segment">
+    <div class="ui stackable grid">
+        <div class="ten wide column">                
+            <button 
+                mountTo="brand_details"
+                component="products::admin.brands.add"
+                title="{{ tooltip.create }}"
+                class="ui mini curcular green icon button create-brand">
+                <i class="icon plus"></i>
+            </button>           
+        </div>
+        <div class="six wide column right aligned">
+            {{  component('semantic~paginator.dropdown',{ 
+                    class: 'mini',
+                    namespace: 'product-brands' 
+                }) 
+            }}
+        </div>
+    </div>
+</div>
+
+<div class="ui segment">
+    <table class="ui compact stackable selectable borderless basic table">
+        <thead class="table-head">
+            <tr>              
+                <th class="three wide collapsing left aligned">{{ columns.action }}</th> 
+                <th class="three wide column">{{ columns.status }}</th>                    
+                <th>{{ columns.title }}</th>                                   
+                <th class="six wide column">{{ columns.user }}</th>                                                                             
+            </tr>
+        </thead>
+        <tbody 
+            id="brand_rows" 
+            component="products::admin.brands.view.rows" 
+            namespace="product-brands">
+            {{ component('products::admin.brands.view.rows') }} 
+        </tbody>
+    </table> 
+    <div id="paginator">      
+        {{ component("semantic~paginator",{ namespace: 'product-brands' }) }}
+    </div>
+</div>

@@ -21,7 +21,7 @@ trait Options
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
-     * @param Validator $data
+     * @param \Arikaim\Core\Validator\Validator $data
     */
     public function updateOptions($request, $response, $data) 
     {         

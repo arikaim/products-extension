@@ -8,6 +8,7 @@
     "version": "1.3.0",
     "repository": "https://github.com/arikaim/products-extension",
     "position": "3",
+    "install-order": 3,
     "require": {
         "extensions": [
             "currency"

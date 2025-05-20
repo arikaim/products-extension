@@ -1,0 +1,19 @@
+<div class="ui stackable tabular menu product-brand-edit-tabs">      
+    <div 
+        class="item link active product-brand-tab-item" 
+        component="products::admin.brands.edit.details" 
+        uuid="{{ uuid }}">
+        <i class="icon stream blue"></i>
+        {{ labels.details }}     
+    </div>  
+    <div 
+        class="item link product-brand-tab-item" 
+        component="products::admin.brands.edit.image" 
+        uuid="{{ uuid }}">
+        <i class="image icon blue"></i>
+        {{ labels.image }}     
+    </div>  
+</div>
+<div class="ui active tab" id="brands_editor">           
+    {{ component('products::admin.brands.edit.details',{ uuid: uuid }) }}       
+</div>  

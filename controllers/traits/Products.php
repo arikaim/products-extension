@@ -21,7 +21,7 @@ trait Products
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
-     * @param Validator $data
+     * @param \Arikaim\Core\Validator\Validator $data
      * @return mixed
     */
     public function getProductsList($request, $response, $data)
@@ -45,8 +45,8 @@ trait Products
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
-     * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
+     * @param \Arikaim\Core\Validator\Validator $data
+     * @return mixed
     */
     public function getPriceController($request, $response, $data)
     {

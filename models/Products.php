@@ -12,6 +12,7 @@ namespace Arikaim\Extensions\Products\Models;
 use Illuminate\Database\Eloquent\Model;
 
 use Arikaim\Extensions\Products\Models\ProductType;
+use Arikaim\Extensions\Products\Models\Brands;
 use Arikaim\Extensions\Products\Models\ProductOptions;
 use Arikaim\Extensions\Products\Models\ProductPriceList;
 use Arikaim\Extensions\Products\Models\ProductTranslations;
@@ -107,6 +108,7 @@ class Products extends Model
         'meta_description',
         'meta_keywords',   
         'image_id',
+        'brand_id',
         'type_id',
         'user_id'
     ];
@@ -235,11 +237,20 @@ class Products extends Model
     /**
      * Product type relation
      *
-     * @return Relation|null
+     * @return object|null
      */
     public function type()
     {
         return $this->belongsTo(ProductType::class,'type_id');
+    }
+
+    /**
+     * Brand relation
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function brand()
+    {
+        return $this->belongsTo(Brands::class,foreignKey: 'brand_id');
     }
 
     /**

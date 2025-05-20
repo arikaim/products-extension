@@ -12,6 +12,9 @@
         },
         "category": {
             "label": "Category"
+        },
+        "brand": {
+            "label": "Brand"
         }
     }
 }

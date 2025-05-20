@@ -68,8 +68,20 @@ function ProductsView() {
                     uuid: result.uuid
                 }                       
             });
-
         },'onProductAdd');
+
+        arikaim.events.on('product.update',function(result) {      
+            arikaim.page.loadContent({
+                id: 'row_' + result.uuid,    
+                replace: true, 
+                component: 'products::admin.products.view.item',
+                params: { 
+                    uuid: result.uuid
+                }                       
+            },function() {
+                self.initRows();
+            });
+        },'onProductUpdate');
     };
 
     this.loadItem = function(uuid, prepend) {

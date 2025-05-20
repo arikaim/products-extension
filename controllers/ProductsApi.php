@@ -126,6 +126,7 @@ class ProductsApi extends ApiController
     public function update($request, $response, $data) 
     {         
         $data
+            ->addFilter('brand_id','EmptyToNull')
             ->validate(true);
         
         $price = $data->get('price',null);
@@ -143,7 +144,8 @@ class ProductsApi extends ApiController
         // check access
         $this->requireUserOrControlPanel($product->user_id);
 
-        $result = $product->update([         
+        $result = $product->update([  
+            'brand_id'    => $data->get('brand_id'),
             'type_id'     => $data['product_type'],       
             'title'       => $data['title'],
             'description' => $data['description']

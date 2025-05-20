@@ -15,7 +15,7 @@
                 <button 
                     mountTo="product_details"
                     component="products::admin.products.add"
-                    title="{{ tooltip.create }}"
+                    title="{{ labels.create }}"
                     class="ui mini curcular green icon button product-action">
                     <i class="icon plus"></i>
                 </button>
@@ -35,7 +35,10 @@
             {{ component("semantic~search.form",{ namespace: 'products' }) }}                    
         </div>
         <div class="three wide column right aligned">
-            {{ component('semantic~paginator.dropdown',{ namespace: 'products' }) }}
+            {{  component('semantic~paginator.dropdown',{                    
+                    namespace: 'products' 
+                }) 
+            }}
         </div>
     </div>
 </div>
@@ -54,11 +57,17 @@
                 <th >{{ columns.user }}</th>                                      
             </tr>
         </thead>
-        <tbody id="product_rows" component="products::admin.products.view.rows" namespace="products">
+        <tbody 
+            id="product_rows" 
+            component="products::admin.products.view.rows" 
+            namespace="products">
             {{ component('products::admin.products.view.rows') }} 
         </tbody>
     </table> 
     <div id="paginator">      
-        {{ component("semantic~paginator",{ namespace: 'products' }) }}
+        {{  component("semantic~paginator",{               
+                namespace: 'products' 
+            }) 
+        }}
     </div>
 </div>
