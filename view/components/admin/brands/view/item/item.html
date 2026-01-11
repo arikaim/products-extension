@@ -1,0 +1,36 @@
+{% if uuid is not empty %}
+    {% set item = createModel('Brands','products').findById(uuid) %}
+{% endif %}
+<tr id="row_{{ item.uuid }}">              
+    <td>  
+        <button 
+            mountTo="brand_details"
+            component="products::admin.brands.details"
+            params="uuid:{{ item.uuid }}"
+            class="ui icon mini compact basic button brand-action" 
+            uuid="{{ item.uuid }}" 
+            title="{{ labels.details }}">
+            <i class="icon info"></i>
+        </button>          
+        <button 
+            mountTo="brand_details"
+            component="products::admin.brands.edit"
+            class="ui icon mini compact basic button brand-action" 
+            params="uuid:{{ item.uuid }}" 
+            title="{{ labels.edit }}">
+            <i class="icon edit"></i>
+        </button>     
+        {% if item.hasProducts() == false %}       
+        <button class="ui icon mini compact basic button delete-button" uuid="{{ item.uuid }}" data-title="{{ item.title }}">
+            <i class="icon trash orange"></i>
+        </button>  
+        {% endif %}      
+    </td>   
+    <td>
+        {{ component('semantic~status.dropdown',{ status: item.status, uuid: item.uuid, skip: [2,3,4,5,6] }) }}
+    </td>       
+    <td>{{ item.title }}</td>         
+    <td>
+        {{ item.user.user_name_or_email }}
+    </td>           
+</tr>

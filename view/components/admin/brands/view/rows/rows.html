@@ -1,0 +1,12 @@
+{% set model = createModel('Brands','products').orderBy('title') %}
+{% set items = paginate(model,'product-brands') %}
+
+{% if items.getItems()|length == 0 %}
+<tr>
+    <td colspan="5">..</td>
+</tr>
+{% endif %}
+
+{% for item in items.getItems() %}  
+    {{ component('products::admin.brands.view.item',{ item: item }) }}
+{% endfor %}

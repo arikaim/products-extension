@@ -31,7 +31,7 @@ class ProductsService extends Service implements ServiceInterface
     /**
      * Find product
      *
-     * @param mixed       $key
+     * @param mixed        $key
      * @param integer|null $userId
      * @return object|null
      */

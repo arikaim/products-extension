@@ -39,11 +39,12 @@ class Products extends Schema
         $table->string('sku')->nullable(true);
         $table->text('description')->nullable(true);
         $table->text('description_summary')->nullable(true);
-        $table->userId(true);
+        $table->userId(false);
         $table->status();
         $table->position();      
         $table->relation('type_id','product_type'); 
         $table->relation('image_id','image',true); 
+        $table->relation('brand_id','brands',true); 
         $table->metaTags();     
         $table->dateCreated();
         $table->dateUpdated();
@@ -61,7 +62,11 @@ class Products extends Schema
      * @return void
      */
     public function update($table) 
-    {           
+    {      
+        if ($this->hasColumn('brand_id') == false) {
+            $table->relation('brand_id','brands',true); 
+        }  
+
         if ($this->hasColumn('meta_title') == false) {
             $table->metaTags();
         }   

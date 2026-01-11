@@ -1,0 +1,19 @@
+{
+    "name": "arikaim/products-extension",
+    "description": "Arikaim products extension",
+    "keywords": ["Module", "Arikaim products extension"],
+    "type": "arikaim-extension",
+    "license": "GPL-3.0-or-later",
+    "authors": [{
+        "name": "Intersoft Ltd",
+        "email": "info@arikaim.com",
+        "homepage": "http://arikaim.com"
+    }],
+    "require": {      
+        "arikaim/installer": "*",
+        "arikaim/currency-extension": "*"
+    },
+    "extra": {
+        "path": "products"
+    }
+}

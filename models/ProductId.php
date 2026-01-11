@@ -11,6 +11,8 @@ namespace Arikaim\Extensions\Products\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use Arikaim\Extensions\Products\Models\Products;
+
 use Arikaim\Core\Db\Traits\Uuid;
 use Arikaim\Core\Db\Traits\Find;
 
@@ -49,6 +51,15 @@ class ProductId extends Model
      */
     public $timestamps = false;
     
+    /**
+     * Relation to product
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function product()
+    {
+        return $this->belongsTo(Products::class,'product_id');
+    }
+
     /**
      * Return true if id ref exist
      *

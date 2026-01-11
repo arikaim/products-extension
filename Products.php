@@ -24,23 +24,6 @@ class Products extends Extension
      */
     public function install()
     {
-        // Pages
-        $this->addPageRoute('/marketplace/{slug}','ProductPages','productDetails','current>products.details',null,'productDetails',true);
-        // Control Panel Routes      
-        $this->addApiRoute('POST','/api/admin/products/add','ProductControlPanel','add','session');  
-        $this->addApiRoute('PUT','/api/admin/products/update','ProductControlPanel','update','session');
-        $this->addApiRoute('PUT','/api/admin/products/update/description','ProductControlPanel','updateDescription','session');
-        $this->addApiRoute('PUT','/api/admin/products/status','ProductControlPanel','setStatus','session');
-        $this->addApiRoute('DELETE','/api/admin/products/delete/{uuid}','ProductControlPanel','deleteProduct','session');
-        $this->addApiRoute('PUT','/api/admin/products/restore/{uuid}','ProductControlPanel','restore','session');     
-        $this->addApiRoute('PUT','/api/admin/products/update/meta','ProductControlPanel','updateMetaTags','session');
-        // Product type
-        $this->addApiRoute('POST','/api/admin/products/type/add','ProductTypeControlPanel','add','session');  
-        $this->addApiRoute('PUT','/api/admin/products/type/update','ProductTypeControlPanel','update','session');
-        $this->addApiRoute('DELETE','/api/admin/products/type/delete/{uuid}','ProductTypeControlPanel','delete','session');
-        // External Id
-        $this->addApiRoute('POST','/api/admin/products/external/id','ProductControlPanel','addExternalId','session');    
-        $this->addApiRoute('DELETE','/api/admin/products/external/id/{uuid}','ProductControlPanel','deleteExternalId','session');  
         // Api      
         $this->addApiRoute('GET','/api/products/list/{category}','ProductsApi','getList');   
         $this->addApiRoute('GET','/api/products/product/list/dropdown/{data_field}/{user}/[{query}]','ProductsApi','getDropdownList');   
@@ -49,18 +32,38 @@ class Products extends Extension
         $this->addApiRoute('POST','/api/products/product/add','ProductsApi','add',['session','token']);  
         $this->addApiRoute('PUT','/api/products/product/update','ProductsApi','update',['session','token']);  
         $this->addApiRoute('DELETE','/api/products/product/delete/{uuid}','ProductsApi','deleteUserProduct',['session','token']);  
+        $this->addApiRoute('PUT','/api/products/status','ProductsApi','setStatus','session');
+        $this->addApiRoute('PUT','/api/products/restore/{uuid}','ProductsApi','restore','session');     
+        $this->addApiRoute('PUT','/api/products/update/description','ProductsApi','updateDescription','session');
+        $this->addApiRoute('PUT','/api/products/update/meta','ProductsApi','updateMetaTags','session'); 
         // Price 
         $this->addApiRoute('PUT','/api/products/price/update','ProductsApi','updatePrice','session');
         // Options
         $this->addApiRoute('PUT','/api/products/options/update','ProductsApi','updateOptions','session');
+        // External Id
+        $this->addApiRoute('POST','/api/products/external/id','ProductsApi','addExternalId','session');    
+        $this->addApiRoute('DELETE','/api/products/external/id/{uuid}','ProductsApi','deleteExternalId','session');  
+        // Brands
+        $this->addApiRoute('POST','/api/products/brand/add','BrandsApi','add','session');  
+        $this->addApiRoute('PUT','/api/products/brand/update','BrandsApi','update','session');
+        $this->addApiRoute('DELETE','/api/products/brand/delete/{uuid}','BrandsApi','delete','session');
+        $this->addApiRoute('PUT','/api/products/brand/status','BrandsApi','setStatus','session');
+
+        // Product type (Control Panel)
+        $this->addApiRoute('POST','/api/admin/products/type/add','ProductTypeControlPanel','add','session');  
+        $this->addApiRoute('PUT','/api/admin/products/type/update','ProductTypeControlPanel','update','session');
+        $this->addApiRoute('DELETE','/api/admin/products/type/delete/{uuid}','ProductTypeControlPanel','delete','session');
         // Events
         $this->registerEvent('product.add','Add product');  
         $this->registerEvent('product.update','Update product');  
         $this->registerEvent('product.delete','Delete product');  
         // Relation map 
         $this->addRelationMap('product','Products');
+        $this->addRelationMap('brand','Brands');
         // Service
         $this->registerService('ProductsService');  
+        // Add Permissions
+        $this->addPermission('Products','Manage products','Create, edit and delete products');
     }   
 
     /**
@@ -71,6 +74,7 @@ class Products extends Extension
     public function dbInstall(): void
     {
         // Create db tables        
+        $this->createDbTable('Brands');
         $this->createDbTable('ProductType');
         $this->createDbTable('Products');
         $this->createDbTable('ProductId');   

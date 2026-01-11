@@ -10,7 +10,6 @@
 namespace Arikaim\Extensions\Products\Controllers\Traits;
 
 use Arikaim\Core\Db\Model;
-use Arikaim\Core\Paginator\Paginator;
 
 /**
  * Products list trait
@@ -22,7 +21,7 @@ trait Products
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
-     * @param Validator $data
+     * @param \Arikaim\Core\Validator\Validator $data
      * @return mixed
     */
     public function getProductsList($request, $response, $data)
@@ -46,16 +45,18 @@ trait Products
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
-     * @param Validator $data
-     * @return Psr\Http\Message\ResponseInterface
+     * @param \Arikaim\Core\Validator\Validator $data
+     * @return mixed
     */
-    public function getPriceController($request, $response, $data)
+    public function getPrice($request, $response, $data)
     {
         $data
             ->addRule('text:required','uuid','Not valid product Id')
             ->validate(true);
 
         $uuid = $data->get('uuid');
+        $key = $data->get('key','price');
+
         $currencyId = $data->get('currency_id',$this->get('currency')->getDefaultCurrencyId());
         
         $product = Model::Products('products')->findById($uuid);
@@ -63,10 +64,12 @@ trait Products
             $this->error('errors.id','Not valid product id');
             return false;
         }
+        
+        $price = $product->getPriceValue($key,$currencyId) ?? 0.00;
 
         $this   
             ->message('product.price','Product price was saved successfully.')                 
             ->field('uuid',$product->uuid)
-            ->field('items',$product->getPriceList($currencyId)->toArray());
+            ->field('price',$price);
     }
 }

@@ -1,0 +1,19 @@
+{% if uuid is not empty %}
+    {% set brand = createModel('Brands','products').findById(uuid) %}
+{% endif %}
+
+{% component 'semantic~panel' %}
+    <div class="mt-2">   
+        <div class="my-2 flex flex-row items-center">
+            <div class="font-bold pr-2">
+                {{ labels.brand }}
+            </div>     
+            <div class="ui basic label">
+                {{ brand.title }}
+            </div>
+        </div>  
+        <div class="mt-4">
+            {{ component('products::admin.brands.edit.tabs',{ uuid: uuid }) }}
+        </div>     
+    </div>  
+{% endcomponent %}     

@@ -63,9 +63,9 @@ class ProductType extends Model
     public $timestamps = false;
 
     /**
-     * Producucs relation
+     * Products relation
      *
-     * @return Relation|null
+     * @return object|null
      */
     public function products()
     {

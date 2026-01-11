@@ -1,5 +1,7 @@
 {% set product = createModel('Products','products').findById(uuid) %}
-<div id="relations_items">
+<div 
+    class="w-full"
+    id="relations_items">
     {{  component('system:admin.orm.relations.view',{ 
             uuid: uuid,
             extension: 'products',

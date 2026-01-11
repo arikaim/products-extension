@@ -3,10 +3,11 @@
 {{  component('semantic~tabs',{ 
         items: [ 
             { id: 'products_button', title: labels.products.content, component: 'products::admin.products', icon: 'grid layout', active: true },
-            { id: 'type_button', title: labels.type.content, component: 'products::admin.type', icon: 'project diagram' },       
+            { id: 'type_button', title: labels.type.content, component: 'products::admin.type', icon: 'project diagram' },  
+            { id: 'brands_button', title: labels.brands.content, component: 'products::admin.brands', icon: 'copyright outline' },            
             { id: 'options_button', title: labels.options.content, component: 'products::admin.options', icon: 'cogs' }          
         ],
-        menu: { component: 'system:admin.extensions.menu.actions', extension: 'blog' },
+        menu: { component: 'system:admin.extensions.menu.actions', extension: 'products' },
         content: { component: 'products::admin.products' } 
     })
 }}

@@ -1,0 +1,21 @@
+{% if uuid is not empty %}
+    {% set brand = createModel('Brands','products').findById(uuid) %}
+{% endif %}
+<form class="ui form" id="brand_form" method="POST">  
+    <input type="hidden" name="uuid" id="uuid" value="{{ uuid }}">   
+    <div class="two fields">
+        <div class="required field">
+            <label>{{ fields.title.label }}</label>
+            <input rule="empty" type="text" name="title" id="title" {{ fields.title.placeholder|attr('placeholder') }} value="{{ brand.title }}"> 
+        </div>   
+        <div class="field">
+            <label>{{ fields.icon.label }}</label>
+            <input type="text" name="icon" id="icon" {{ fields.icon.placeholder|attr('placeholder') }} value="{{ brand.icon }}"> 
+        </div>          
+    </div>
+    <div class="field">
+        <label>{{ fields.description.label }}</label>
+        <textarea name="description" id="description" placeholder="{{ fields.description.placeholder }}">{{ brand.description }}</textarea>
+    </div> 
+    {{ component('semantic~form.footer') }}
+</form>

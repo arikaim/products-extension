@@ -1,9 +1,14 @@
-## Arikaim CMS Products Extension
+## Arikaim CMS products extension
+![Version: 1.0.0](https://img.shields.io/github/release/arikaim/products-extension.svg)
+![License: GPL3](https://img.shields.io/badge/License-GPLv3-blue.svg)
 
 
 #### Requirements 
   * [Arikaim CMS](https://github.com/arikaim/arikaim)
 
+
+
 #### Install
-from ../arikaim/extensions
-git clone https://github.com/arikaim-repository/products-extension products
+```sh
+composer require arikaim/products-extension
+```

@@ -12,8 +12,6 @@
     <form class="ui form" id="price_form">       
         <input type="hidden" value="{{ uuid }}" name="uuid">
         {% for price in price_options %}    
-       
-            
             {{  component('semantic~form.fields.price',{ 
                     label: price.type.title,
                     value: product.getPriceValue(price.key),

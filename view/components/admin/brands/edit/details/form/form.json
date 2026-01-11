@@ -1,0 +1,19 @@
+{    
+    "fields": {        
+        "title": {
+            "label": "Title",
+            "placeholder": "Enter brand title"
+        },
+        "description": {
+            "label": "Description",
+            "placeholder": "Enter brand description"
+        },
+        "slug": {
+            "label": "Slug"
+        },
+        "icon": {
+            "label": "Svg icon component name",
+            "placeholder": "Enter icon component name"
+        }        
+    }
+}

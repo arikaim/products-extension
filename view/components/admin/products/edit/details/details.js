@@ -2,9 +2,10 @@
 
 arikaim.component.onLoaded(function() {
     arikaim.ui.form.onSubmit('#product_form',function() {
-        return products.update('#product_form');
+        return productsApi.update('#product_form');
     },function(result) {
-        arikaim.ui.form.showMessage(result.message);       
+        arikaim.ui.form.showMessage(result.message);  
+        arikaim.events.emit('product.update',result);         
     },function(error) {
     });
 });

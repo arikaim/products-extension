@@ -1,0 +1,55 @@
+{% if uuid is not empty %}
+    {% set brand = createModel('Brands','products').findById(uuid) %}
+{% endif %}
+{% component 'semantic~panel' %}
+    {{ component('semantic~view.image',{ model: brand }) }} 
+    <table class="ui very basic definition table">
+        <tbody>
+            <tr>
+                <td class="right aligned">{{ labels.uuid }}</td>
+                <td>
+                    <div class="ui basic label">{{ brand.id }}</div>
+                    {{ brand.uuid }}
+                </td>
+            </tr>
+            <tr>
+                <td class="right aligned">{{ labels.date }}</td>
+                <td>                   
+                    {{ brand.date_created|dateFormat }}
+                </td>
+            </tr>
+            <tr>
+                <td class="right aligned">{{ labels.status }}</td>
+                <td>
+                    {{ component('semantic~status.label',{ status: brand.status }) }}
+                </td>
+            </tr>   
+            <tr>
+                <td class="right aligned">{{ labels.icon }}</td>
+                <td>{{ brand.icon }}</td>
+            </tr> 
+            <tr>
+                <td class="right aligned">{{ labels.title }}</td>
+                <td>{{ brand.title }}</td>
+            </tr>
+            {% if brand.description is not empty %}
+            <tr>
+                <td class="right aligned">{{ labels.description }}</td>
+                <td>{{ brand.description }}</td>
+            </tr>
+            {% endif %}
+            <tr>
+                <td class="right aligned">{{ labels.slug }}</td>
+                <td>{{ brand.slug }}</td>
+            </tr>
+            <tr>
+                <td class="right aligned">{{ labels.products }}</td>
+                <td>{{ brand.products.count() }}</td>
+            </tr>
+        </tbody>
+    </table>      
+    <h4>
+        {{ labels.options }}
+    </h4>    
+    {{ component('semantic~properties.details',{ properties: brand.getOptionsType() }) }}
+{% endcomponent %}
