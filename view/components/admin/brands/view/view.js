@@ -12,8 +12,7 @@ function ProductBrandsView() {
     this.init = function() {
         this.loadMessages('products::admin.messages');
         arikaim.ui.loadComponentButton('.create-brand');
-        paginator.init('brand_rows');   
-
+ 
         arikaim.events.on('brand.add',function(uuid) {      
             arikaim.page.loadContent({
                 id: 'brand_rows',     
@@ -40,17 +39,17 @@ function ProductBrandsView() {
             });
         },'onBrandUpdate');
 
-        self.initRows();  
+        this.initRows();  
     };
 
     this.initRows = function() {       
         arikaim.ui.loadComponentButton('.brand-action');
 
-        $('.status-dropdown').dropdown({
-            onChange: function(value) {               
-                var uuid = $(this).attr('uuid');
-                brandsApi.setStatus(uuid,value);
-            }
+        $('.status-dropdown').on('change', function() {
+            var value = $(this).val();
+            var uuid = $(this).attr('uuid');
+
+            brandsApi.setStatus(uuid,value);
         });    
 
         arikaim.ui.button('.delete-button',function(element) {

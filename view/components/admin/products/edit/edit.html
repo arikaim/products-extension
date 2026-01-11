@@ -1,12 +1,12 @@
 {% if uuid is not empty %}
     {% set product = createModel('Products','products').findById(uuid) %}
 {% endif %}
-{% component 'semantic~panel' %}   
+{% component 'system:admin.panel' %}   
     <div class="my-4 flex flex-row items-center">
         <div class="font-bold px-2">
             {{ labels.product }}
         </div>
-        <div class="ui basic label">
+        <div class="badge badge-outline badge-sm">
             {{ product.title }}
         </div>
     </div>

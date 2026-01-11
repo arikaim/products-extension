@@ -10,11 +10,7 @@ function ProductTypeView() {
     var self = this;
 
     this.init = function() {
-        this.loadMessages('products::admin.messages');
-
-        paginator.init('product_type_rows');   
-
-        self.initRows();  
+        this.loadMessages('products::admin.messages');       
     };
 
     this.initRows = function() {       

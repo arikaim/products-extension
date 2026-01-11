@@ -16,7 +16,3 @@ function ProductTypeControlPanel() {
 }
 
 var productType = new ProductTypeControlPanel();
-
-arikaim.component.onLoaded(function() {
-   
-});

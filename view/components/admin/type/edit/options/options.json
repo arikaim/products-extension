@@ -1,6 +1,7 @@
 {
     "labels": {
         "type": "Type",
-        "slug": "Slug"
-    }
+        "slug": "Slug",
+        "empty": "No options for this type"
+    }    
 }

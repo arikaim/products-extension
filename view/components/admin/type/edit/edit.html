@@ -2,13 +2,13 @@
     {% set product_type = createModel('ProductType','products').findById(uuid) %}
 {% endif %}
 
-{% component 'semantic~panel' %}
+{% component 'system:admin.panel' %}
     <div class="mt-2">   
         <div class="my-2 flex flex-row items-center">
             <div class="font-bold pr-2">
                 {{ labels.type }}
             </div>     
-            <div class="ui basic label">
+            <div class="badge badge-sm badge-outline">
                 {{ product_type.title }}
             </div>
         </div>  

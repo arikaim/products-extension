@@ -1,37 +1,34 @@
-{% set show_label = (show_label is null) ? true : show_label %}
-{% set name = name|default('product_type') %}
 {% set id = id|default(name) %}
 {% set model = createModel('ProductType','products') %}
-{% set class = class|default('basic button') %}
 {% set data_column = data_column|default('id') %}
 {% if selected is not empty %}
     {% set selected = model.findById(selected) %}
 {% endif %}
-{% set label = (selected is empty) ? labels.choose : selected.title %}
 {% if hide_readonly == true %}
     {% set model = model.editable() %}
 {% endif %}
-<div class="ui dropdown product-type {{ class }}" {{ title|attr('title') }} {{ attributes|attr }}>
-    <input type="hidden" value="{{ selected[data_column] }}" name="{{ name }}" {{ id|attr('id') }}>  
-    {% if icon is not empty %}
-    <i class="icon {{ icon }}"></i>
-    {% endif %}
-    {% if show_label == true %}
-        <div class="text default">
-           {{ label }}
-        </div>  
-    {% endif %}
-    <i class="icon dropdown"></i>
-    <div class="menu">
-        {% if show_all == true %}
-        <div class="item" data-value="">                    
+
+<select 
+    name="{{ name|default('product_type') }}"
+    {{ id|attr('id') }}
+    {{ rule|attr('rule') }}
+    class="{{ theme.form.select }} product-type {{ class }} {{ size }}" 
+    {{ title|attr('title') }} 
+    {{ attributes|attr }}>
+   
+    {% if show_all == true %}
+        <option 
+            {{ (selected[data_column] is empty) ? 'selected' : '' }}
+            value="">                    
             {{ labels.all }}            
-        </div>  
-        {% endif %}
-        {% for item in model.get() %}
-        <div class="item" data-value="{{ item[data_column] }}">                    
+        </option>  
+    {% endif %}
+
+    {% for item in model.get() %}
+        <option 
+            {{ (selected[data_column] == item[data_column]) ? 'selected' : '' }}
+            value="{{ item[data_column] }}">                    
             {{ item.title }}            
-        </div>   
-        {% endfor %}         
-    </div>
-</div>
+        </option>   
+    {% endfor %}         
+</select>

@@ -2,11 +2,14 @@
     {% set product = createModel('Products','products').findById(uuid) %}
 {% endif %}
 <form  
-    class="ui form fluid" id="product_form">  
+    class="form" id="product_form">  
     <input type="hidden" name="uuid" id="uuid" value="{{ uuid }}">        
-    <div class="field">
-        <label>{{ fields.title.label }}</label>
+    <div class="{{ theme.form.field }}">
+        <label class="{{ theme.form.label }}">
+            {{ fields.title.label }}
+        </label>
         <input 
+            class="{{ theme.form.input }}"
             rule="minLength[2]"
             type="text" 
             name="title" 
@@ -14,25 +17,28 @@
             {{ fields.title.placeholder|attr('placeholder') }} 
             value="{{ product.title }}"> 
     </div>       
-    {{  component('semantic~form.fields.slug',{ 
+    {{  component('system:form.fields.slug',{ 
             slug_source: 'title',
             label: fields.slug.label,
-            show_url: false,
-            field_class: 'basic large label' 
+            show_url: false           
         }) 
     }}   
-    <div class="two fields">
-        <div class="field">
-            <label>{{ fields.brand.label }}</label>
+    <div class="{{ theme.foprm.fields }}">
+        <div class="{{ theme.form.field }}">
+            <label class="{{ theme.form.label }}">
+                {{ fields.brand.label }}
+            </label>
             {{  component('products::admin.brands.dropdown',{ 
                     selected: product.brand_id,
-                    class: 'clearable selection'                   
+                    class: ''                   
                 }) 
             }}   
         </div>
         {% if product is not empty %}
-            <div class="field">
-                <label>{{ fields.category.label }}</label>
+            <div class="{{ theme.form.field }}">
+                <label class="{{ theme.form.label }}">
+                    {{ fields.category.label }}
+                </label>
                 {{  component('system:admin.orm.relations.fields.dropdown',{ 
                         model: 'CategoryRelations',
                         extension: 'category',
@@ -45,14 +51,15 @@
             </div>
         {% endif %}
     </div>
-    <div class="field fluid">
-        <label>{{ fields.type.label }}</label>
+    <div class="{{ theme.form.field }}">
+        <label class="{{ theme.form.label }}">
+            {{ fields.type.label }}
+        </label>
         {{  component('products::admin.type.dropdown',{ 
                 selected: product.type_id, 
-                rule: 'empty',
-                class: 'basic button fluid' 
+                rule: 'empty',              
             }) 
         }}
     </div>    
-    {{ component('semantic~form.footer') }}
+    {{ component('system:form.footer') }}
 </form>

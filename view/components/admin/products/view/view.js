@@ -10,13 +10,10 @@ function ProductsView() {
     var self = this;
 
     this.getSearchData = function() {      
-        var typeId = $('.product-type').dropdown('get value');
-        var deleted = $('.show-deleted').checkbox('is checked');
-
         return {
             search: {
-                type_id: typeId,
-                show_deleted: deleted
+                type_id: $('.product-type').val(),
+                show_deleted: $('.show-deleted').val()
             }          
         }
     };
@@ -25,27 +22,25 @@ function ProductsView() {
         arikaim.ui.loadComponentButton('.product-action');
         this.loadMessages('products::admin.messages');
 
-        paginator.init('product_rows');   
-
-        $('.product-type').dropdown({
-            onChange: function(value) {
-                search.setSearch(self.getSearchData(),'products',function(result) {                  
-                    self.loadList();
-                });
-            }
+        $('.product-type').on('change', function() {
+            var value = $(this).val();
+         
+            search.setSearch(self.getSearchData(),'products',function(result) {                  
+                self.loadList();
+            });            
         });
 
-        $('.show-deleted').checkbox({
-            onChecked: function() {
+        $('.show-deleted').on('change', function() {
+           
                 search.setSearch(self.getSearchData(),'products',function(result) {                  
                     self.loadList();
                 });
-            },
-            onUnchecked: function() {
+          
+            // uncheded
                 search.setSearch(self.getSearchData(),'products',function(result) {                  
                     self.loadList();
                 });
-            }
+         
         });
 
         search.init({
@@ -85,7 +80,6 @@ function ProductsView() {
     };
 
     this.loadItem = function(uuid, prepend) {
-        
         arikaim.page.loadContent({
             id: 'product_rows',     
             prepend: prepend,   
@@ -103,20 +97,20 @@ function ProductsView() {
             id: 'product_rows',           
             component: 'products::admin.products.view.rows'                         
         },function(result) {
-            paginator.setPage(1,'products',function(result) {
-                paginator.reload();
-            });          
+          //  paginator.setPage(1,'products',function(result) {
+                //paginator.reload();
+          //  });          
         });
     };
 
     this.initRows = function() {
         arikaim.ui.loadComponentButton('.product-action');
         
-        $('.status-dropdown').dropdown({
-            onChange: function(value) {               
-                var uuid = $(this).attr('uuid');
-                products.setStatus(uuid,value);
-            }
+        $('.status-dropdown').on('change', function() {
+            var value = $().val();            
+            var uuid = $(this).attr('uuid');
+
+            products.setStatus(uuid,value);           
         });    
 
         arikaim.ui.button('.product-details',function(element) {
@@ -126,7 +120,9 @@ function ProductsView() {
             arikaim.page.loadContent({
                 id: 'product_details',
                 component: 'products::admin.products.details',
-                params: { uuid: uuid }
+                params: { 
+                    uuid: uuid 
+                }
             });   
         });
        
@@ -146,13 +142,13 @@ function ProductsView() {
             });
         });
 
-        arikaim.ui.button('.edit-button',function(element) {
-            var uuid = $(element).attr('uuid');    
-           
+        arikaim.ui.button('.edit-button',function(element) { 
             arikaim.page.loadContent({
                 id: 'product_details',
                 component: 'products::admin.products.edit',
-                params: { uuid: uuid }
+                params: { 
+                    uuid: $(element).attr('uuid')    
+                }
             });          
         });
 
@@ -170,6 +166,5 @@ function ProductsView() {
 var productsView = createObject(ProductsView,ControlPanelView);
 
 arikaim.component.onLoaded(function() {
-    productsView.init();
-    productsView.initRows();  
+    productsView.init(); 
 }); 

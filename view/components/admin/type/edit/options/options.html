@@ -5,21 +5,17 @@
 
 <div class="mt-2">
     {% if items.count() == 0 %}
-    <div class="ui message">
-        {{ labels.empty }}
-    </div>
+        {{ component('system:admin.alert.info',{ message: labels.empty }) }}  
     {% endif %}
     {% for item in items.get() %}
         {% set type = option_type.getByKey(item.key) %}
         <div class="mt-2 pb-4">
-            <h4 class="ui header">
+            <h4 class="font-bold">
                 {{ type.title }}
-            </h4>
-            <div class="ui ten column grid p-2">
-                <div class="ten wide column">
-                    {{ component('semantic~orm.options.type',{ type: type, class: 'mini' }) }}  
-                </div>
-            </div>                                                      
+            </h4>          
+            <div class="mt-2">
+                {{ component('system:admin.orm.options.type',{ type: type, class: '' }) }}  
+            </div>                                                    
         </div>
     {% endfor %}
 </div>

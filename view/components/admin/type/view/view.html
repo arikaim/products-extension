@@ -1,19 +1,22 @@
-<div class="ui segment">
-    <table class="ui compact stackable selectable borderless basic table">
-        <thead class="table-head">
+<div class="{{ theme.panel }}">
+    <table class="{{ theme.table.default }}">
+        <thead>
             <tr>              
-                <th class="two wide collapsing left aligned">{{ columns.action }}</th>               
+                <th class="w-32">{{ columns.action }}</th>               
                 <th>{{ columns.title }}</th>  
                 <th>{{ columns.slug }}</th>                        
-                <th class="six wide column">{{ columns.description }}</th>                   
-                <th class="one wide column">{{ columns.prodcuts }}</th>                                                   
+                <th class="">{{ columns.description }}</th>                   
+                <th class="">{{ columns.prodcuts }}</th>                                                   
             </tr>
         </thead>
-        <tbody id="product_type_rows" component="products::admin.type.view.rows" namespace="product-type">
+        <tbody 
+            id="product_type_rows" 
+            component="products::admin.type.view.rows" 
+            namespace="product-type">
             {{ component('products::admin.type.view.rows') }} 
         </tbody>
     </table> 
     <div id="paginator">      
-        {{ component("semantic~paginator",{ namespace: 'product-type' }) }}
+       
     </div>
 </div>

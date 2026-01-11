@@ -1,40 +1,42 @@
 {% if uuid is not empty %}
     {% set product_type = createModel('ProductType','products').findById(uuid) %}
 {% endif %}
-{% component 'semantic~panel' %}
-    <table class="ui very basic definition table">
+{% component 'system:admin.panel' %}
+    <table class="{{ theme.table.details }}">
         <tbody>
             <tr>
-                <td class="right aligned">{{ labels.uuid }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.uuid }}</td>
                 <td>
-                    <div class="ui basic label">{{ product_type.id }}</div>
-                    {{ product_type.uuid }}
+                    {{ component('system:admin.view.id',{ model: product_type }) }}                    
                 </td>
             </tr>
             <tr>
-                <td class="right aligned">{{ labels.status }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.status }}</td>
                 <td>
                     {{ component('semantic~status.label',{ status: product_type.status }) }}
                 </td>
             </tr>    
             <tr>
-                <td class="right aligned">{{ labels.title }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.title }}</td>
                 <td>{{ product_type.title }}</td>
             </tr>
             {% if product_type.description is not empty %}
             <tr>
-                <td class="right aligned">{{ labels.description }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.description }}</td>
                 <td>{{ product_type.description }}</td>
             </tr>
             {% endif %}
             <tr>
-                <td class="right aligned">{{ labels.slug }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.slug }}</td>
                 <td>{{ product_type.slug }}</td>
             </tr>
         </tbody>
     </table>      
-    <h4>
+    <h4 class="font-bold my-4">
         {{ labels.options }}
     </h4>    
-    {{ component('semantic~properties.details',{ properties: product_type.getOptionsType() }) }}
+    {{  component('semantic~properties.details',{ 
+            properties: product_type.getOptionsType() 
+        }) 
+    }}
 {% endcomponent %}

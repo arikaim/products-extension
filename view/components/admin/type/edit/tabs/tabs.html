@@ -1,19 +1,31 @@
-<div class="ui stackable tabular menu product-type-edit-tabs">      
-    <div 
-        class="item link active product-type-tab-item" 
-        component="products::admin.type.edit.details" 
-        uuid="{{ uuid }}">
-        <i class="icon stream blue"></i>
-        {{ labels.details }}     
-    </div>  
-    <div 
-        class="item link product-type-tab-item" 
-        component="products::admin.type.edit.options" 
-        uuid="{{ uuid }}">
-        <i class="horizontal sliders icon blue"></i>
-        {{ labels.options }}     
-    </div>  
-</div>
-<div class="ui active tab" id="product_type_editor">           
-    {{ component('products::admin.type.edit.details',{ uuid: uuid }) }}       
+{{  component('system:admin.tabs',{ 
+        id: 'product_type_edit_tab',
+        items: [ 
+            { 
+                title: labels.details, 
+                component: 'products::admin.type.edit.details', 
+                params: 'uuid:' ~ uuid,
+                svg_icon: 'icons~info', 
+                active: true 
+            },
+            { 
+                title: labels.options, 
+                component: 'products::admin.type.edit.options', 
+                svg_icon: 'icons~cog' 
+            }
+                  
+        ],
+        content: { 
+            id: 'product_type_editor',
+            params: {
+                uuid: uuid
+            },
+            component: 'products::admin.type.edit.details' 
+        } 
+    })
+}}
+
+<div 
+    class="mt-2" 
+    id="product_type_editor">               
 </div>  

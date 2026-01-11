@@ -5,6 +5,10 @@
         "deleted": "Show deleted",
         "type" : "Type"
     },
+    "buttons": {
+        "import": "Import",
+        "create": "Create"
+    },
     "columns": {
         "action": "Action",
         "image": "Image",

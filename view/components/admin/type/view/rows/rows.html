@@ -8,40 +8,44 @@
 {% endif %}
 
 {% for item in items.getItems() %}  
-    <tr id="product_type_row_{{ item.uuid }}">              
+    <tr 
+        id="product_type_row_{{ item.uuid }}">              
         <td>  
             {% if item.readonly != 1 %}
-                <div class="ui buttons">   
-                    <button 
-                        mountTo="product_type_details"
-                        component="products::admin.type.details"
-                        params="uuid:{{ item.uuid }}"
-                        class="ui icon mini compact basic button product-type-action" 
-                        uuid="{{ item.uuid }}" 
-                        title="{{ labels.details }}">
-                        <i class="icon info"></i>
-                    </button>          
-                    <button 
-                        mountTo="product_type_details"
-                        component="products::admin.type.edit"
-                        class="ui icon mini compact basic button product-type-action" 
-                        params="uuid:{{ item.uuid }}" 
-                        title="{{ labels.edit }}">
-                        <i class="icon edit"></i>
-                    </button>     
-                    {% if item.hasProducts() == false %}       
-                    <button class="ui icon mini compact basic button delete-button" uuid="{{ item.uuid }}" data-title="{{ item.title }}">
-                        <i class="icon trash orange"></i>
-                    </button>  
-                    {% endif %}
-                </div>                  
+                <button 
+                    mountTo="product_type_details"
+                    component="products::admin.type.details"
+                    params="uuid:{{ item.uuid }}"
+                    class="{{ theme.buttons.menu }} product-type-action" 
+                    uuid="{{ item.uuid }}" 
+                    title="{{ labels.details }}">
+                    {{ component('icons~info',theme.icons.menu,'svg') }} 
+                </button>          
+                <button 
+                    mountTo="product_type_details"
+                    component="products::admin.type.edit"
+                    class="{{ theme.buttons.menu }} product-type-action" 
+                    params="uuid:{{ item.uuid }}" 
+                    title="{{ labels.edit }}">
+                    {{ component('icons~edit',theme.icons.menu,'svg') }} 
+                </button>     
+                {% if item.hasProducts() == false %}       
+                <button 
+                    class="{{ theme.buttons.menu }} delete-button" 
+                    uuid="{{ item.uuid }}" 
+                    data-title="{{ item.title }}">
+                   {{ component('icons~trash',theme.icons.delete,'svg') }} 
+                </button>  
+                {% endif %}                        
             {% else %}
-                <div class="ui horizontal blue fluid basic label">{{ labels.readonly }}</div>
+                <div class="badge badge-sm badge-outline">
+                    {{ labels.readonly }}
+                </div>
             {% endif %}   
         </td>         
         <td>{{ item.title }}</td> 
         <td>
-            <div class="ui horizontal basic label">{{ item.slug }}</div>
+            <div class="badge badge-sm badge-outline">{{ item.slug }}</div>
         </td> 
         <td>{{ item.description|sliceLabel(30) }}</td>      
         <td>
