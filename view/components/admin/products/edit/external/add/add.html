@@ -1,10 +1,10 @@
 {% set selected = selected|default('envato') %}
-<form class="ui form" id="add_id_from">
-    <div class="inline field">
+<form class="form" id="add_id_from">
+    <div class="{{ theme.form.field }}">
         <label>{{ labels.id }}</label>
         <input rule="empty" type="text" id="external_id" name="external_id" value="">
     </div>
-    <div class="inline field">
+    <div class="{{ theme.form.field }}">
         <label class="pl-2">{{ labels.driver }}</label>
         {{  component('system:admin.drivers.dropdown',{ 
                 selected: selected,
@@ -13,7 +13,7 @@
             }) 
         }}           
     </div>
-    <div class="inline field">
+    <div class="{{ theme.form.field }}">
         <a class="ui mini green icon button add-external-id" uuid="{{ uuid }}">
             <i class="icon plus"></i>
         </a>

@@ -1,6 +1,4 @@
 {
-    "title": {
-        "content": "Add Product Type",
-        "icon": "plus"
-    }
+    "title": "Add Product Type",
+    "icon": "icons~plus"
 }

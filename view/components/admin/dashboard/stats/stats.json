@@ -1,5 +1,6 @@
 {
-    "labels": {        
-        "products": "Products"
+    "labels": {
+        "products": "Products",
+        "description": "Total active products"
     }
 }

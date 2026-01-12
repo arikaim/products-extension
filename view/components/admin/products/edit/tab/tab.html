@@ -1,55 +1,71 @@
-<div class="flex flex-rowsitems-start">
-    <div class="ui stackable tabular vertical small menu product-edit-tabs">      
-        <div class="item link active edit-product-tab-item" component="products::admin.products.edit.details" uuid="{{ uuid }}">
-            <i class="icon stream blue"></i>
-            {{ labels.details }}     
-        </div>  
-        <div class="item link edit-product-tab-item" component="products::admin.products.edit.description" uuid="{{ uuid }}">
-            <i class="icon text file outline blue"></i>
-            {{ labels.description }}     
-        </div>  
-        <div class="item link edit-product-tab-item" component="products::admin.products.edit.options" uuid="{{ uuid }}">
-            <i class="icon sliders horizontal blue"></i>
-            {{ labels.options }}     
-        </div>  
-        <div class="item link edit-product-tab-item" component="products::admin.products.edit.price" uuid="{{ uuid }}">
-            <i class="currency icon blue"></i>
-            {{ labels.price }}     
-        </div> 
-        {% if hasExtension('image') == true %}
-        <div class="item link edit-product-tab-item" component="products::admin.products.edit.images" uuid="{{ uuid }}">
-            <i class="image icon blue"></i>
-            {{ labels.images }}     
-        </div> 
-        {% endif %} 
-        <div class="item link edit-product-tab-item" component="products::admin.products.edit.relations" uuid="{{ uuid }}">
-            <i class="project diagram icon blue"></i>
-            {{ labels.relations }}     
-        </div>  
-        {% if hasExtension('_repository') == true %}
-        <div class="item link edit-product-tab-item" component="products::admin.products.edit.repository" uuid="{{ uuid }}">
-            <i class="git icon blue"></i>
-            {{ labels.repository }}     
-        </div>  
-        {% endif %}
-        {% if hasExtension('storage') == true %}
-        <div class="item link edit-product-tab-item" component="products::admin.products.edit.files" uuid="{{ uuid }}">
-            <i class="file icon blue"></i>
-            {{ labels.files }}     
-        </div>  
-        {% endif %}
-        {% if hasExtension('rating') == true %}
-        <div class="item link edit-product-tab-item" component="products::admin.products.edit.rating" uuid="{{ uuid }}">
-            <i class="star outline icon blue"></i>
-            {{ labels.rating }}     
-        </div>  
-        {% endif %}
-        <div class="item link edit-product-tab-item" component="products::admin.products.edit.meta" uuid="{{ uuid }}">
-            <i class="code icon blue"></i>
-            {{ labels.meta }}     
-        </div>      
-    </div>
-    <div class="ml-4 ui active tab w-full" id="product_edit_content">    
-        {{ component('products::admin.products.edit.details',{ uuid: uuid }) }}
-    </div> 
-</div>
+{{  component('system:admin.tabs',{ 
+        id: 'product_edit_tab',
+        items: [ 
+            { 
+                title: labels.details, 
+                component: 'products::admin.products.edit.details',
+                params: 'uuid:' ~ uuid,
+                svg_icon: 'icons~info', 
+                active: true 
+            },
+            { 
+                title: labels.description, 
+                component: 'products::admin.products.edit.description', 
+                params: 'uuid:' ~ uuid,
+                svg_icon: 'icons~info' 
+            },  
+            { 
+                title: labels.options, 
+                component: 'products::admin.products.edit.options', 
+                params: 'uuid:' ~ uuid,
+                svg_icon: 'icons~info' 
+            },            
+            { 
+                title: labels.price, 
+                component: 'products::admin.products.edit.price', 
+                params: 'uuid:' ~ uuid,
+                svg_icon: 'icons~cog' 
+            },
+            { 
+                title: labels.images, 
+                component: 'products::admin.products.edit.images', 
+                params: 'uuid:' ~ uuid,
+                svg_icon: 'icons~image' 
+            },
+            { 
+                title: labels.relations, 
+                component: 'products::admin.products.edit.relations', 
+                params: 'uuid:' ~ uuid,
+                svg_icon: 'icons~share' 
+            },
+            { 
+                title: labels.files, 
+                component: 'products::admin.products.edit.files', 
+                params: 'uuid:' ~ uuid,
+                svg_icon: 'icons~document' 
+            },
+            { 
+                title: labels.rating, 
+                component: 'products::admin.products.edit.rating', 
+                params: 'uuid:' ~ uuid,
+                svg_icon: 'icons~document' 
+            },
+            { 
+                title: labels.meta, 
+                component: 'products::admin.products.edit.meta', 
+                params: 'uuid:' ~ uuid,
+                svg_icon: 'icons~code' 
+            }            
+        ],
+        content: { 
+            id: 'product_edit_content',
+            component: 'products::admin.products.edit.details',
+            params: {
+                uuid: uuid
+            }
+        } 
+    })
+}}
+
+<div class="mt-4" id="product_edit_content">    
+</div> 

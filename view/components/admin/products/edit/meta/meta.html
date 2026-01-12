@@ -1,6 +1,10 @@
 {% if uuid is not empty %}
         {% set product = createModel('Products','products').findById(uuid) %}
 {% endif %}
-<div class="w-full">                
-        {{ component('semantic~form.meta',{ uuid: product.uuid, model: product }) }}
+<div class="w-full">  
+{{ component('system:form.meta',{ 
+        uuid: product.uuid, 
+        model: product 
+   }) 
+}}
 </div>

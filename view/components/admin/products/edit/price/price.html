@@ -2,17 +2,12 @@
 {% set price_options = product.type.getOptionsType('price') %}
 
 {% if price_options|length == 0 %}
-<div class="ui icon mini message">
-    <i class="icon warning mini"></i>
-    <div class="content">
-        <h4>{{ messages.price }}</h4>       
-    </div>   
-</div>
+    {{ component('system:admin.alert.info',{ message: messages.price }) }}
 {% else %}
-    <form class="ui form" id="price_form">       
+    <form class="form" id="price_form">       
         <input type="hidden" value="{{ uuid }}" name="uuid">
         {% for price in price_options %}    
-            {{  component('semantic~form.fields.price',{ 
+            {{  component('system:form.fields.price',{ 
                     label: price.type.title,
                     value: product.getPriceValue(price.key),
                     icon: product.getPrice(price.key).currency.icon,
@@ -21,6 +16,6 @@
                 }) 
             }}        
         {% endfor %}
-        {{ component('semantic~form.footer') }}
+        {{ component('system:form.footer') }}
     </form>
 {% endif %}

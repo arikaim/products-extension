@@ -13,7 +13,7 @@
             <tr>
                 <td class="{{ theme.table.field.label }}">{{ labels.status }}</td>
                 <td>
-                    {{ component('semantic~status.label',{ status: product_type.status }) }}
+                    {{ component('system:admin.status.label',{ status: product_type.status }) }}
                 </td>
             </tr>    
             <tr>
@@ -35,7 +35,7 @@
     <h4 class="font-bold my-4">
         {{ labels.options }}
     </h4>    
-    {{  component('semantic~properties.details',{ 
+    {{  component('system:admin.properties.details',{ 
             properties: product_type.getOptionsType() 
         }) 
     }}

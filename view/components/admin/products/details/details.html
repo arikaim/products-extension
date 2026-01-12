@@ -1,84 +1,92 @@
 {% if uuid is not empty %}
     {% set product = createModel('Products','products').findById(uuid) %}
 {% endif %}
-{% component 'semantic~panel' %}
-    {{ component('semantic~view.image',{ model: product }) }} 
-    <table class="ui very basic definition table">
+{% component 'system:admin.panel' %}
+    {{ component('system:admin.view.image',{ model: product }) }} 
+    <table class="{{ theme.table.default }}">
         <tbody>
             <tr>
-                <td class="right aligned">{{ labels.uuid }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.uuid }}</td>
                 <td>
-                    <div class="ui basic label">{{ product.id }}</div>
-                    {{ product.uuid }}
+                    {{ component('system:admin.view.id',{ model: product }) }}                     
                 </td>
             </tr>
             <tr>
-                <td class="right aligned">{{ labels.status }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.status }}</td>
                 <td>
-                    {{ component('semantic~status.label',{ status: product.status }) }}
+                    {{ component('system:admin.status.label',{ status: product.status }) }}
                 </td>
             </tr>    
             <tr>
-                <td class="right aligned">{{ labels.title }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.title }}</td>
                 <td>{{ product.title }}</td>
             </tr>
             {% if product.description is not empty %}
             <tr>
-                <td class="right aligned">{{ labels.description }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.description }}</td>
                 <td>{{ product.description }}</td>
             </tr>
             {% endif %}
             {% if product.description_summary is not empty %}
             <tr>
-                <td class="right aligned">{{ labels.summary }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.summary }}</td>
                 <td>{{ product.description_summary }}</td>
             </tr>
             {% endif %}
             <tr>
-                <td class="right aligned">{{ labels.brand }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.brand }}</td>
                 <td>{{ product.brand.title }}</td>
             </tr>
             <tr>
-                <td class="right aligned">{{ labels.price }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.price }}</td>
                 <td>
-                    <div class="ui label basic horizontal">
-                        {{ product.getPrice('price').currency.sign }}
-                        {{ product.getPrice('price').price|default(0)|numberFormat }}
+                    <div class="badge badge-sm badge-outline">
+                        <span>
+                            {{ product.getPrice('price').currency.sign }}
+                        </span>
+                        <span>
+                            {{ product.getPrice('price').price|default(0)|numberFormat }}
+                        </span>                     
                     </div>        
                 </td>
             </tr>
             <tr>
-                <td class="right aligned">{{ labels.slug }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.slug }}</td>
                 <td>{{ product.slug }}</td>
             </tr>
             <tr>
-                <td class="right aligned">{{ labels.type }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.type }}</td>
                 <td>
                     {{ product.type.title }}
-                    <div class="ui basic label">
+                    <div class="badge badge-sm badge-outline">
                         {{ product.type.slug }}
                     </div>
                 </td>
             </tr>
             <tr>
-                <td class="right aligned">{{ labels.user }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.user }}</td>
                 <td>{{ product.user.username_or_email }}</td>
             </tr>
             <tr>
-                <td class="right aligned">{{ labels.date }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.date }}</td>
                 <td>{{ product.date_created|dateTimeFormat }}</td>
             </tr>
             <tr>
-                <td class="right aligned">{{ labels.updated }}</td>
+                <td class="{{ theme.table.field.label }}">{{ labels.updated }}</td>
                 <td>
                     {{ product.date_updated|dateFormat }}
                 </td>
             </tr>   
         </tbody>
     </table>   
-    {{  component('semantic~options',{
+    {{  component('system:admin.options',{
+            class: 'mt-4',
             options: product.options_list.toArray() 
         }) 
     }}      
-    {{ component('semantic~view.metatags',{ model: product }) }}    
+    {{  component('system:admin.view.metatags',{ 
+            class: 'mt-4',
+            model: product 
+        }) 
+    }}    
 {% endcomponent %}

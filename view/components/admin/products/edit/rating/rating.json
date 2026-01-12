@@ -1,3 +1,4 @@
 {
-    "message": "Product is not rated yet."
+    "message": "Product is not rated yet.",
+    "error": "Rating extension not installed"
 }

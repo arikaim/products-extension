@@ -1,3 +1,8 @@
+{% if hasExtension('image') == false %}
+    {{ component('system:admin.alert.error',{ message: error }) }}
+    {% error '' %}
+{% endif %} 
+
 {% if uuid is not empty %}
     {% set product = createModel('Products','products').findById(uuid) %}
 {% endif %}

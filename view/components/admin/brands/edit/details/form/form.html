@@ -1,21 +1,44 @@
 {% if uuid is not empty %}
     {% set brand = createModel('Brands','products').findById(uuid) %}
 {% endif %}
-<form class="ui form" id="brand_form" method="POST">  
+<form class="form" id="brand_form">  
     <input type="hidden" name="uuid" id="uuid" value="{{ uuid }}">   
-    <div class="two fields">
-        <div class="required field">
-            <label>{{ fields.title.label }}</label>
-            <input rule="empty" type="text" name="title" id="title" {{ fields.title.placeholder|attr('placeholder') }} value="{{ brand.title }}"> 
+    <div class="{{ theme.form.fields }}">
+        <div class="required {{ theme.form.field }}">
+            <label class="{{ theme.form.label }}">
+                {{ fields.title.label }}
+            </label>
+            <input 
+                class="{{ theme.form.input }}"
+                rule="empty" 
+                type="text" 
+                name="title" 
+                id="title" 
+                {{ fields.title.placeholder|attr('placeholder') }} 
+                value="{{ brand.title }}"> 
         </div>   
-        <div class="field">
-            <label>{{ fields.icon.label }}</label>
-            <input type="text" name="icon" id="icon" {{ fields.icon.placeholder|attr('placeholder') }} value="{{ brand.icon }}"> 
+        <div class="{{ theme.form.field }}">
+            <label class="{{ theme.form.label }}">
+                {{ fields.icon.label }}
+            </label>
+            <input 
+                class="{{ theme.form.input }}"
+                type="text" 
+                name="icon" 
+                id="icon" 
+                {{ fields.icon.placeholder|attr('placeholder') }} 
+                value="{{ brand.icon }}"> 
         </div>          
     </div>
     <div class="field">
-        <label>{{ fields.description.label }}</label>
-        <textarea name="description" id="description" placeholder="{{ fields.description.placeholder }}">{{ brand.description }}</textarea>
+        <label class="{{ theme.form.label }}">
+            {{ fields.description.label }}
+        </label>
+        <textarea 
+            class="{{ theme.form.textarea }}"
+            name="description" 
+            id="description" 
+            placeholder="{{ fields.description.placeholder }}">{{ brand.description }}</textarea>
     </div> 
-    {{ component('semantic~form.footer') }}
+    {{ component('system:form.footer') }}
 </form>

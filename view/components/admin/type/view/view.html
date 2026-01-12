@@ -10,13 +10,17 @@
             </tr>
         </thead>
         <tbody 
-            id="product_type_rows" 
-            component="products::admin.type.view.rows" 
-            namespace="product-type">
+            id="product_type_rows">
             {{ component('products::admin.type.view.rows') }} 
         </tbody>
     </table> 
-    <div id="paginator">      
-       
+    <div class="mt-2 ml-2" id="paginator">      
+        {{  component("system:admin.paginator",{ 
+                id: 'product_type_paginator',
+                namespace: 'product-type',
+                rows_selector: 'product_type_rows',
+                component:"products::admin.type.view.rows" 
+            })  
+        }} 
     </div>
 </div>

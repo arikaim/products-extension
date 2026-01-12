@@ -10,12 +10,10 @@ function ExternalProductId() {
     var self = this;
 
     this.init = function() {
-        $('#drivers_dropdown').dropdown({});
-
         arikaim.ui.button('.add-external-id',function(element) {
             var uuid = $(element).attr('uuid');
             var id = $('#external_id').val();
-            var driver = $('#drivers_dropdown').dropdown('get value');
+            var driver = $('#drivers_dropdown').val();
 
             self.add(uuid,id,driver,function(result) {
                 self.loadRows(uuid);
@@ -34,13 +32,11 @@ function ExternalProductId() {
     };  
 
     this.add = function(productUuid, externalId, apiDriver, onSuccess, onError) {
-        var data = {
+        return arikaim.post('/api/products/admin/external/id',{
             uuid: productUuid,
             external_id: externalId,
             api_driver: apiDriver
-        };
-
-        return arikaim.post('/api/products/admin/external/id',data,onSuccess,onError);    
+        },onSuccess,onError);    
     };
 
     this.delete = function(uuid, onSuccess, onError) {
@@ -62,5 +58,4 @@ var externalProductId = new ExternalProductId();
 
 arikaim.component.onLoaded(function() {
     externalProductId.init();
-    externalProductId.initRows();
 });

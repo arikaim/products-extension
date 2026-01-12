@@ -11,18 +11,18 @@
             <button 
                 mountTo="option_details"
                 component="products::admin.options.details"
-                class="ui icon mini compact basic button option-action-button" 
+                class="{{ theme.buttons.icon }} option-action-button" 
                 params="uuid:{{ item.uuid }}" 
                 title="{{ labels.info }}">
-                <i class="icon info"></i>
+                {{ component('icons~info',theme.icons.menu,'svg') }} 
             </button>                 
         </td>         
         <td>{{ item.title }}</td> 
         <td>
-            <div class="ui horizontal basic label">{{ item.key }}</div>
+            <div class="badge badge-sm badge-outline">{{ item.key }}</div>
         </td> 
         <td>
-            <div class="ui horizontal basic blue label">
+            <div class="badge badge-sm badge-outline">
                 {{ item.getTypeText() }}
             </div>           
         </td>

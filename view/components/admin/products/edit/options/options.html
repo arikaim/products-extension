@@ -4,16 +4,12 @@
 {% set prop = properties.setPropertyValues(product.options_list.toArray()) %}
 
 {% if properties|length == 0 %}
-    <div class="ui icon mini message">
-        <i class="icon warning mini"></i>
-        <div class="content">
-            <h4>{{ messages.options }}</h4>        
-        </div>   
-    </div>
+    {{ component('system:admin.alert.info',{ message: messages.options }) }}
 {% else %}
-    <form class="ui form" id="product_options_form">
+    <form class="form" id="product_options_form">
         <input type="hidden" name="uuid" value="{{ product.uuid }}" id="product_id">                  
-        {{ component('semantic~properties.items',{ items: properties }) }}  
-        {{ component('semantic~form.footer') }}   
+        {{ component('system:admin.properties.items',{ items: properties }) }}  
+        
+        {{ component('system:form.footer') }}   
     </form>
 {% endif %}

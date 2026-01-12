@@ -2,6 +2,9 @@
     "tooltips": {
         "create": "New brand"
     },
+    "buttons": {
+        "create": "Create"
+    },
     "columns": {
         "action": "Action",
         "title": "Title",

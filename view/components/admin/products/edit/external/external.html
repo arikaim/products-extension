@@ -1,20 +1,20 @@
-{% component 'semantic~tabs.vertical.content' %}
-{% set product = createModel('Products','products').findById(uuid) %}
-<div class="mt-4">
-    <table class="ui very basic table">
-        <thead>
-            <tr>
-                <th class="one wide"></th>
-                <th>{{ labels.id }}</th>
-                <th>{{ labels.driver }}</th>
-            </tr>
-        </thead>
-        <tbody id="external_id_rows">
-            {{ component('products::admin.products.edit.external.rows',{ items: product.external().get() }) }}          
-        </tbody>
-    </table>
-    <div class="ui segment">
-        {{ component('products::admin.products.edit.external.add',{ uuid: uuid }) }}
-    </div>
-</div>   
+{% component 'system:admin.panel' %}
+    {% set product = createModel('Products','products').findById(uuid) %}
+    <div class="mt-4">
+        <table class="{{ theme.table.default }}">
+            <thead>
+                <tr>
+                    <th class="one wide"></th>
+                    <th>{{ labels.id }}</th>
+                    <th>{{ labels.driver }}</th>
+                </tr>
+            </thead>
+            <tbody id="external_id_rows">
+                {{ component('products::admin.products.edit.external.rows',{ items: product.external().get() }) }}          
+            </tbody>
+        </table>
+        <div class="mt-4">
+            {{ component('products::admin.products.edit.external.add',{ uuid: uuid }) }}
+        </div>
+    </div>   
 {% endcomponent %}

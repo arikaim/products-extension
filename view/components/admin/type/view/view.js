@@ -19,17 +19,14 @@ function ProductTypeView() {
         arikaim.ui.button('.delete-button',function(element) {
             var uuid = $(element).attr('uuid');
             var title = $(element).attr('data-title');
-            var message = arikaim.ui.template.render(self.getMessage('messages.type.remove.content'),{ title: title });
+            var message = arikaim.ui.template.render(self.getMessage('type.remove.content'),{ title: title });
             
-            modal.confirmDelete({ 
-                title: self.getMessage('messages.type.remove.title'),
-                description: message
-            },function() {
+            arikaim.ui.getComponent('confirm_delete').open(function() {
                 productType.delete(uuid,function(result) {
                     arikaim.ui.table.removeRow('#product_type_row_' + uuid); 
-                    arikaim.page.toastMessage(result.message);    
+                    arikaim.ui.getComponent('toast').show(result.message); 
                 });
-            });
+            },message);
         });
     };
 };

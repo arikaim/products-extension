@@ -5,45 +5,49 @@
     <td>              
         {% if item.isDeleted() == false %} 
             <button 
-                class="ui icon mini compact basic button edit-button" 
-                uuid="{{ item.uuid }}">
-                <i class="icon edit"></i>
+                mountTo="product_details"
+                component="products::admin.products.edit"
+                class="{{ theme.buttons.icon }} product-action" 
+                params="uuid:{{ item.uuid }}">
+                {{ component('icons~edit',theme.icons.menu,'svg') }} 
             </button>            
             <button 
-                class="ui icon mini compact basic button delete-button" 
+                class="{{ theme.buttons.icon }} delete-button" 
                 uuid="{{ item.uuid }}" 
                 data-title="{{ item.title }}">
-                <i class="icon trash orange"></i>
+                {{ component('icons~trash',theme.icons.delete,'svg') }} 
             </button>                       
         {% else %}
             <button 
-                class="ui icon mini compact basic button restore-button" 
+                class="{{ theme.buttons.icon }} restore-button" 
                 uuid="{{ item.uuid }}" 
                 title="{{ labels.resotre }}">
-                <i class="trash restore olive icon"></i>
+                {{ component('icons~trash',theme.icons.menu,'svg') }} 
             </button>    
         {% endif %} 
         <button 
-            class="ui icon mini basic compact button product-details" 
-            uuid="{{ item.uuid }}">
-            <i class="icon info blue"></i>
+            mountTo="product_details"
+            component="products::admin.products.details"
+            class="{{ theme.buttons.icon }} product-action" 
+            params="uuid:{{ item.uuid }}">
+            {{ component('icons~info',theme.icons.menu,'svg') }} 
         </button>  
         <button 
             title="{{ labels.export }}"
             mountTo="product_details"
             component="content::admin.export"
             params="uuid:{{ item.uuid }},model_class:Products,schema_class:Products,extension:products"
-            class="ui icon mini basic compact button product-action">
-            <i class="icon file export blue"></i>
+            class="{{ theme.buttons.icon }} product-action">
+            {{ component('icons~document',theme.icons.menu,'svg') }} 
         </button>  
     </td>
     <td>
         {% if item.hasImage() == true %}
             <img       
-                class="ui mini image bordered rounded" 
+                class="h-20 w-20 rounded" 
                 src="{{ url(item.image.thumbnail(64,64).src) }}?t={{ today() }}">             
         {% else %}
-            <i class="image bordered outline icon large grey"></i>
+            {{ component('icons~image',{ size: 'h-20 w-20' },'svg') }} 
         {% endif %}
     </td>  
     <td>{{ item.date_created|dateFormat }}</td>  

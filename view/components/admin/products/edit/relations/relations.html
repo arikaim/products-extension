@@ -12,9 +12,16 @@
 </div>
 <div class="mt-4">
     {% if hasExtension('repository') == true %}
-        {{ component('repository::admin.package.dropdown',{ class: 'mini selection', data_field: 'id' }) }} 
-        <button class="ui mini green icon button add-relation" type="package" product-id="{{ product.id }}">
-            <i class="icon plus"></i>
+        {{  component('repository::admin.package.dropdown',{ 
+                class: '', 
+                data_field: 'id' 
+            }) 
+        }} 
+        <button 
+            class="{{ theme.buttons.icon }} add-relation" 
+            type="package" 
+            product-id="{{ product.id }}">
+            {{ component('icons~plus',theme.icons.menu,'svg') }}
         </button>
     {% endif %}
 </div>

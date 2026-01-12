@@ -10,6 +10,7 @@
     {% set selected = model.findById(selected) %}
 {% endif %}
 {% set selected_text = (selected is empty) ? labels.select : selected.title %}
+
 <div class="ui search selection dropdown product-dropdown {{ class }}" 
     id="{{ component_id|default('product-dropdown') }}" 
     selected="{{ selected[data_field] }}"

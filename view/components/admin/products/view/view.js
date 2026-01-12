@@ -49,8 +49,8 @@ function ProductsView() {
             event: 'product.search.load'
         },'products');  
         
-        arikaim.events.on('product.search.load',function(result) {      
-            paginator.reload();
+        arikaim.events.on('product.search.load',function(result) {           
+            arikaim.ui.getComponent('products_paginator').reload();
             self.initRows();    
         },'productSearch');
 
@@ -97,9 +97,7 @@ function ProductsView() {
             id: 'product_rows',           
             component: 'products::admin.products.view.rows'                         
         },function(result) {
-          //  paginator.setPage(1,'products',function(result) {
-                //paginator.reload();
-          //  });          
+            arikaim.ui.getComponent('products_paginator').reload();      
         });
     };
 
@@ -113,51 +111,25 @@ function ProductsView() {
             products.setStatus(uuid,value);           
         });    
 
-        arikaim.ui.button('.product-details',function(element) {
-            var uuid = $(element).attr('uuid');
-            $('#product_details').fadeIn(500);
-
-            arikaim.page.loadContent({
-                id: 'product_details',
-                component: 'products::admin.products.details',
-                params: { 
-                    uuid: uuid 
-                }
-            });   
-        });
-       
         arikaim.ui.button('.delete-button',function(element) {
             var uuid = $(element).attr('uuid');
             var title = $(element).attr('data-title');
-            var message = arikaim.ui.template.render(self.getMessage('messages.remove.content'),{ title: title });
+            var message = arikaim.ui.template.render(productsView.getMessage('remove.content'),{ title: title });
 
-            modal.confirmDelete({ 
-                title: self.getMessage('messages.remove.title'),
-                description: message
-            },function() {
+            arikaim.ui.getComponent('confirm_delete').open(function() {
                 productsApi.delete(uuid,function(result) {
-                    arikaim.ui.table.removeRow('#row_' + uuid);  
-                    arikaim.page.toastMessage(result.message);  
+                    arikaim.ui.table.removeRow('#row_' + uuid); 
+                    arikaim.ui.getComponent('toast').show(result.message);
                 });
-            });
-        });
-
-        arikaim.ui.button('.edit-button',function(element) { 
-            arikaim.page.loadContent({
-                id: 'product_details',
-                component: 'products::admin.products.edit',
-                params: { 
-                    uuid: $(element).attr('uuid')    
-                }
-            });          
+            }, message);
         });
 
         arikaim.ui.button('.restore-button',function(element) {
             var uuid = $(element).attr('uuid');
     
             products.restoreProduct(uuid,function(result) {
-                arikaim.ui.table.removeRow('#' + uuid);  
-                arikaim.page.toastMessage(result.message);  
+                arikaim.ui.table.removeRow('#row_' + uuid); 
+                arikaim.ui.getComponent('toast').show(result.message); 
             });     
         });
     };

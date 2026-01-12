@@ -6,6 +6,5 @@ arikaim.component.onLoaded(function() {
     },function(result) {
         arikaim.ui.form.showMessage(result.message);         
         arikaim.events.emit('brand.update',result.uuid);    
-    },function(error) {
     });    
 });

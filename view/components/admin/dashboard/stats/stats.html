@@ -1,7 +1,6 @@
 {% set products = createModel('Products','products').getActive() %}
-<div class="ui mini horizontal teal statistics">
-    <div class="statistic">
-        <div class="value">{{ products.count() }}</div>
-        <div class="label">{{ labels.products }}</div>
-    </div>               
+<div class="stat">   
+    <div class="stat-title">{{ labels.products }}</div>
+    <div class="stat-value">{{ products.count() }}</div> 
+    <div class="stat-desc">{{ labels.description }}</div>                 
 </div>

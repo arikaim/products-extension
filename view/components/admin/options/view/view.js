@@ -10,7 +10,6 @@ function ProductOptionsView() {
  
     this.init = function() {
         this.loadMessages('products::admin.messages');
-        this.initRows();  
     };
 
     this.initRows = function() {       

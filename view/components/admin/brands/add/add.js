@@ -4,7 +4,7 @@ arikaim.component.onLoaded(function() {
     arikaim.ui.form.onSubmit('#brand_form',function() {
         return brandsApi.add('#brand_form');
     },function(result) {
-        arikaim.page.toastMessage(result.message);
+        arikaim.ui.getComponent('toast').show(result.message);      
         arikaim.events.emit('brand.add',result.uuid);    
 
         arikaim.page.loadContent({
@@ -14,6 +14,5 @@ arikaim.component.onLoaded(function() {
                 uuid: result.uuid
             }           
         });         
-    },function(error) {
     });
 });

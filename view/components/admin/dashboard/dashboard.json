@@ -1,5 +1,4 @@
 {
-    "labels": {
-        "title": "Products"       
-    }
+    "title": "Products",      
+    "icon": "icons~shopping.bag"
 }

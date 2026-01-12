@@ -1,6 +1,6 @@
 {
     "title": "Option Type",
-    "icon": "info",
+    "icon": "icons~info",
     "labels": {
         "uuid": "Uuid",
         "title": "Title",

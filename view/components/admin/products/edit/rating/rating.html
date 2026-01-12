@@ -1,13 +1,14 @@
+{% if hasExtension('rating') == false %}
+    {{ component('system:admin.alert.error',{ message: error }) }}
+    {% error '' %}
+{% endif %}
 {% set product = createModel('Products','products').findById(uuid) %}
-<div class="ui grid">
-    <div class="six wide column">
-        <div class="ui segment">
-            {% if service('rating').hasRating(product.id,'product') == false %}
-                <div>
-                    {{ message }}
-                </div>
-            {% else %}
-            {% endif %}
+<div class="{{ theme.panel }}">
+    {% if service('rating').hasRating(product.id,'product') == false %}
+        <div>
+            {{ message }}
         </div>
-    </div>
+    {% else %}
+
+    {% endif %}
 </div>

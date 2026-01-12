@@ -2,5 +2,6 @@
     "labels": {
         "main": "Main",
         "library": "Library"
-    }
+    },
+    "error":"Images extension not installed! "
 }

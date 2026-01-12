@@ -55,17 +55,14 @@ function ProductBrandsView() {
         arikaim.ui.button('.delete-button',function(element) {
             var uuid = $(element).attr('uuid');
             var title = $(element).attr('data-title');
-            var message = arikaim.ui.template.render(self.getMessage('messages.brand.remove.content'),{ title: title });
+            var message = arikaim.ui.template.render(self.getMessage('brand.remove.content'),{ title: title });
             
-            modal.confirmDelete({ 
-                title: self.getMessage('messages.brand.remove.title'),
-                description: message
-            },function() {
+            arikaim.ui.getComponent('confirm_delete').open(function() {
                 brandsApi.delete(uuid,function(result) {
                     arikaim.ui.table.removeRow('#row_' + uuid); 
-                    arikaim.page.toastMessage(result.message);    
+                    arikaim.ui.getComponent('toast').show(result.message);   
                 });
-            });
+            },message);
         });
     };
 };

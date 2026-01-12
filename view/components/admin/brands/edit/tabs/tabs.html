@@ -1,19 +1,30 @@
-<div class="ui stackable tabular menu product-brand-edit-tabs">      
-    <div 
-        class="item link active product-brand-tab-item" 
-        component="products::admin.brands.edit.details" 
-        uuid="{{ uuid }}">
-        <i class="icon stream blue"></i>
-        {{ labels.details }}     
-    </div>  
-    <div 
-        class="item link product-brand-tab-item" 
-        component="products::admin.brands.edit.image" 
-        uuid="{{ uuid }}">
-        <i class="image icon blue"></i>
-        {{ labels.image }}     
-    </div>  
-</div>
-<div class="ui active tab" id="brands_editor">           
-    {{ component('products::admin.brands.edit.details',{ uuid: uuid }) }}       
+{{  component('system:admin.tabs',{ 
+        id: 'product_brand_edit_tab',
+        items: [ 
+            { 
+                title: labels.details, 
+                component: 'products::admin.brands.edit.details', 
+                params: 'uuid:' ~ uuid,
+                svg_icon: 'icons~info', 
+                active: true 
+            },
+            { 
+                title: labels.image, 
+                component: 'products::admin.brands.edit.image', 
+                params: 'uuid:' ~ uuid,
+                svg_icon: 'icons~image' 
+            }
+                  
+        ],
+        content: { 
+            id: 'brands_editor',
+            params: {
+                uuid: uuid
+            },
+            component: 'products::admin.brands.edit.details' 
+        } 
+    })
+}}
+
+<div class="mt-2" id="brands_editor">           
 </div>  
