@@ -1,31 +1,18 @@
-{% set name = name|default('product') %}
-{% set size = size|default(15) %}
-{% set data_field = data_field|default('uuid') %}
-{% set model = createModel('Products','products') %}
-{% if user_id is not empty %}
-{% set model = model.userQuery(user_id) %}
+{% if user_id is empty %}
+    {% set user_id = service('access').getId() %}
 {% endif %}
-{% set items = model.take(size).get() %}
-{% if selected is not empty %}
-    {% set selected = model.findById(selected) %}
-{% endif %}
-{% set selected_text = (selected is empty) ? labels.select : selected.title %}
+{% set data_field = data_field|default('id') %}
 
-<div class="ui search selection dropdown product-dropdown {{ class }}" 
-    id="{{ component_id|default('product-dropdown') }}" 
-    selected="{{ selected[data_field] }}"
-    user="{{ user_id }}"
-    data-field="{{ data_field }}">
-    <input {{ rule|attr('rule') }} name="{{ name }}" type="hidden" value="{{ selected[data_field] }}">
-    <div class="text">
-        {{ selected_text }}
-    </div>
-    <i class="dropdown icon"></i>
-    <div class="menu">
-        {% for item in items %}
-        <div class="item" data-value="{{ item[data_field] }}">
-            {{ item.title }}
-        </div>
-        {% endfor %}
-    </div>
-</div>
+{{  component('system:form.fields.select',{
+        id: id|default('product-dropdown'),
+        name: field_name|default('product'),
+        rule: rule,
+        class: class,
+        size: size,
+        button_class: button_class,
+        apiUrl: DOMAIN ~ BASE_PATH ~ '/api/products/product/list/dropdown/' ~ data_field ~ '/' ~ user_id ~ '/',
+        clear_button: true,                     
+        selected: selected,
+        placeholder: labels.select
+    }) 
+}} 
