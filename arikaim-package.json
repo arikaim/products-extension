@@ -17,8 +17,7 @@
     "admin-menu": {       
         "title": "Products",
         "page-title": "Products",
-        "svg_icon": "icons~shopping.bag",
-        "page-icon": "icons~shopping.bag",              
+        "svg_icon": "icons~shopping.bag",          
         "component": "products::admin"        
     }
 }
