@@ -7,35 +7,34 @@
  * @license     http://www.arikaim.com/license
  * 
 */
-namespace Arikaim\Extensions\Products\Controllers;
+namespace Arikaim\Extensions\Products\Controllers\Traits;
 
-use Arikaim\Core\Controllers\Controller;
 use Arikaim\Core\Db\Model;
 
 /**
- * Store pages controler
+ * Product pages controler trait
 */
-class ProductPages extends Controller
+trait ProductPages 
 {
     /**
      * Product details page
      *
      * @param \Psr\Http\Message\ServerRequestInterface $request
      * @param \Psr\Http\Message\ResponseInterface $response
-     * @param Validator $data
+     * @param \Arikaim\Core\Validator\Validator $data
      * @return mixed
     */
     public function productDetailsPage($request, $response, $data)
     {
-        $language = $this->getPageLanguage($data);
+        $language = $this->getPageLanguage($data) ?? $this->get('page')->getLanguage();
         
         $product = Model::Products('products')->findBySlug($data['slug']);
         if ($product == null) {
-            return $this->pageLoad($request,$response,$data,'current>products.not-found',$language);          
+            return $this->pageLoad($request,$response,$data,'current>store.products.not-found');          
         }
 
         if ($product->status != 1) {
-            return $this->pageLoad($request,$response,$data,'current>products.not-found',$language);          
+            return $this->pageLoad($request,$response,$data,'current>store.products.not-found');          
         }
 
         $data['categories'] = $product->getCategoriesList();
@@ -72,5 +71,7 @@ class ProductPages extends Controller
             ->twitterSite($this->getUrl($request));    
             
         $data['product'] = $product;
+
+        return $this->pageLoad($request,$response,$data,'current>store.products.details'); 
     }
 }

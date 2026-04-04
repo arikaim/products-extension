@@ -69,11 +69,11 @@
         </div>            
         {% endfor %}
     </td>                  
-    <td>
-        <div class="badge badge-sm badge-outline">
-            {{ item.getPrice('price').currency.sign }}
+    <td>       
+        {{ item.getPrice('price').currency.sign }}
+        <span class="font-bold">
             {{ item.getPrice('price').price|default(0)|numberFormat }}
-        </div>    
+        </span>    
     </td>
     <td>
         {{ item.user.user_name_or_email }}
