@@ -7,6 +7,34 @@
         "type": "price"          
     },
     {
+        "key": "width",
+        "title": "Width",
+        "description": "Product width",
+        "default": null,
+        "type": "number"          
+    },
+    {
+        "key": "height",
+        "title": "Height",
+        "description": "Product height",
+        "default": null,
+        "type": "number"          
+    },
+    {
+        "key": "length",
+        "title": "length",
+        "description": "Product length",
+        "default": null,
+        "type": "number"          
+    },
+    {
+        "key": "weight",
+        "title": "Weight",
+        "description": "Product weight",
+        "default": null,
+        "type": "number"          
+    },
+    {
         "key": "features",
         "title": "Features",
         "description": "Product Features",

@@ -30,6 +30,10 @@
         "slug": "consumer",
         "options": [
             "price",
+            "length",
+            "width",
+            "height",
+            "weight",
             "features"
         ]              
     }
